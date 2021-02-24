@@ -1,0 +1,102 @@
+// Centre d'excellence : Lyon, 
+// Année : 2020, 
+// Type de projet : Dev
+
+{
+    "january": {
+        "CA": 20000,
+        "TJM": 600,
+        "availableDays": 15,
+        "productionDays": 30,
+        "interProductionDays": 5,
+        "TO":50
+    },
+    "february": {
+        "CA": 20000,
+        "TJM": 500,
+        "availableDays": 20,
+        "productionDays": 31,
+        "interProductionDays": 6,
+        "TO":60
+    },
+    "march": {
+        "CA": 20000,
+        "TJM": 800,
+        "availableDays": 15,
+        "productionDays": 32,
+        "interProductionDays": 7,
+        "TO":70
+    },
+    "april": {
+        "CA": 20000,
+        "TJM": 900,
+        "availableDays": 20,
+        "productionDays": 33,
+        "interProductionDays": 8,
+        "TO":80
+    },
+    "may": {
+        "CA": 20000,
+        "TJM": 600,
+        "availableDays": 15,
+        "productionDays": 34,
+        "interProductionDays": 9,
+        "TO":90
+    },
+    "june": {
+        "CA": 20000,
+        "TJM": 800,
+        "availableDays": 20,
+        "productionDays": 35,
+        "interProductionDays": 10,
+        "TO":100
+    },
+    "july": {
+        "CA": 15000,
+        "TJM": 900,
+        "availableDays": 28,
+        "productionDays": 26,
+        "interProductionDays": 12,
+        "TO":100
+    },
+    "august": {
+        "CA": 10000,
+        "TJM": 700,
+        "availableDays": 29,
+        "productionDays": 27,
+        "interProductionDays": 4,
+        "TO":100
+    },
+    "september": {
+        "CA": 15000,
+        "TJM": 900,
+        "availableDays": 28,
+        "productionDays": 28,
+        "interProductionDays": 11,
+        "TO":100
+    },
+    "october": {
+        "CA": 20000,
+        "TJM": 700,
+        "availableDays": 27,
+        "productionDays": 29,
+        "interProductionDays": 5,
+        "TO":100
+    },
+    "november": {
+        "CA": 15000,
+        "TJM": 900,
+        "availableDays": 26,
+        "productionDays": 30,
+        "interProductionDays": 10,
+        "TO":100
+    },
+    "december": {
+        "CA": 10000,
+        "TJM": 700,
+        "availableDays": 25,
+        "productionDays": 31,
+        "interProductionDays": 6,
+        "TO":100
+    }
+}
