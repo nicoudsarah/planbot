@@ -10,7 +10,7 @@ const LabelSelect = (props) => {
             )}
             {props.options && (
                 <select id={props.id}>
-                    {props.options.map(item => <option value={item.key}>{item.value}</option>)}
+                    {props.options.map((item, index) => <option key={index} value={item.key}>{item.value}</option>)}
                 </select>
             )}
         </>
