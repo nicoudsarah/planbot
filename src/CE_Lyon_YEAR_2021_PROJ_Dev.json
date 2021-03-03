@@ -1,10 +1,6 @@
-// Centre d'excellence : Lyon, 
-// Année : 2020, 
-// Type de projet : Dev
-
 {
     "january": {
-        "CA": 20000,
+        "CA": 21000,
         "TJM": 600,
         "availableDays": 15,
         "productionDays": 30,
@@ -12,7 +8,7 @@
         "TO":50
     },
     "february": {
-        "CA": 20000,
+        "CA": 21000,
         "TJM": 500,
         "availableDays": 20,
         "productionDays": 31,
@@ -20,7 +16,7 @@
         "TO":60
     },
     "march": {
-        "CA": 20000,
+        "CA": 21000,
         "TJM": 800,
         "availableDays": 15,
         "productionDays": 32,
@@ -28,7 +24,7 @@
         "TO":70
     },
     "april": {
-        "CA": 20000,
+        "CA": 21000,
         "TJM": 900,
         "availableDays": 20,
         "productionDays": 33,
@@ -36,7 +32,7 @@
         "TO":80
     },
     "may": {
-        "CA": 20000,
+        "CA": 21000,
         "TJM": 600,
         "availableDays": 15,
         "productionDays": 34,
@@ -44,7 +40,7 @@
         "TO":90
     },
     "june": {
-        "CA": 20000,
+        "CA": 21000,
         "TJM": 800,
         "availableDays": 20,
         "productionDays": 35,
@@ -52,7 +48,7 @@
         "TO":100
     },
     "july": {
-        "CA": 15000,
+        "CA": 21000,
         "TJM": 900,
         "availableDays": 28,
         "productionDays": 26,
@@ -60,7 +56,7 @@
         "TO":100
     },
     "august": {
-        "CA": 10000,
+        "CA": 21000,
         "TJM": 700,
         "availableDays": 29,
         "productionDays": 27,
@@ -68,7 +64,7 @@
         "TO":100
     },
     "september": {
-        "CA": 15000,
+        "CA": 21000,
         "TJM": 900,
         "availableDays": 28,
         "productionDays": 28,
@@ -76,7 +72,7 @@
         "TO":100
     },
     "october": {
-        "CA": 20000,
+        "CA": 21000,
         "TJM": 700,
         "availableDays": 27,
         "productionDays": 29,
@@ -84,7 +80,7 @@
         "TO":100
     },
     "november": {
-        "CA": 15000,
+        "CA": 21000,
         "TJM": 900,
         "availableDays": 26,
         "productionDays": 30,
@@ -92,7 +88,7 @@
         "TO":100
     },
     "december": {
-        "CA": 10000,
+        "CA": 21000,
         "TJM": 700,
         "availableDays": 25,
         "productionDays": 31,

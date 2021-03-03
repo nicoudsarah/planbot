@@ -1,58 +1,54 @@
-// Centre d'excellence : Lyon, 
-// Année : 2021, 
-// Type de projet : Dev
-
 {
     "january": {
-        "CA": 21000,
-        "TJM": 600,
-        "availableDays": 15,
-        "productionDays": 30,
-        "interProductionDays": 5,
-        "TO":50
-    },
-    "february": {
-        "CA": 21000,
-        "TJM": 500,
-        "availableDays": 20,
-        "productionDays": 31,
-        "interProductionDays": 6,
-        "TO":60
-    },
-    "march": {
-        "CA": 21000,
-        "TJM": 800,
-        "availableDays": 15,
-        "productionDays": 32,
-        "interProductionDays": 7,
+        "CA": 10000,
+        "TJM": 900,
+        "availableDays": 22,
+        "productionDays": 20,
+        "interProductionDays": 15,
         "TO":70
     },
-    "april": {
-        "CA": 21000,
+    "february": {
+        "CA": 20000,
+        "TJM": 700,
+        "availableDays": 23,
+        "productionDays": 21,
+        "interProductionDays": 4,
+        "TO":75
+    },
+    "march": {
+        "CA": 15000,
         "TJM": 900,
-        "availableDays": 20,
-        "productionDays": 33,
-        "interProductionDays": 8,
+        "availableDays": 24,
+        "productionDays": 22,
+        "interProductionDays": 14,
         "TO":80
     },
+    "april": {
+        "CA": 10000,
+        "TJM": 700,
+        "availableDays": 25,
+        "productionDays": 23,
+        "interProductionDays": 3,
+        "TO":85
+    },
     "may": {
-        "CA": 21000,
-        "TJM": 600,
-        "availableDays": 15,
-        "productionDays": 34,
-        "interProductionDays": 9,
+        "CA": 15000,
+        "TJM": 900,
+        "availableDays": 26,
+        "productionDays": 24,
+        "interProductionDays": 13,
         "TO":90
     },
     "june": {
-        "CA": 21000,
-        "TJM": 800,
-        "availableDays": 20,
-        "productionDays": 35,
-        "interProductionDays": 10,
-        "TO":100
+        "CA": 20000,
+        "TJM": 700,
+        "availableDays": 27,
+        "productionDays": 25,
+        "interProductionDays": 3,
+        "TO":95
     },
     "july": {
-        "CA": 21000,
+        "CA": 15000,
         "TJM": 900,
         "availableDays": 28,
         "productionDays": 26,
@@ -60,7 +56,7 @@
         "TO":100
     },
     "august": {
-        "CA": 21000,
+        "CA": 10000,
         "TJM": 700,
         "availableDays": 29,
         "productionDays": 27,
@@ -68,7 +64,7 @@
         "TO":100
     },
     "september": {
-        "CA": 21000,
+        "CA": 15000,
         "TJM": 900,
         "availableDays": 28,
         "productionDays": 28,
@@ -76,7 +72,7 @@
         "TO":100
     },
     "october": {
-        "CA": 21000,
+        "CA": 20000,
         "TJM": 700,
         "availableDays": 27,
         "productionDays": 29,
@@ -84,7 +80,7 @@
         "TO":100
     },
     "november": {
-        "CA": 21000,
+        "CA": 15000,
         "TJM": 900,
         "availableDays": 26,
         "productionDays": 30,
@@ -92,7 +88,7 @@
         "TO":100
     },
     "december": {
-        "CA": 21000,
+        "CA": 10000,
         "TJM": 700,
         "availableDays": 25,
         "productionDays": 31,
