@@ -1,8 +1,8 @@
 {
     "january": {
-        "CA": 10000,
-        "TJM": 900,
-        "availableDays": 22,
+        "CA": 107000,
+        "TJM": 2021,
+        "availableDays": 75,
         "productionDays": 20,
         "interProductionDays": 15,
         "TO":70

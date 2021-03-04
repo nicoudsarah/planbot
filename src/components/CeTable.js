@@ -1,10 +1,22 @@
 import React, {useEffect, useState} from "react";
 import Json_CE_All_YEAR_2021_PROJ_Dev from "../CE_All_YEAR_2021_PROJ_Dev.json";
+import Json_CE_All_YEAR_2021_PROJ_Ergo from "../CE_All_YEAR_2021_PROJ_Ergo.json";
+import Json_CE_All_YEAR_2021_PROJ_All from "../CE_All_YEAR_2021_PROJ_All.json";
+import Json_CE_All_YEAR_2020_PROJ_Dev from "../CE_All_YEAR_2020_PROJ_Dev.json";
+import Json_CE_All_YEAR_2020_PROJ_Ergo from "../CE_All_YEAR_2020_PROJ_Ergo.json";
+import Json_CE_All_YEAR_2020_PROJ_All from "../CE_All_YEAR_2020_PROJ_All.json";
 import Json_CE_Grenoble_YEAR_2021_PROJ_Dev from "../CE_Grenoble_YEAR_2021_PROJ_Dev.json"
+import Json_CE_Grenoble_YEAR_2021_PROJ_Ergo from "../CE_Grenoble_YEAR_2021_PROJ_Ergo.json"
+import Json_CE_Grenoble_YEAR_2021_PROJ_All from "../CE_Grenoble_YEAR_2021_PROJ_All.json"
+import Json_CE_Grenoble_YEAR_2020_PROJ_Dev from "../CE_Grenoble_YEAR_2020_PROJ_Dev.json"
+import Json_CE_Grenoble_YEAR_2020_PROJ_Ergo from "../CE_Grenoble_YEAR_2020_PROJ_Ergo.json"
+import Json_CE_Grenoble_YEAR_2020_PROJ_All from "../CE_Grenoble_YEAR_2020_PROJ_All.json"
 import Json_CE_Lyon_YEAR_2021_PROJ_Dev from "../CE_Lyon_YEAR_2021_PROJ_Dev.json"
-import Json_CE_Lyon_YEAR_2021_PROJ_All from "../CE_Lyon_YEAR_2021_PROJ_All.json"
 import Json_CE_Lyon_YEAR_2021_PROJ_Ergo from "../CE_Lyon_YEAR_2021_PROJ_Ergo.json"
+import Json_CE_Lyon_YEAR_2021_PROJ_All from "../CE_Lyon_YEAR_2021_PROJ_All.json"
 import Json_CE_Lyon_YEAR_2020_PROJ_Dev from "../CE_Lyon_YEAR_2020_PROJ_Dev.json"
+import Json_CE_Lyon_YEAR_2020_PROJ_Ergo from "../CE_Lyon_YEAR_2020_PROJ_Ergo.json"
+import Json_CE_Lyon_YEAR_2020_PROJ_All from "../CE_Lyon_YEAR_2020_PROJ_All.json"
 
 const CeTable = ({ce, projectType, year}) => {
 
@@ -26,21 +38,44 @@ const CeTable = ({ce, projectType, year}) => {
         JSONRecup()*/
         if( ce === "all" && year === "2021" && projectType === "dev" ) {
             setData(Json_CE_All_YEAR_2021_PROJ_Dev)
+        } else if (ce === "all" && year === "2021" && projectType === "ergo" ) {
+            setData(Json_CE_All_YEAR_2021_PROJ_Ergo)
+        } else if (ce === "all" && year === "2021" && projectType === "all" ) {
+            setData(Json_CE_All_YEAR_2021_PROJ_All)
+        } else if (ce === "all" && year === "2020" && projectType === "dev" ) {
+            setData(Json_CE_All_YEAR_2020_PROJ_Dev)
+        } else if (ce === "all" && year === "2020" && projectType === "ergo" ) {
+            setData(Json_CE_All_YEAR_2020_PROJ_Ergo)
+        } else if (ce === "all" && year === "2020" && projectType === "all" ) {
+            setData(Json_CE_All_YEAR_2020_PROJ_All)
         } else if (ce === "grenoble" && year === "2021" && projectType === "dev" ) {
             setData(Json_CE_Grenoble_YEAR_2021_PROJ_Dev)
+        } else if (ce === "grenoble" && year === "2021" && projectType === "ergo" ) {
+            setData(Json_CE_Grenoble_YEAR_2021_PROJ_Ergo)
+        } else if (ce === "grenoble" && year === "2021" && projectType === "all" ) {
+            setData(Json_CE_Grenoble_YEAR_2021_PROJ_All)
+        } else if (ce === "grenoble" && year === "2020" && projectType === "dev" ) {
+            setData(Json_CE_Grenoble_YEAR_2020_PROJ_Dev)
+        } else if (ce === "grenoble" && year === "2020" && projectType === "ergo" ) {
+            setData(Json_CE_Grenoble_YEAR_2020_PROJ_Ergo)
+        } else if (ce === "grenoble" && year === "2020" && projectType === "all" ) {
+            setData(Json_CE_Grenoble_YEAR_2020_PROJ_All)
         } else if (ce === "lyon" && year === "2021" && projectType === "dev" ) {
             setData(Json_CE_Lyon_YEAR_2021_PROJ_Dev)
-        } else if (ce === "lyon" && year === "2021" && projectType === "all" ) {
-            setData(Json_CE_Lyon_YEAR_2021_PROJ_All)
-        } else if (ce === "lyon" && year === "2021" && projectType === "ergo" ) {
+        }  else if (ce === "lyon" && year === "2021" && projectType === "ergo" ) {
             setData(Json_CE_Lyon_YEAR_2021_PROJ_Ergo)
+        }else if (ce === "lyon" && year === "2021" && projectType === "all" ) {
+            setData(Json_CE_Lyon_YEAR_2021_PROJ_All)
         } else if (ce === "lyon" && year === "2020" && projectType === "dev" ) {
             setData(Json_CE_Lyon_YEAR_2020_PROJ_Dev)
+        } else if (ce === "lyon" && year === "2020" && projectType === "ergo" ) {
+            setData(Json_CE_Lyon_YEAR_2020_PROJ_Ergo)
+        } else if (ce === "lyon" && year === "2020" && projectType === "all" ) {
+            setData(Json_CE_Lyon_YEAR_2020_PROJ_All)
         }
 
     }, [ce, projectType, year])
     const months = data && Object.keys(data)
-    console.log(months)
 
 
     return (
