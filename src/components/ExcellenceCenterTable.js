@@ -18,7 +18,7 @@ import Json_CE_Lyon_YEAR_2020_PROJ_Dev from "../CE_Lyon_YEAR_2020_PROJ_Dev.json"
 import Json_CE_Lyon_YEAR_2020_PROJ_Ergo from "../CE_Lyon_YEAR_2020_PROJ_Ergo.json"
 import Json_CE_Lyon_YEAR_2020_PROJ_All from "../CE_Lyon_YEAR_2020_PROJ_All.json"
 
-const CeTable = ({ce, projectType, year}) => {
+const ExcellenceCenterTable = ({ce, projectType, year}) => {
 
     const indicators =  ["CA", "TJM", "# Jours dispo",  "# Jours prod", "# Jours interP", "TO"]
 
@@ -113,4 +113,4 @@ const CeTable = ({ce, projectType, year}) => {
 }
 
 
-export default CeTable
+export default ExcellenceCenterTable

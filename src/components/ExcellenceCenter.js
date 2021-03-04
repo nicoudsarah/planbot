@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from "react";
 import LabelSelect from "./LabelSelect";
-import CeTable from "./CeTable";
+import ExcellenceCenterTable from "./ExcellenceCenterTable";
 
 const ExcellenceCenter = () => {
     const ce = [{key: "all", value: "Tous"}, {key: "lyon", value: "Lyon"}, {key: "grenoble", value:"Grenoble"}]
@@ -29,7 +29,7 @@ const ExcellenceCenter = () => {
             <LabelSelect label="Choix du centre d'excellence" options={ce} id="excellence-center-choice" onChange={buttonChangeCE}/>
             <LabelSelect label="Année" options={years} id="year" onChange={buttonChangeYear}/>
             <LabelSelect label="Type de projet" options={projectsType} id="projects-type" onChange={buttonChangeProjectType}/>
-            <CeTable ce={selectedCE} year={selectedYear} projectType={selectedProjectType}/>
+            <ExcellenceCenterTable ce={selectedCE} year={selectedYear} projectType={selectedProjectType}/>
         </div>
     );
 }
