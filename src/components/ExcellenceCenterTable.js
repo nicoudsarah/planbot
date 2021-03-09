@@ -18,6 +18,92 @@ const ExcellenceCenterTable = ({ce, projectType, year}) => {
     }, [ce, projectType, year])
     const months = data && Object.keys(data)
 
+
+    let casComputed =[]
+    if(months && data) {
+           casComputed = months
+             .map(month => data[month].CA)
+             .reduce((acc, currentCA, index) => {
+                 if (index === 0) {
+                     acc.push(currentCA)
+                     return acc;
+                 }
+                 acc.push(currentCA + acc[index - 1])
+                 return acc;
+             }, [])
+    }
+
+
+    let tjmComputed =[]
+    if(months && data) {
+        tjmComputed = months
+            .map(month => data[month].TJM)
+            .reduce((acc, currentTJM, index) => {
+                if (index === 0) {
+                    acc.push(currentTJM)
+                    return acc;
+                }
+                acc.push(currentTJM + acc[index - 1])
+                return acc;
+            }, [])
+    }
+
+    let availableDaysComputed =[]
+    if(months && data) {
+        availableDaysComputed = months
+            .map(month => data[month].availableDays)
+            .reduce((acc, currentAvailableDays, index) => {
+                if (index === 0) {
+                    acc.push(currentAvailableDays)
+                    return acc;
+                }
+                acc.push(currentAvailableDays + acc[index - 1])
+                return acc;
+            }, [])
+    }
+
+    let productionDaysComputed =[]
+    if(months && data) {
+        productionDaysComputed = months
+            .map(month => data[month].productionDays)
+            .reduce((acc, currentProductionDays, index) => {
+                if (index === 0) {
+                    acc.push(currentProductionDays)
+                    return acc;
+                }
+                acc.push(currentProductionDays + acc[index - 1])
+                return acc;
+            }, [])
+    }
+
+    let interProductionDaysComputed =[]
+    if(months && data) {
+        interProductionDaysComputed = months
+            .map(month => data[month].interProductionDays)
+            .reduce((acc, currentInterProductionDays, index) => {
+                if (index === 0) {
+                    acc.push(currentInterProductionDays)
+                    return acc;
+                }
+                acc.push(currentInterProductionDays + acc[index - 1])
+                return acc;
+            }, [])
+    }
+
+    let toComputed =[]
+    if(months && data) {
+        toComputed = months
+            .map(month => data[month].TO)
+            .reduce((acc, currentTO, index) => {
+                if (index === 0) {
+                    acc.push(currentTO)
+                    return acc;
+                }
+                acc.push(currentTO + acc[index - 1])
+                return acc;
+            }, [])
+    }
+
     return (
         <>
             <table>
@@ -45,7 +131,15 @@ const ExcellenceCenterTable = ({ce, projectType, year}) => {
                             <td>{data[month].productionDays}</td>
                             <td>{data[month].interProductionDays}</td>
                             <td>{data[month].TO}</td>
+
+                            <td>{casComputed[index]}</td>
+                            <td>{tjmComputed[index]}</td>
+                            <td>{availableDaysComputed[index]}</td>
+                            <td>{productionDaysComputed[index]}</td>
+                            <td>{interProductionDaysComputed[index]}</td>
+                            <td>{parseInt(toComputed[index]/(index+1))}</td>
                         </tr>)}
+
                 </tbody>
             </table>
         </>
