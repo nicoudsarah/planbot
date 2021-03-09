@@ -18,7 +18,6 @@ const ExcellenceCenterTable = ({ce, projectType, year}) => {
     }, [ce, projectType, year])
     const months = data && Object.keys(data)
 
-
     return (
         <>
             <table>
