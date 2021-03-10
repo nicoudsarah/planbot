@@ -19,7 +19,7 @@ const ExcellenceCenterTable = ({ce, projectType, year}) => {
     }, [ce, projectType, year])
     const months = data && Object.keys(data)
 
-    function calculateAnnualDateValueForIndicator(indicator) {
+    const calculateAnnualDateValueForIndicator = (indicator) => {
         let computedValuesTable = []
         if (months && data) {
             computedValuesTable = months
@@ -36,10 +36,10 @@ const ExcellenceCenterTable = ({ce, projectType, year}) => {
         return computedValuesTable
     }
 
-    function calculateActualTotalValueForIndicator (indicator) {
+    const calculateActualTotalValueForIndicator = (indicator) => {
         if (months && data) {
             const computedValuesTable = calculateAnnualDateValueForIndicator(indicator)
-            const actualTotal = calculateAnnualDateValueForIndicator(indicator)[computedValuesTable.length - 1]
+            const actualTotal = computedValuesTable[computedValuesTable.length - 1]
             return actualTotal
         }
     }
