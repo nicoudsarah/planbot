@@ -104,6 +104,9 @@ const ExcellenceCenterTable = ({ce, projectType, year}) => {
             }, [])
     }
 
+    // refactorer les constantes xxxComputed dans une fonction
+    // remplacer les * dans le tableau par le calcul du total.
+
     return (
         <>
             <table>
@@ -139,7 +142,14 @@ const ExcellenceCenterTable = ({ce, projectType, year}) => {
                             <td>{interProductionDaysComputed[index]}</td>
                             <td>{parseInt(toComputed[index]/(index+1))}</td>
                         </tr>)}
-
+                        <tr>
+                            <td>Total annuel</td>
+                            <td>*</td>
+                            <td></td>
+                            <td>*</td>
+                            <td>*</td>
+                            <td>*</td>
+                        </tr>
                 </tbody>
             </table>
         </>
