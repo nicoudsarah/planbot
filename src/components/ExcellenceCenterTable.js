@@ -36,8 +36,13 @@ const ExcellenceCenterTable = ({ce, projectType, year}) => {
         return computedValuesTable
     }
 
-    
-
+    function calculateActualTotalValueForIndicator (indicator) {
+        if (months && data) {
+            const computedValuesTable = calculateAnnualDateValueForIndicator(indicator)
+            const actualTotal = calculateAnnualDateValueForIndicator(indicator)[computedValuesTable.length - 1]
+            return actualTotal
+        }
+    }
 
     return (
         <>
@@ -76,11 +81,11 @@ const ExcellenceCenterTable = ({ce, projectType, year}) => {
                         </tr>)}
                         <tr>
                             <td>Total annuel</td>
-                            <td>*</td>
+                            <td>{calculateActualTotalValueForIndicator(JSONindicators[0])}</td>
                             <td></td>
-                            <td>*</td>
-                            <td>*</td>
-                            <td>*</td>
+                            <td>{calculateActualTotalValueForIndicator(JSONindicators[2])}</td>
+                            <td>{calculateActualTotalValueForIndicator(JSONindicators[3])}</td>
+                            <td>{calculateActualTotalValueForIndicator(JSONindicators[4])}</td>
                         </tr>
                 </tbody>
             </table>
