@@ -4,6 +4,7 @@ import {fetchCEData} from "../API";
 const ExcellenceCenterTable = ({ce, projectType, year}) => {
 
     const indicators =  ["CA", "TJM", "# Jours dispo",  "# Jours prod", "# Jours interP", "TO"]
+    const JSONindicators =  ["CA", "TJM", "availableDays",  "productionDays", "interProductionDays", "TO"]
 
     const [data, setData] = useState(null)
 
@@ -18,94 +19,25 @@ const ExcellenceCenterTable = ({ce, projectType, year}) => {
     }, [ce, projectType, year])
     const months = data && Object.keys(data)
 
-
-    let casComputed =[]
-    if(months && data) {
-           casComputed = months
-             .map(month => data[month].CA)
-             .reduce((acc, currentCA, index) => {
-                 if (index === 0) {
-                     acc.push(currentCA)
-                     return acc;
-                 }
-                 acc.push(currentCA + acc[index - 1])
-                 return acc;
-             }, [])
-    }
-
-
-    let tjmComputed =[]
-    if(months && data) {
-        tjmComputed = months
-            .map(month => data[month].TJM)
-            .reduce((acc, currentTJM, index) => {
-                if (index === 0) {
-                    acc.push(currentTJM)
+    function calculateAnnualDateValueForIndicator(indicator) {
+        let computedValuesTable = []
+        if (months && data) {
+            computedValuesTable = months
+                .map(month => data[month][indicator])
+                .reduce((acc, currentValue, index) => {
+                    if (index === 0) {
+                        acc.push(currentValue)
+                        return acc;
+                    }
+                    acc.push(currentValue + acc[index - 1])
                     return acc;
-                }
-                acc.push(currentTJM + acc[index - 1])
-                return acc;
-            }, [])
+                }, [])
+        }
+        return computedValuesTable
     }
 
-    let availableDaysComputed =[]
-    if(months && data) {
-        availableDaysComputed = months
-            .map(month => data[month].availableDays)
-            .reduce((acc, currentAvailableDays, index) => {
-                if (index === 0) {
-                    acc.push(currentAvailableDays)
-                    return acc;
-                }
-                acc.push(currentAvailableDays + acc[index - 1])
-                return acc;
-            }, [])
-    }
+    
 
-    let productionDaysComputed =[]
-    if(months && data) {
-        productionDaysComputed = months
-            .map(month => data[month].productionDays)
-            .reduce((acc, currentProductionDays, index) => {
-                if (index === 0) {
-                    acc.push(currentProductionDays)
-                    return acc;
-                }
-                acc.push(currentProductionDays + acc[index - 1])
-                return acc;
-            }, [])
-    }
-
-    let interProductionDaysComputed =[]
-    if(months && data) {
-        interProductionDaysComputed = months
-            .map(month => data[month].interProductionDays)
-            .reduce((acc, currentInterProductionDays, index) => {
-                if (index === 0) {
-                    acc.push(currentInterProductionDays)
-                    return acc;
-                }
-                acc.push(currentInterProductionDays + acc[index - 1])
-                return acc;
-            }, [])
-    }
-
-    let toComputed =[]
-    if(months && data) {
-        toComputed = months
-            .map(month => data[month].TO)
-            .reduce((acc, currentTO, index) => {
-                if (index === 0) {
-                    acc.push(currentTO)
-                    return acc;
-                }
-                acc.push(currentTO + acc[index - 1])
-                return acc;
-            }, [])
-    }
-
-    // refactorer les constantes xxxComputed dans une fonction
-    // remplacer les * dans le tableau par le calcul du total.
 
     return (
         <>
@@ -135,12 +67,12 @@ const ExcellenceCenterTable = ({ce, projectType, year}) => {
                             <td>{data[month].interProductionDays}</td>
                             <td>{data[month].TO}</td>
 
-                            <td>{casComputed[index]}</td>
-                            <td>{tjmComputed[index]}</td>
-                            <td>{availableDaysComputed[index]}</td>
-                            <td>{productionDaysComputed[index]}</td>
-                            <td>{interProductionDaysComputed[index]}</td>
-                            <td>{parseInt(toComputed[index]/(index+1))}</td>
+                            <td>{calculateAnnualDateValueForIndicator(JSONindicators[0])[index]}</td>
+                            <td>{calculateAnnualDateValueForIndicator(JSONindicators[1])[index]}</td>
+                            <td>{calculateAnnualDateValueForIndicator(JSONindicators[2])[index]}</td>
+                            <td>{calculateAnnualDateValueForIndicator(JSONindicators[3])[index]}</td>
+                            <td>{calculateAnnualDateValueForIndicator(JSONindicators[4])[index]}</td>
+                            <td>{parseInt(calculateAnnualDateValueForIndicator(JSONindicators[5])[index]/(index+1))}</td>
                         </tr>)}
                         <tr>
                             <td>Total annuel</td>
