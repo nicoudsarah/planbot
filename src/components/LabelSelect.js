@@ -1,12 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import "./LabelSelect.scss";
 
 
 const LabelSelect = (props) => {
     return (
         <>
             {props.label && (
-                <p>{props.label}</p>
+                <p className={props.id} >{props.label}</p>
             )}
             {props.options && (
                 <select id={props.id} onChange={e => props.onChange(e)}>

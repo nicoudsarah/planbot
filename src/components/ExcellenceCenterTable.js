@@ -1,5 +1,6 @@
 import React, {useEffect, useState} from "react";
 import {fetchCEData} from "../API";
+import "./ExcellenceCenterTable.scss";
 
 const ExcellenceCenterTable = ({ce, projectType, year}) => {
 
@@ -56,36 +57,36 @@ const ExcellenceCenterTable = ({ce, projectType, year}) => {
                     <tr>
                         <th id="month-cell">Mois</th>
                         {indicators.map((item, index) =>
-                            <th key={index} >{item}</th>)}
+                            <th key={index} id="month-cell-item">{item}</th>)}
                         {indicators.map((item, index) =>
                             <th key={index} >{item}</th>)}
                     </tr>
                 </thead>
                 <tbody>
                     {data && months && months.map((month, index) =>
-                        <tr key={index}>
-                            <td key={index}>{month}</td>
-                            <td>{data[month].CA}</td>
-                            <td>{data[month].TJM}</td>
-                            <td>{data[month].availableDays}</td>
-                            <td>{data[month].productionDays}</td>
-                            <td>{data[month].interProductionDays}</td>
-                            <td>{data[month].TO}</td>
+                        <tr key={index} className="ExcellenceCenterTable__row">
+                            <td key={index} className="ExcellenceCenterTable__row-item">{month}</td>
+                            <td className="ExcellenceCenterTable__row-item__CA">{data[month].CA}</td>
+                            <td className="ExcellenceCenterTable__row-item">{data[month].TJM}</td>
+                            <td className="ExcellenceCenterTable__row-item">{data[month].availableDays}</td>
+                            <td className="ExcellenceCenterTable__row-item">{data[month].productionDays}</td>
+                            <td className="ExcellenceCenterTable__row-item">{data[month].interProductionDays}</td>
+                            <td className="ExcellenceCenterTable__row-item">{data[month].TO}</td>
 
-                            <td>{calculateAnnualDateValueForIndicator(JSONindicators[0])[index]}</td>
-                            <td>{calculateAnnualDateValueForIndicator(JSONindicators[1])[index]}</td>
-                            <td>{calculateAnnualDateValueForIndicator(JSONindicators[2])[index]}</td>
-                            <td>{calculateAnnualDateValueForIndicator(JSONindicators[3])[index]}</td>
-                            <td>{calculateAnnualDateValueForIndicator(JSONindicators[4])[index]}</td>
-                            <td>{parseInt(calculateAnnualDateValueForIndicator(JSONindicators[5])[index]/(index+1))}</td>
+                            <td className="ExcellenceCenterTable__row-item__CA">{calculateAnnualDateValueForIndicator(JSONindicators[0])[index]}</td>
+                            <td className="ExcellenceCenterTable__row-item">{calculateAnnualDateValueForIndicator(JSONindicators[1])[index]}</td>
+                            <td className="ExcellenceCenterTable__row-item">{calculateAnnualDateValueForIndicator(JSONindicators[2])[index]}</td>
+                            <td className="ExcellenceCenterTable__row-item">{calculateAnnualDateValueForIndicator(JSONindicators[3])[index]}</td>
+                            <td className="ExcellenceCenterTable__row-item">{calculateAnnualDateValueForIndicator(JSONindicators[4])[index]}</td>
+                            <td className="ExcellenceCenterTable__row-item">{parseInt(calculateAnnualDateValueForIndicator(JSONindicators[5])[index]/(index+1))}</td>
                         </tr>)}
                         <tr>
-                            <td>Total annuel</td>
-                            <td>{calculateActualTotalValueForIndicator(JSONindicators[0])}</td>
+                            <td className="ExcellenceCenterTable__row-total-item">Total annuel</td>
+                            <td className="ExcellenceCenterTable__row-total-item__CA">{calculateActualTotalValueForIndicator(JSONindicators[0])}</td>
                             <td></td>
-                            <td>{calculateActualTotalValueForIndicator(JSONindicators[2])}</td>
-                            <td>{calculateActualTotalValueForIndicator(JSONindicators[3])}</td>
-                            <td>{calculateActualTotalValueForIndicator(JSONindicators[4])}</td>
+                            <td className="ExcellenceCenterTable__row-total-item">{calculateActualTotalValueForIndicator(JSONindicators[2])}</td>
+                            <td className="ExcellenceCenterTable__row-total-item">{calculateActualTotalValueForIndicator(JSONindicators[3])}</td>
+                            <td className="ExcellenceCenterTable__row-total-item">{calculateActualTotalValueForIndicator(JSONindicators[4])}</td>
                         </tr>
                 </tbody>
             </table>

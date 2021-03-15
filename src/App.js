@@ -1,5 +1,5 @@
 import ExcellenceCenter from './components/ExcellenceCenter';
-import './App.css';
+import './App.scss';
 
 
 const App = () => {
