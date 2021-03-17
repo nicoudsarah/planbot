@@ -68,4 +68,37 @@ describe('ExcellenceCenter', () =>{
         ExcellenceCenterWrapperObject.update()
         expect(ExcellenceCenterWrapperObject.find('.ExcellenceCenterTable__row-item__TJM').at(0).text()).toEqual("2020")
     })
+
+    it('should show a value of 100 for january on availableDays column for all project type',async () => {
+        let ExcellenceCenterWrapperObject
+        await act(async () => {
+            ExcellenceCenterWrapperObject = await mount(<ExcellenceCenter />);
+            ExcellenceCenterWrapperObject.find('LabelSelect').at(2).props().onChange({target:{value:"all"}})
+        });
+
+        ExcellenceCenterWrapperObject.update()
+        expect(ExcellenceCenterWrapperObject.find('.ExcellenceCenterTable__row-item__availableDays').at(0).text()).toEqual("100")
+    })
+
+    it('should show a value of 75 for january on availableDays column for dev project type',async () => {
+        let ExcellenceCenterWrapperObject
+        await act(async () => {
+            ExcellenceCenterWrapperObject = await mount(<ExcellenceCenter />);
+            ExcellenceCenterWrapperObject.find('LabelSelect').at(2).props().onChange({target:{value:"dev"}})
+        });
+
+        ExcellenceCenterWrapperObject.update()
+        expect(ExcellenceCenterWrapperObject.find('.ExcellenceCenterTable__row-item__availableDays').at(0).text()).toEqual("75")
+    })
+
+    it('should show a value of 25 for january on availableDays column for ergo project type',async () => {
+        let ExcellenceCenterWrapperObject
+        await act(async () => {
+            ExcellenceCenterWrapperObject = await mount(<ExcellenceCenter />);
+            ExcellenceCenterWrapperObject.find('LabelSelect').at(2).props().onChange({target:{value:"ergo"}})
+        });
+
+        ExcellenceCenterWrapperObject.update()
+        expect(ExcellenceCenterWrapperObject.find('.ExcellenceCenterTable__row-item__availableDays').at(0).text()).toEqual("25")
+    })
 })

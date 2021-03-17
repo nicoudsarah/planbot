@@ -68,7 +68,7 @@ const ExcellenceCenterTable = ({ce, projectType, year}) => {
                             <td key={index} className="ExcellenceCenterTable__row-item">{month}</td>
                             <td className="ExcellenceCenterTable__row-item__CA">{data[month].CA}</td>
                             <td className="ExcellenceCenterTable__row-item__TJM">{data[month].TJM}</td>
-                            <td className="ExcellenceCenterTable__row-item">{data[month].availableDays}</td>
+                            <td className="ExcellenceCenterTable__row-item__availableDays">{data[month].availableDays}</td>
                             <td className="ExcellenceCenterTable__row-item">{data[month].productionDays}</td>
                             <td className="ExcellenceCenterTable__row-item">{data[month].interProductionDays}</td>
                             <td className="ExcellenceCenterTable__row-item">{data[month].TO}</td>
