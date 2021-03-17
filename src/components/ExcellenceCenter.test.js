@@ -36,7 +36,7 @@ describe('ExcellenceCenter', () =>{
         expect(ExcellenceCenterWrapperObject.find('.ExcellenceCenterTable__row-item__CA').at(0).text()).toEqual("38000")
     })
 
-    it('should show a value of 38000 for january on CA column for all excellence centers',async () => {
+    it('should show a value of 107000 for january on CA column for all excellence centers',async () => {
         let ExcellenceCenterWrapperObject
         await act(async () => {
             ExcellenceCenterWrapperObject = await mount(<ExcellenceCenter />);
@@ -45,5 +45,27 @@ describe('ExcellenceCenter', () =>{
 
         ExcellenceCenterWrapperObject.update()
         expect(ExcellenceCenterWrapperObject.find('.ExcellenceCenterTable__row-item__CA').at(0).text()).toEqual("107000")
+    })
+
+    it('should show a value of 2021 for january on TJM column for year 2021',async () => {
+        let ExcellenceCenterWrapperObject
+        await act(async () => {
+            ExcellenceCenterWrapperObject = await mount(<ExcellenceCenter />);
+            ExcellenceCenterWrapperObject.find('LabelSelect').at(1).props().onChange({target:{value:"2021"}})
+        });
+
+        ExcellenceCenterWrapperObject.update()
+        expect(ExcellenceCenterWrapperObject.find('.ExcellenceCenterTable__row-item__TJM').at(0).text()).toEqual("2021")
+    })
+
+    it('should show a value of 2020 for january on TJM column for year 2020',async () => {
+        let ExcellenceCenterWrapperObject
+        await act(async () => {
+            ExcellenceCenterWrapperObject = await mount(<ExcellenceCenter />);
+            ExcellenceCenterWrapperObject.find('LabelSelect').at(1).props().onChange({target:{value:"2020"}})
+        });
+
+        ExcellenceCenterWrapperObject.update()
+        expect(ExcellenceCenterWrapperObject.find('.ExcellenceCenterTable__row-item__TJM').at(0).text()).toEqual("2020")
     })
 })
