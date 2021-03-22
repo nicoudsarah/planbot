@@ -3,7 +3,7 @@ import { mount, shallow } from 'enzyme';
 import { act } from "react-dom/test-utils";
 
 import ExcellenceCenter from "./ExcellenceCenter"
-import LabelSelect from "./LabelSelect";
+import FilterSelector from "./FilterSelector";
 
 describe('ExcellenceCenter', () =>{
 
@@ -18,7 +18,7 @@ describe('ExcellenceCenter', () =>{
         let ExcellenceCenterWrapperObject
         await act(async () => {
              ExcellenceCenterWrapperObject = await mount(<ExcellenceCenter />);
-             ExcellenceCenterWrapperObject.find('LabelSelect').at(0).props().onChange({target:{value:"lyon"}})
+             ExcellenceCenterWrapperObject.find('FilterSelector').at(0).props().onChange({target:{value:"lyon"}})
         });
 
         ExcellenceCenterWrapperObject.update()
@@ -29,7 +29,7 @@ describe('ExcellenceCenter', () =>{
         let ExcellenceCenterWrapperObject
         await act(async () => {
             ExcellenceCenterWrapperObject = await mount(<ExcellenceCenter />);
-            ExcellenceCenterWrapperObject.find('LabelSelect').at(0).props().onChange({target:{value:"grenoble"}})
+            ExcellenceCenterWrapperObject.find('FilterSelector').at(0).props().onChange({target:{value:"grenoble"}})
         });
 
         ExcellenceCenterWrapperObject.update()
@@ -40,7 +40,7 @@ describe('ExcellenceCenter', () =>{
         let ExcellenceCenterWrapperObject
         await act(async () => {
             ExcellenceCenterWrapperObject = await mount(<ExcellenceCenter />);
-            ExcellenceCenterWrapperObject.find('LabelSelect').at(0).props().onChange({target:{value:"all"}})
+            ExcellenceCenterWrapperObject.find('FilterSelector').at(0).props().onChange({target:{value:"all"}})
         });
 
         ExcellenceCenterWrapperObject.update()
@@ -51,7 +51,7 @@ describe('ExcellenceCenter', () =>{
         let ExcellenceCenterWrapperObject
         await act(async () => {
             ExcellenceCenterWrapperObject = await mount(<ExcellenceCenter />);
-            ExcellenceCenterWrapperObject.find('LabelSelect').at(1).props().onChange({target:{value:"2021"}})
+            ExcellenceCenterWrapperObject.find('FilterSelector').at(1).props().onChange({target:{value:"2021"}})
         });
 
         ExcellenceCenterWrapperObject.update()
@@ -62,7 +62,7 @@ describe('ExcellenceCenter', () =>{
         let ExcellenceCenterWrapperObject
         await act(async () => {
             ExcellenceCenterWrapperObject = await mount(<ExcellenceCenter />);
-            ExcellenceCenterWrapperObject.find('LabelSelect').at(1).props().onChange({target:{value:"2020"}})
+            ExcellenceCenterWrapperObject.find('FilterSelector').at(1).props().onChange({target:{value:"2020"}})
         });
 
         ExcellenceCenterWrapperObject.update()
@@ -73,7 +73,7 @@ describe('ExcellenceCenter', () =>{
         let ExcellenceCenterWrapperObject
         await act(async () => {
             ExcellenceCenterWrapperObject = await mount(<ExcellenceCenter />);
-            ExcellenceCenterWrapperObject.find('LabelSelect').at(2).props().onChange({target:{value:"all"}})
+            ExcellenceCenterWrapperObject.find('FilterSelector').at(2).props().onChange({target:{value:"all"}})
         });
 
         ExcellenceCenterWrapperObject.update()
@@ -84,7 +84,7 @@ describe('ExcellenceCenter', () =>{
         let ExcellenceCenterWrapperObject
         await act(async () => {
             ExcellenceCenterWrapperObject = await mount(<ExcellenceCenter />);
-            ExcellenceCenterWrapperObject.find('LabelSelect').at(2).props().onChange({target:{value:"dev"}})
+            ExcellenceCenterWrapperObject.find('FilterSelector').at(2).props().onChange({target:{value:"dev"}})
         });
 
         ExcellenceCenterWrapperObject.update()
@@ -95,7 +95,7 @@ describe('ExcellenceCenter', () =>{
         let ExcellenceCenterWrapperObject
         await act(async () => {
             ExcellenceCenterWrapperObject = await mount(<ExcellenceCenter />);
-            ExcellenceCenterWrapperObject.find('LabelSelect').at(2).props().onChange({target:{value:"ergo"}})
+            ExcellenceCenterWrapperObject.find('FilterSelector').at(2).props().onChange({target:{value:"ergo"}})
         });
 
         ExcellenceCenterWrapperObject.update()

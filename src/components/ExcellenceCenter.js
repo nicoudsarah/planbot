@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from "react";
-import LabelSelect from "./LabelSelect";
+import FilterSelector from "./FilterSelector";
 import ExcellenceCenterTable from "./ExcellenceCenterTable";
 import {fetchExcellenceCenters, fetchYears, fetchProjectTypes} from "../API";
 import "./ExcellenceCenter.scss";
@@ -67,18 +67,18 @@ const ExcellenceCenter = () => {
             <h2 className="excellence-center__title">Business Intelligency - CE</h2>
             <div className="excellence-center__buttons">
                 <div className="excellence-center__button-item">
-                    <LabelSelect label="Choix du centre d'excellence" options={excellenceCentersFilters} id="excellence-center-choice" onChange={handleExcellenceCentersFilterChange}/>
+                    <FilterSelector label="Choix du centre d'excellence" options={excellenceCentersFilters} id="excellence-center-choice" onChange={handleExcellenceCentersFilterChange}/>
                 </div>
                 <div className="excellence-center__button-item">
-                    <LabelSelect label="Année" options={years} id="year" onChange={handleYearChange}/>
+                    <FilterSelector label="Année" options={years} id="year" onChange={handleYearChange}/>
                 </div>
                 <div className="excellence-center__button-item">
-                    <LabelSelect label="Type de projet" options={projectTypesFilters} id="projects-type" onChange={handleProjectTypesFilterChange}/>
+                    <FilterSelector label="Type de projet" options={projectTypesFilters} id="projects-type" onChange={handleProjectTypesFilterChange}/>
                 </div>
             </div>
             <br/>
             <br/>
-            <ExcellenceCenterTable className="excellence-center__table" ce={currentExcellenceCentersFilter} year={currentYear} projectType={currentProjectTypesFilter}/>
+            <ExcellenceCenterTable className="excellence-center__table" excellenceCenter={currentExcellenceCentersFilter} year={currentYear} projectType={currentProjectTypesFilter}/>
         </div>
     );
 }

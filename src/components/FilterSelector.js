@@ -1,9 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import "./LabelSelect.scss";
+import "./FilterSelector.scss";
 
 
-const LabelSelect = (props) => {
+const FilterSelector = (props) => {
     return (
         <>
             {props.label && (
@@ -18,10 +18,10 @@ const LabelSelect = (props) => {
     )
 }
 
-LabelSelect.propTypes = {
+FilterSelector.propTypes = {
     label: PropTypes.string.isRequired,
     options: PropTypes.array.isRequired,
     id: PropTypes.string.isRequired,
 }
 
-export default LabelSelect
+export default FilterSelector
