@@ -75,21 +75,21 @@ export const fetchCEData = async ({ce, year, projectType}) => {
 
 }
 
-export const fetchYearsDatas = async () => {
+export const fetchYears = async () => {
     return new Promise((resolve, _) => {
         const years = [{key: "2021", value:"2021"}, {key: "2020", value: "2020"}]
         resolve(years);
     });
 }
 
-export const fetchCeDatas = async () => {
+export const fetchExcellenceCenters = async () => {
     return new Promise((resolve, _) => {
         const ce = [{key: "all", value: "Tous"}, {key: "lyon", value: "Lyon"}, {key: "grenoble", value:"Grenoble"}]
         resolve(ce);
     });
 }
 
-export const fetchProjectsTypeDatas = async () => {
+export const fetchProjectTypes = async () => {
     return new Promise((resolve, _) => {
         const projectsType = [{key: "all", value: "Tous"}, {key: "dev", value: "Dev"}, {key: "ergo", value:"Ergo"}]
         resolve(projectsType);

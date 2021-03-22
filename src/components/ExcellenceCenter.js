@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from "react";
 import LabelSelect from "./LabelSelect";
 import ExcellenceCenterTable from "./ExcellenceCenterTable";
-import {fetchCeDatas, fetchYearsDatas, fetchProjectsTypeDatas} from "../API";
+import {fetchExcellenceCenters, fetchYears, fetchProjectTypes} from "../API";
 import "./ExcellenceCenter.scss";
 
 const ExcellenceCenter = () => {
@@ -10,19 +10,19 @@ const ExcellenceCenter = () => {
     const todayYear = todayDate.getFullYear().toString()
 
     const [years, setYears] = useState([])
-    const [selectedYear, setSelectedYear] = useState(years.length>0 ? years[0].key : todayYear);
+    const [currentYear, changeYear] = useState(years.length>0 ? years[0].key : todayYear);
 
-    const [ce, setCe] = useState([])
-    const [selectedCE, setSelectedCE] = useState(ce.length>0 ? ce[0].key : 'all');
+    const [excellenceCentersFilters, setExcellenceCentersFilters] = useState([])
+    const [currentExcellenceCentersFilter, changeExcellenceCentersFilter] = useState(excellenceCentersFilters.length>0 ? excellenceCentersFilters[0].key : 'all');
 
-    const [projectsType, setProjectsType] = useState([])
-    const [selectedProjectType, setSelectedProjectType] = useState(projectsType.length>0 ? projectsType[0].key : 'all');
+    const [projectTypesFilters, setProjectsTypesFilters] = useState([])
+    const [currentProjectTypesFilter, changeProjectTypesFilter] = useState(projectTypesFilters.length>0 ? projectTypesFilters[0].key : 'all');
 
     useEffect( () => {
 
         const getYears = async () => {
-            const yearsTable = await fetchYearsDatas()
-            setYears(yearsTable)
+            const years = await fetchYears()
+            setYears(years)
         }
         getYears()
 
@@ -31,35 +31,35 @@ const ExcellenceCenter = () => {
 
     useEffect(() => {
 
-        const getCe = async () => {
-            const ceTable = await fetchCeDatas()
-            setCe(ceTable)
+        const getExcellenceCenters = async () => {
+            const ExcellenceCenters = await fetchExcellenceCenters()
+            setExcellenceCentersFilters(ExcellenceCenters)
         }
-        getCe()
+        getExcellenceCenters()
 
     }, [])
 
     useEffect(() => {
 
-        const getProjectsType = async () => {
-            const ProjectsTypeTable = await fetchProjectsTypeDatas()
-            setProjectsType(ProjectsTypeTable)
+        const getProjectTypes = async () => {
+            const ProjectTypes = await fetchProjectTypes()
+            setProjectsTypesFilters(ProjectTypes)
         }
-        getProjectsType()
+        getProjectTypes()
 
     }, [])
 
 
-    const handleButtonChangeCE = (e) => {
-        setSelectedCE(e.target.value);
+    const handleExcellenceCentersFilterChange = (e) => {
+        changeExcellenceCentersFilter(e.target.value);
     }
 
-    const handleButtonChangeYear = (e) => {
-        setSelectedYear(e.target.value);
+    const handleYearChange = (e) => {
+        changeYear(e.target.value);
     }
 
-    const handleButtonChangeProjectType = (e) => {
-        setSelectedProjectType(e.target.value);
+    const handleProjectTypesFilterChange = (e) => {
+        changeProjectTypesFilter(e.target.value);
     }
 
     return (
@@ -67,18 +67,18 @@ const ExcellenceCenter = () => {
             <h2 className="excellence-center__title">Business Intelligency - CE</h2>
             <div className="excellence-center__buttons">
                 <div className="excellence-center__button-item">
-                    <LabelSelect label="Choix du centre d'excellence" options={ce} id="excellence-center-choice" onChange={handleButtonChangeCE}/>
+                    <LabelSelect label="Choix du centre d'excellence" options={excellenceCentersFilters} id="excellence-center-choice" onChange={handleExcellenceCentersFilterChange}/>
                 </div>
                 <div className="excellence-center__button-item">
-                    <LabelSelect label="Année" options={years} id="year" onChange={handleButtonChangeYear}/>
+                    <LabelSelect label="Année" options={years} id="year" onChange={handleYearChange}/>
                 </div>
                 <div className="excellence-center__button-item">
-                    <LabelSelect label="Type de projet" options={projectsType} id="projects-type" onChange={handleButtonChangeProjectType}/>
+                    <LabelSelect label="Type de projet" options={projectTypesFilters} id="projects-type" onChange={handleProjectTypesFilterChange}/>
                 </div>
             </div>
             <br/>
             <br/>
-            <ExcellenceCenterTable className="excellence-center__table" ce={selectedCE} year={selectedYear} projectType={selectedProjectType}/>
+            <ExcellenceCenterTable className="excellence-center__table" ce={currentExcellenceCentersFilter} year={currentYear} projectType={currentProjectTypesFilter}/>
         </div>
     );
 }
