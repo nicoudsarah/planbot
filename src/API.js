@@ -98,4 +98,14 @@ export const fetchProjectTypes = async () => {
 
 
 
+export const fetchProductionMetrics = async() => {
+    return new Promise ( (resolve, _) => {
+        const actualYearJSONForAllProduction = Json_CE_All_YEAR_2021_PROJ_All
+        resolve(actualYearJSONForAllProduction)
+    })
+
+    //renvoie le JSON
+}
+
+
 
