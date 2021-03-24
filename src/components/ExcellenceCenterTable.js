@@ -7,26 +7,26 @@ const ExcellenceCenterTable = ({excellenceCenter, projectType, year}) => {
     const ProductionMetricsLabels =  ["CA", "TJM", "# Jours dispo",  "# Jours prod", "# Jours interP", "TO"]
     const ProductionMetricsJSONKeys =  ["CA", "TJM", "availableDays",  "productionDays", "interProductionDays", "TO"]
 
-    const [productionMetrics, applyFiltersOnProductionMetrics] = useState(null)
+    const [selectedYearProductionMetrics, changeProductionMetrics] = useState(null)
 
     useEffect(() => {
 
         const setProductionMetricsWithFilters = async () => {
-            applyFiltersOnProductionMetrics((await fetchFilteredProductionMetrics({excellenceCenter, year, projectType})))
+            changeProductionMetrics((await fetchFilteredProductionMetrics({excellenceCenter, year, projectType})))
         }
         setProductionMetricsWithFilters()
 
 
 
     }, [excellenceCenter, projectType, year])
-    const months = productionMetrics && Object.keys(productionMetrics)
+    const months = selectedYearProductionMetrics && Object.keys(selectedYearProductionMetrics)
 
 
     const calculateAnnualDateValueForProductionMetrics = (ProductionMetric) => {
         let computedValues = []
-        if (months && productionMetrics) {
+        if (months && selectedYearProductionMetrics) {
             computedValues = months
-                .map(month => productionMetrics[month][ProductionMetric])
+                .map(month => selectedYearProductionMetrics[month][ProductionMetric])
                 .reduce((acc, currentValue, index) => {
                     if (index === 0) {
                         acc.push(currentValue)
@@ -40,7 +40,7 @@ const ExcellenceCenterTable = ({excellenceCenter, projectType, year}) => {
     }
 
     const calculateActualTotalValueForProductionMetric = (ProductionMetric) => {
-        if (months && productionMetrics) {
+        if (months && selectedYearProductionMetrics) {
             const computedValues = calculateAnnualDateValueForProductionMetrics(ProductionMetric)
             const actualTotal = computedValues[computedValues.length - 1]
             return actualTotal
@@ -65,15 +65,15 @@ const ExcellenceCenterTable = ({excellenceCenter, projectType, year}) => {
                     </tr>
                 </thead>
                 <tbody>
-                    {productionMetrics && months && months.map((month, index) =>
+                    {selectedYearProductionMetrics && months && months.map((month, index) =>
                         <tr key={index} className="ExcellenceCenterTable__row">
                             <td key={index} className="ExcellenceCenterTable__row-item">{month}</td>
-                            <td className="ExcellenceCenterTable__row-item__CA">{productionMetrics[month].CA}</td>
-                            <td className="ExcellenceCenterTable__row-item__TJM">{productionMetrics[month].TJM}</td>
-                            <td className="ExcellenceCenterTable__row-item__availableDays">{productionMetrics[month].availableDays}</td>
-                            <td className="ExcellenceCenterTable__row-item">{productionMetrics[month].productionDays}</td>
-                            <td className="ExcellenceCenterTable__row-item">{productionMetrics[month].interProductionDays}</td>
-                            <td className="ExcellenceCenterTable__row-item">{productionMetrics[month].TO}</td>
+                            <td className="ExcellenceCenterTable__row-item__CA">{selectedYearProductionMetrics[month].CA}</td>
+                            <td className="ExcellenceCenterTable__row-item__TJM">{selectedYearProductionMetrics[month].TJM}</td>
+                            <td className="ExcellenceCenterTable__row-item__availableDays">{selectedYearProductionMetrics[month].availableDays}</td>
+                            <td className="ExcellenceCenterTable__row-item">{selectedYearProductionMetrics[month].productionDays}</td>
+                            <td className="ExcellenceCenterTable__row-item">{selectedYearProductionMetrics[month].interProductionDays}</td>
+                            <td className="ExcellenceCenterTable__row-item">{selectedYearProductionMetrics[month].TO}</td>
 
                             <td className="ExcellenceCenterTable__row-item__CA">{calculateAnnualDateValueForProductionMetrics(ProductionMetricsJSONKeys[0])[index]}</td>
                             <td className="ExcellenceCenterTable__row-item">{calculateAnnualDateValueForProductionMetrics(ProductionMetricsJSONKeys[1])[index]}</td>
