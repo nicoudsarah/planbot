@@ -11,7 +11,7 @@ const ExcellenceCenterBarChart = ({productionMetricsLabel}) => {
 
     let dataCumulCA = [107000, 127000, 142000, 152000, 167000, 187000, 202000, 212000, 227000, 247000, 262000, 272000]
 
-    const [productionMetricsForEachMonth, changeProductionMetricsForEachMonth] = useState(null)
+    const [monthlyProductionMetrics, changeProductionMetricsForEachMonth] = useState(null)
 
     useEffect(() => {
 
@@ -21,22 +21,18 @@ const ExcellenceCenterBarChart = ({productionMetricsLabel}) => {
         setProductionMetricsWithFilters()
 
     }, [])
-    const months = productionMetricsForEachMonth && Object.keys(productionMetricsForEachMonth)
+    const months = monthlyProductionMetrics && Object.keys(monthlyProductionMetrics)
 
-    const catchProductionMetricsValues =  (productionMetricsLabel) => {
-        let ProductionMetricsalues = []
-        if (months && productionMetricsForEachMonth) {
-            ProductionMetricsalues = months.map((month) => { return productionMetricsForEachMonth[month][productionMetricsLabel]})
-            console.log(ProductionMetricsalues)
+    const extractProductionMetricsValues = (productionMetricsLabel) => {
+        let ProductionMetricValues = []
+        if (months && monthlyProductionMetrics) {
+            ProductionMetricValues = months.map((month) => { return monthlyProductionMetrics[month][productionMetricsLabel]})
         }
-        return ProductionMetricsalues
+        return ProductionMetricValues
     }
 
-    let productionMetricsValues = catchProductionMetricsValues(productionMetricsLabel)
-
-
-    // ajouter un useState pour avoir le set de la métrique (métrique par défaut, ce sera CA)
-    // Ajouter un useEffect pour modifier la valeur avec ce qui vient de l'API
+    let productionMetricsValues = extractProductionMetricsValues(productionMetricsLabel)
+    
 
     return <div>
         <Bar
