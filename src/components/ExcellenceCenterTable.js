@@ -17,8 +17,10 @@ const ExcellenceCenterTable = ({excellenceCenter, projectType, year}) => {
         setProductionMetricsWithFilters()
 
 
+
     }, [excellenceCenter, projectType, year])
     const months = productionMetrics && Object.keys(productionMetrics)
+
 
     const calculateAnnualDateValueForProductionMetrics = (ProductionMetric) => {
         let computedValues = []

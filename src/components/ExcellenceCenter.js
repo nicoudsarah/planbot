@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from "react";
 import FilterSelector from "./FilterSelector";
 import ExcellenceCenterTable from "./ExcellenceCenterTable";
+import ExcellenceCenterBarChart from "./ExcellenceCenterBarChart";
 import {fetchExcellenceCenters, fetchYears, fetchProjectTypes} from "../API";
 import "./ExcellenceCenter.scss";
 
@@ -79,8 +80,11 @@ const ExcellenceCenter = () => {
             <br/>
             <br/>
             <ExcellenceCenterTable className="excellence-center__table" excellenceCenter={currentExcellenceCentersFilter} year={currentYear} projectType={currentProjectTypesFilter}/>
+            <br/>
+            <br/>
+            <ExcellenceCenterBarChart productionMetricsLabel={"CA"}/>
         </div>
     );
 }
-
+//ajouter à barchart l'option de modification de la métrique
 export default ExcellenceCenter
