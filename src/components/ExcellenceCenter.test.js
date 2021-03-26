@@ -9,7 +9,7 @@ describe('ExcellenceCenter', () =>{
 
 
     it('should display the excellence center section title', () => {
-        const ExcellenceCenterWrapperObject = shallow(<ExcellenceCenter />);
+        const ExcellenceCenterWrapperObject = shallow(<ExcellenceCenter  usechart={false}/>);
         const ExcellenceCenterTitleText = ExcellenceCenterWrapperObject.find('.excellence-center__title').text();
         expect(ExcellenceCenterTitleText).toEqual("Business Intelligency - CE");
     });
@@ -17,7 +17,7 @@ describe('ExcellenceCenter', () =>{
     it('should show a value of 69000 for january on CA column for Lyon excellence center',async () => {
         let ExcellenceCenterWrapperObject
         await act(async () => {
-             ExcellenceCenterWrapperObject = await mount(<ExcellenceCenter />);
+             ExcellenceCenterWrapperObject = await mount(<ExcellenceCenter usechart={false}/>);
              ExcellenceCenterWrapperObject.find('FilterSelector').at(0).props().onChange({target:{value:"lyon"}})
         });
 
@@ -28,7 +28,7 @@ describe('ExcellenceCenter', () =>{
     it('should show a value of 38000 for january on CA column for Grenoble excellence center',async () => {
         let ExcellenceCenterWrapperObject
         await act(async () => {
-            ExcellenceCenterWrapperObject = await mount(<ExcellenceCenter />);
+            ExcellenceCenterWrapperObject = await mount(<ExcellenceCenter usechart={false}/>);
             ExcellenceCenterWrapperObject.find('FilterSelector').at(0).props().onChange({target:{value:"grenoble"}})
         });
 
@@ -39,7 +39,7 @@ describe('ExcellenceCenter', () =>{
     it('should show a value of 107000 for january on CA column for all excellence centers',async () => {
         let ExcellenceCenterWrapperObject
         await act(async () => {
-            ExcellenceCenterWrapperObject = await mount(<ExcellenceCenter />);
+            ExcellenceCenterWrapperObject = await mount(<ExcellenceCenter usechart={false}/>);
             ExcellenceCenterWrapperObject.find('FilterSelector').at(0).props().onChange({target:{value:"all"}})
         });
 
@@ -50,7 +50,7 @@ describe('ExcellenceCenter', () =>{
     it('should show a value of 2021 for january on TJM column for year 2021',async () => {
         let ExcellenceCenterWrapperObject
         await act(async () => {
-            ExcellenceCenterWrapperObject = await mount(<ExcellenceCenter />);
+            ExcellenceCenterWrapperObject = await mount(<ExcellenceCenter usechart={false}/>);
             ExcellenceCenterWrapperObject.find('FilterSelector').at(1).props().onChange({target:{value:"2021"}})
         });
 
@@ -61,7 +61,7 @@ describe('ExcellenceCenter', () =>{
     it('should show a value of 2020 for january on TJM column for year 2020',async () => {
         let ExcellenceCenterWrapperObject
         await act(async () => {
-            ExcellenceCenterWrapperObject = await mount(<ExcellenceCenter />);
+            ExcellenceCenterWrapperObject = await mount(<ExcellenceCenter usechart={false}/>);
             ExcellenceCenterWrapperObject.find('FilterSelector').at(1).props().onChange({target:{value:"2020"}})
         });
 
@@ -72,7 +72,7 @@ describe('ExcellenceCenter', () =>{
     it('should show a value of 100 for january on availableDays column for all project type',async () => {
         let ExcellenceCenterWrapperObject
         await act(async () => {
-            ExcellenceCenterWrapperObject = await mount(<ExcellenceCenter />);
+            ExcellenceCenterWrapperObject = await mount(<ExcellenceCenter usechart={false}/>);
             ExcellenceCenterWrapperObject.find('FilterSelector').at(2).props().onChange({target:{value:"all"}})
         });
 
@@ -83,7 +83,7 @@ describe('ExcellenceCenter', () =>{
     it('should show a value of 75 for january on availableDays column for dev project type',async () => {
         let ExcellenceCenterWrapperObject
         await act(async () => {
-            ExcellenceCenterWrapperObject = await mount(<ExcellenceCenter />);
+            ExcellenceCenterWrapperObject = await mount(<ExcellenceCenter usechart={false} />);
             ExcellenceCenterWrapperObject.find('FilterSelector').at(2).props().onChange({target:{value:"dev"}})
         });
 
@@ -94,7 +94,7 @@ describe('ExcellenceCenter', () =>{
     it('should show a value of 25 for january on availableDays column for ergo project type',async () => {
         let ExcellenceCenterWrapperObject
         await act(async () => {
-            ExcellenceCenterWrapperObject = await mount(<ExcellenceCenter />);
+            ExcellenceCenterWrapperObject = await mount(<ExcellenceCenter usechart={false}/>);
             ExcellenceCenterWrapperObject.find('FilterSelector').at(2).props().onChange({target:{value:"ergo"}})
         });
 
