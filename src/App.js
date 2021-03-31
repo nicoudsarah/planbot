@@ -6,7 +6,7 @@ const App = () => {
   return (
       <div className="App">
         <h1>Business Intelligency</h1>
-        <ExcellenceCenter usechart={true}/>
+        <ExcellenceCenter />
       </div>
   );
 }

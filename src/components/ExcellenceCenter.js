@@ -5,9 +5,8 @@ import ExcellenceCenterBarChart from "./ExcellenceCenterBarChart";
 import {fetchExcellenceCenters, fetchYears, fetchProjectTypes} from "../API";
 import "./ExcellenceCenter.scss";
 
-const ExcellenceCenter = ({usechart}) => {
-    console.log("usechart !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
-    console.log(usechart)
+const ExcellenceCenter = () => {
+
     const todayDate = new Date()
     const todayYear = todayDate.getFullYear().toString()
 
@@ -83,8 +82,7 @@ const ExcellenceCenter = ({usechart}) => {
             <ExcellenceCenterTable className="excellence-center__table" excellenceCenter={currentExcellenceCentersFilter} year={currentYear} projectType={currentProjectTypesFilter}/>
             <br/>
             <br/>
-            {(usechart==true) ? <ExcellenceCenterBarChart productionMetricsLabel={"TJM"}/> : <br/>}
-
+            <ExcellenceCenterBarChart productionMetricsLabel={"TJM"}/>
         </div>
     );
 }
