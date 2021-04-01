@@ -10,11 +10,10 @@ const computeAverage = (values) => {
 
 export class DataProcessing extends React.Component {
 
-    static calculateValueToDisplayForProductionMetrics(months, productionMetricsValues, productionMetricsLabel) {
-        //let eachMonthProductionMetricValues = null
+    static calculateValueToDisplayForProductionMetricsExceptTO(months, productionMetricsValues, productionMetricsLabel) {
         let collectionOfProductionMetricsValues = []
         months.forEach((month, index) => {
-            let eachMonthProductionMetricValues = productionMetricsValues.slice(0, index + 1); // On récupère les valeurs de la métrique de chaque mois
+            let eachMonthProductionMetricValues = productionMetricsValues.slice(0, index + 1);
 
             if(productionMetricsLabel == "CA"){
                 const sumOfProductionMetricValues = computeSum(eachMonthProductionMetricValues);
@@ -29,6 +28,26 @@ export class DataProcessing extends React.Component {
             }
         })
         return collectionOfProductionMetricsValues
+    }
+
+    static calculateValueToDisplayForTOProductionMetrics(months, availableDaysValues, productionDaysValues){
+        let collectedSumOfProductionDays =[]
+        let collectedSumOfAvailableDays =[]
+        let collectionOfTOValues = []
+        months.forEach((month, index) => {
+            const eachMonthProductionDaysValues = productionDaysValues.slice(0, index + 1);
+            const eachMonthAvailableDaysValues = availableDaysValues.slice(0, index + 1);
+            const sumOfProductionDays = computeSum(eachMonthProductionDaysValues)
+            const sumOfAvailableDays = computeSum(eachMonthAvailableDaysValues)
+            collectedSumOfProductionDays.push(sumOfProductionDays)
+            collectedSumOfAvailableDays.push(sumOfAvailableDays)
+        })
+        for (var i = 0 ; i < months.length ; i++){
+            let cumulatedTOvalues = ((collectedSumOfProductionDays[i]/collectedSumOfAvailableDays[i])*100).toFixed(2)
+            collectionOfTOValues.push(cumulatedTOvalues)
+        }
+        return collectionOfTOValues
+
     }
 }
 
