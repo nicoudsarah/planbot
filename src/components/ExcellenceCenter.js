@@ -86,5 +86,5 @@ const ExcellenceCenter = () => {
         </div>
     );
 }
-//ajouter à barchart l'option de modification de la métrique
+
 export default ExcellenceCenter
