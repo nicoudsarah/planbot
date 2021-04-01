@@ -43,39 +43,6 @@ const ExcellenceCenterBarChart = ({productionMetricsLabel}) => {
     productionMetricsValues = extractProductionMetricsValues(productionMetricsLabel)
 
 
-
-    const computeSum = (data) => {
-        return data.reduce((a, b) => a + b, 0);
-    }
-
-    const computeAverage = (data) => {
-        return computeSum(data) / data.length;
-    }
-
-
-
-    const averages = [];
-    const sums = [];
-
-
-   /* if (months && monthlyProductionMetrics) {
-        months.forEach((month, index) => {
-            const data = getProductionMetricsValuesFromJson("TJM").slice(0, index + 1);
-            const average = computeAverage(data);
-            const sum = computeSum(data);
-            averages.push(average);
-            sums.push(sum);
-        });
-    }*/
-
-    /*const dataToDisplay = () => {
-        return data.map(data => {
-            data.toFixed(2);
-        })
-    }*/
-    //console.log('average : ' +averages)
-    //console.log('sum : ' + sums)
-
     /** La bonne version !!!!*/
 
     const getProductionMetricsValuesFromJson = (productionMetricsLabel) => {
@@ -84,51 +51,17 @@ const ExcellenceCenterBarChart = ({productionMetricsLabel}) => {
 
     const calculateValuesToDisplayForProductionMetricsFromJson = (ProductionMetricsLabel) => {       // on pourra remplacer label par CA, TJM, jour...
         if (months && monthlyProductionMetrics) {
-
-            return DataProcessing.calculateValueToDisplayForProductionMetrics(months, getProductionMetricsValuesFromJson(ProductionMetricsLabel), "CA")
-
+            return DataProcessing.calculateValueToDisplayForProductionMetrics(months, getProductionMetricsValuesFromJson(ProductionMetricsLabel), "TJM")
         }
     }
 
-    const data = calculateValuesToDisplayForProductionMetricsFromJson("CA")
-    console.log(data)
-
-
-
-
+    const data = calculateValuesToDisplayForProductionMetricsFromJson("TJM")
+    //console.log(data)
 
 
 
     /*  const calculateAnnualDateValueForProductionMetrics = (ProductionMetricsLabel) => {
           let computedValues = []
-
-          if (months && monthlyProductionMetrics) {
-              if (productionMetricsLabel != "TO" && productionMetricsLabel != "TJM") {
-                  computedValues = months
-                      .map(month => monthlyProductionMetrics[month][productionMetricsLabel])
-                      .reduce((acc, currentValue, index) => {
-                          if (index === 0) {
-                              acc.push(currentValue)
-                              return acc;
-                          }
-                          acc.push(currentValue + acc[index - 1])
-                          return acc;
-                      }, [])
-              } else if (productionMetricsLabel == "TJM") {
-                  let sumTJMValues = []
-                  computedValues = months
-                      .map(month => monthlyProductionMetrics[month][productionMetricsLabel])
-                      .reduce((moyTJMValues, currentValue, index) => {
-                          if (index === 0) {
-                              moyTJMValues.push(currentValue)
-                              sumTJMValues.push(currentValue)
-                              return moyTJMValues;
-                          }
-                          sumTJMValues.push(currentValue + sumTJMValues[index - 1])
-
-                          moyTJMValues.push((sumTJMValues[index] / (index + 1)).toFixed(2))
-                          return moyTJMValues;
-                      }, [])
               } else {
                   let productionDayValues = []
                   let availablDaysValue = []
@@ -160,36 +93,7 @@ const ExcellenceCenterBarChart = ({productionMetricsLabel}) => {
               }
           }
           return computedValues
-      }
-
-      console.log(calculateAnnualDateValueForProductionMetrics("TJM"))
-      let cumulatedProductionMetricsValues = calculateAnnualDateValueForProductionMetrics(productionMetricsLabel)
-
-      const TJM = [{prod: 20}, {prod: 40}, {prod: 60}, {prod: 80}]
-
-
-      //Si on a TO, il faut prendre le tableau des valeurs cumulées des jours produits et des jours dispos et pour chaque valeur faire: jour produit/jour dispo x100
-      let sumValues = []
-      let computedValues1 = TJM
-          .map(TJM => TJM.prod)
-          .reduce((moyValues, currentValue, index) => {
-              if (index === 0) {
-                  moyValues.push(currentValue)
-                  sumValues.push(currentValue)
-                  return moyValues;
-              }
-
-              sumValues.push(currentValue + sumValues[index - 1])
-
-              moyValues.push(sumValues[index] / (index + 1))
-
-              //console.log('tableau somme des valeurs : ' + sumValues)
-              //console.log('tableau moy des valeurs : ' + moyValues)
-              return moyValues;
-          }, [])*/
-
-
-    //console.log('test : ' + computedValues1)
+      }*/
 
 
     return <div>
