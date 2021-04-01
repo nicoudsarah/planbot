@@ -37,4 +37,12 @@ describe ('Dataprocessing',  () => {
         const valueToDisplay = DataProcessing.calculateValueToDisplayForProductionMetrics(months, productionMetricsValues, productionMetricsLabel)
         expect(valueToDisplay).toEqual([100, 300, 600])
     })
+
+    it( 'should done a table of average values convert in k€ for TJM production metric', () => {
+        const months = ["january", "february", "march"]
+        const productionMetricsValues = [100, 200, 300]
+        const productionMetricsLabel = "TJM"
+        const valueToDisplay = DataProcessing.calculateValueToDisplayForProductionMetrics(months, productionMetricsValues, productionMetricsLabel)
+        expect(valueToDisplay).toEqual(['100.00', '150.00', '200.00'])
+    })
 })
