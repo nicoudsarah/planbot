@@ -26,7 +26,7 @@ describe ('Dataprocessing',  () => {
         const months = ["january", "february", "march"]
         const productionMetricsValues = [100, 200, 300]
         const productionMetricsLabel = "availableDays"
-        const valueToDisplay = DataProcessing.calculateValueToDisplayForProductionMetrics(months, productionMetricsValues, productionMetricsLabel)
+        const valueToDisplay = DataProcessing.calculateValueToDisplayForProductionMetricsExceptTO(months, productionMetricsValues, productionMetricsLabel)
         expect(valueToDisplay).toEqual([100, 300, 600])
     })
 
@@ -34,15 +34,24 @@ describe ('Dataprocessing',  () => {
         const months = ["january", "february", "march"]
         const productionMetricsValues = [100000, 200000, 300000]
         const productionMetricsLabel = "CA"
-        const valueToDisplay = DataProcessing.calculateValueToDisplayForProductionMetrics(months, productionMetricsValues, productionMetricsLabel)
+        const valueToDisplay = DataProcessing.calculateValueToDisplayForProductionMetricsExceptTO(months, productionMetricsValues, productionMetricsLabel)
         expect(valueToDisplay).toEqual([100, 300, 600])
     })
 
-    it( 'should done a table of average values convert in k€ for TJM production metric', () => {
+    it( 'should done a table of average values for TJM production metric', () => {
         const months = ["january", "february", "march"]
         const productionMetricsValues = [100, 200, 300]
         const productionMetricsLabel = "TJM"
-        const valueToDisplay = DataProcessing.calculateValueToDisplayForProductionMetrics(months, productionMetricsValues, productionMetricsLabel)
+        const valueToDisplay = DataProcessing.calculateValueToDisplayForProductionMetricsExceptTO(months, productionMetricsValues, productionMetricsLabel)
         expect(valueToDisplay).toEqual(['100.00', '150.00', '200.00'])
+    })
+
+    it( 'should done a table of average values for TO production metric', () => {
+        const months = ["january", "february", "march"]
+        const availableDaysValues = [20, 20, 20]
+        const productionDaysValues = [5, 10, 15]
+        const productionMetricsLabel = "TO"
+        const valueToDisplay = DataProcessing.calculateValueToDisplayForTOProductionMetrics(months, availableDaysValues, productionDaysValues, productionMetricsLabel)
+        expect(valueToDisplay).toEqual(['25.00', '37.50', '50.00'])
     })
 })

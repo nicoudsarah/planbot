@@ -43,57 +43,28 @@ const ExcellenceCenterBarChart = ({productionMetricsLabel}) => {
     productionMetricsValues = extractProductionMetricsValues(productionMetricsLabel)
 
 
-    /** La bonne version !!!!*/
 
     const getProductionMetricsValuesFromJson = (productionMetricsLabel) => {
         return months.map(month => monthlyProductionMetrics[month][productionMetricsLabel]);
     }
 
-    const calculateValuesToDisplayForProductionMetricsFromJson = (ProductionMetricsLabel) => {       // on pourra remplacer label par CA, TJM, jour...
+    const calculateValuesToDisplayForProductionMetricsFromJson = (productionMetricsLabel) => {      
         if (months && monthlyProductionMetrics) {
-            return DataProcessing.calculateValueToDisplayForProductionMetrics(months, getProductionMetricsValuesFromJson(ProductionMetricsLabel), "TJM")
+            if (productionMetricsLabel != "TO"){
+                return DataProcessing.calculateValueToDisplayForProductionMetricsExceptTO(
+                    months,
+                    getProductionMetricsValuesFromJson(productionMetricsLabel),
+                    "TJM")
+            } else {
+                return DataProcessing.calculateValueToDisplayForTOProductionMetrics(
+                    months,
+                    getProductionMetricsValuesFromJson("availableDays"),
+                    getProductionMetricsValuesFromJson("productionDays"))
+            }
         }
     }
 
-    const data = calculateValuesToDisplayForProductionMetricsFromJson("TJM")
-    //console.log(data)
-
-
-
-    /*  const calculateAnnualDateValueForProductionMetrics = (ProductionMetricsLabel) => {
-          let computedValues = []
-              } else {
-                  let productionDayValues = []
-                  let availablDaysValue = []
-                  productionDayValues = months
-                      .map(month => monthlyProductionMetrics[month]["productionDays"])
-                      .reduce((acc, currentValue, index) => {
-                          if (index === 0) {
-                              acc.push(currentValue)
-                              return acc;
-                          }
-                          acc.push(currentValue + acc[index - 1])
-                          return acc;
-                      }, [])
-                  availablDaysValue = months
-                      .map(month => monthlyProductionMetrics[month]["availableDays"])
-                      .reduce((acc, currentValue, index) => {
-                          if (index === 0) {
-                              acc.push(currentValue)
-                              return acc;
-                          }
-                          acc.push(currentValue + acc[index - 1])
-                          return acc;
-                      }, [])
-                  for (var i = 0; i < productionDayValues.length; i++) {
-                      let fixedComputed = null
-                      fixedComputed = ((productionDayValues[i] / availablDaysValue[i]) * 100).toFixed(2)
-                      computedValues.push(fixedComputed)
-                  }
-              }
-          }
-          return computedValues
-      }*/
+    const data = calculateValuesToDisplayForProductionMetricsFromJson("TO")
 
 
     return <div>
