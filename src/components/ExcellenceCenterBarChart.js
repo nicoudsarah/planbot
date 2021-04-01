@@ -2,6 +2,7 @@ import React, {useEffect, useState} from "react";
 import {Bar, defaults} from "react-chartjs-2"
 import 'chartjs-plugin-datalabels';
 import {fetchProductionMetrics} from "../API";
+import {DataProcessing} from "../DataProcessing";
 
 defaults.global.tooltips.enabled = false
 
@@ -21,14 +22,11 @@ const ExcellenceCenterBarChart = ({productionMetricsLabel}) => {
         setProductionMetricsWithFilters()
 
     }, [])
-    console.log("monthlyProductionMetrics")
-    console.log(monthlyProductionMetrics)
     let months = []
     if (monthlyProductionMetrics) {
         months = Object.keys(monthlyProductionMetrics)
     }
-    console.log("months")
-    console.log(months)
+
 
 
     const extractProductionMetricsValues = (productionMetricsLabel) => {
@@ -43,13 +41,8 @@ const ExcellenceCenterBarChart = ({productionMetricsLabel}) => {
 
     let productionMetricsValues = []
     productionMetricsValues = extractProductionMetricsValues(productionMetricsLabel)
-    console.log("data values")
-    console.log(extractProductionMetricsValues(productionMetricsLabel))
 
 
-    /*  [10, 20, 40]
-      [10, 30, 70]somme
-      [10, 15, 20]moy*/
 
     const computeSum = (data) => {
         return data.reduce((a, b) => a + b, 0);
@@ -59,15 +52,13 @@ const ExcellenceCenterBarChart = ({productionMetricsLabel}) => {
         return computeSum(data) / data.length;
     }
 
-    const getProductionMetricsValuesFromJson = (productionMetricsLabel) => {
-        return months.map(month => monthlyProductionMetrics[month][productionMetricsLabel]);
-    }
+
 
     const averages = [];
     const sums = [];
 
 
-    if (months && monthlyProductionMetrics) {
+   /* if (months && monthlyProductionMetrics) {
         months.forEach((month, index) => {
             const data = getProductionMetricsValuesFromJson("TJM").slice(0, index + 1);
             const average = computeAverage(data);
@@ -75,7 +66,7 @@ const ExcellenceCenterBarChart = ({productionMetricsLabel}) => {
             averages.push(average);
             sums.push(sum);
         });
-    }
+    }*/
 
     /*const dataToDisplay = () => {
         return data.map(data => {
@@ -85,22 +76,25 @@ const ExcellenceCenterBarChart = ({productionMetricsLabel}) => {
     //console.log('average : ' +averages)
     //console.log('sum : ' + sums)
 
+    /** La bonne version !!!!*/
+
+    const getProductionMetricsValuesFromJson = (productionMetricsLabel) => {
+        return months.map(month => monthlyProductionMetrics[month][productionMetricsLabel]);
+    }
 
     const calculateValuesToDisplayForProductionMetricsFromJson = (ProductionMetricsLabel) => {       // on pourra remplacer label par CA, TJM, jour...
-        return calculateValueToDisplayForProductionMetrics(getProductionMetricsValuesFromJson("TJM"))
-    }
-
-    const calculateValueToDisplayForProductionMetrics = (productionMetricsValues, productionMetricLabel) => {     // c'est ça qu'on test
         if (months && monthlyProductionMetrics) {
-            months.forEach((month, index) => {
-                const data = productionMetricsValues.slice(0, index + 1);
-                const average = computeAverage(data);
-                const sum = computeSum(data);
-                averages.push(average);
-                sums.push(sum);
-            });
+            return DataProcessing.calculateValueToDisplayForProductionMetrics(months, getProductionMetricsValuesFromJson(ProductionMetricsLabel), "TJM")
         }
     }
+
+    const data = calculateValuesToDisplayForProductionMetricsFromJson("availableDays")
+    console.log(data)
+
+
+
+
+
 
 
     /*  const calculateAnnualDateValueForProductionMetrics = (ProductionMetricsLabel) => {
@@ -203,7 +197,7 @@ const ExcellenceCenterBarChart = ({productionMetricsLabel}) => {
                 datasets: [
                     {
                         label: 'Cumul annuel à date (€)',
-                        data: [],
+                        data: data,
                         pointBackgroundColor: 'white',
                         pointBorderColor: '#A50040',
                         pointBorderWidth: 3,
@@ -251,6 +245,8 @@ const ExcellenceCenterBarChart = ({productionMetricsLabel}) => {
             }}
         />
     </div>
+
+
 }
 
 export default ExcellenceCenterBarChart
