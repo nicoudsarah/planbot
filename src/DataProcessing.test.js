@@ -29,4 +29,12 @@ describe ('Dataprocessing',  () => {
         const valueToDisplay = DataProcessing.calculateValueToDisplayForProductionMetrics(months, productionMetricsValues, productionMetricsLabel)
         expect(valueToDisplay).toEqual([100, 300, 600])
     })
+
+    it( 'should done a table of added values convert in k€ for CA production metric', () => {
+        const months = ["january", "february", "march"]
+        const productionMetricsValues = [100000, 200000, 300000]
+        const productionMetricsLabel = "CA"
+        const valueToDisplay = DataProcessing.calculateValueToDisplayForProductionMetrics(months, productionMetricsValues, productionMetricsLabel)
+        expect(valueToDisplay).toEqual([100, 300, 600])
+    })
 })

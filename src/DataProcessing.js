@@ -12,7 +12,11 @@ export class DataProcessing extends React.Component {
         months.forEach((month, index) => {
             eachMonthProductionMetricValues = productionMetricsValues.slice(0, index + 1); // On récupère les valeurs de la métrique de chaque mois
             const sumOfProductionMetricValues = computeSum(eachMonthProductionMetricValues);  //on somme ces valeurs
-            collectionOfProductionMetricsValuesAdded.push(sumOfProductionMetricValues);
+            if(productionMetricsLabel == "CA"){
+                collectionOfProductionMetricsValuesAdded.push(sumOfProductionMetricValues/1000);
+            } else {
+                collectionOfProductionMetricsValuesAdded.push(sumOfProductionMetricValues);
+            }
         })
         return collectionOfProductionMetricsValuesAdded
     }
