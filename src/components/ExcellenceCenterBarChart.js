@@ -84,11 +84,13 @@ const ExcellenceCenterBarChart = ({productionMetricsLabel}) => {
 
     const calculateValuesToDisplayForProductionMetricsFromJson = (ProductionMetricsLabel) => {       // on pourra remplacer label par CA, TJM, jour...
         if (months && monthlyProductionMetrics) {
-            return DataProcessing.calculateValueToDisplayForProductionMetrics(months, getProductionMetricsValuesFromJson(ProductionMetricsLabel), "TJM")
+
+            return DataProcessing.calculateValueToDisplayForProductionMetrics(months, getProductionMetricsValuesFromJson(ProductionMetricsLabel), "CA")
+
         }
     }
 
-    const data = calculateValuesToDisplayForProductionMetricsFromJson("availableDays")
+    const data = calculateValuesToDisplayForProductionMetricsFromJson("CA")
     console.log(data)
 
 
