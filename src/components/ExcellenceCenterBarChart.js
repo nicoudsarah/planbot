@@ -58,7 +58,7 @@ const ExcellenceCenterBarChart = ({productionMetricsLabel}) => {
                 return DataProcessing.computeGenericCumulatedMetrics(
                     months,
                     getProductionMetricsValuesFromJson(productionMetricsLabel),
-                    "TO")
+                    productionMetricsLabel)
             }
         }
     }
