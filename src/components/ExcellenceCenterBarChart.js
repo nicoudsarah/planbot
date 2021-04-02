@@ -43,28 +43,28 @@ const ExcellenceCenterBarChart = ({productionMetricsLabel}) => {
     productionMetricsValues = extractProductionMetricsValues(productionMetricsLabel)
 
 
-
     const getProductionMetricsValuesFromJson = (productionMetricsLabel) => {
         return months.map(month => monthlyProductionMetrics[month][productionMetricsLabel]);
     }
 
-    const calculateValuesToDisplayForProductionMetricsFromJson = (productionMetricsLabel) => {      
+    const computeCumulatedMetricsFromJson = (productionMetricsLabel) => {
         if (months && monthlyProductionMetrics) {
-            if (productionMetricsLabel != "TO"){
-                return DataProcessing.calculateValueToDisplayForProductionMetricsExceptTO(
-                    months,
-                    getProductionMetricsValuesFromJson(productionMetricsLabel),
-                    "TJM")
-            } else {
-                return DataProcessing.calculateValueToDisplayForTOProductionMetrics(
+            if (productionMetricsLabel == "TO"){
+                // we can not use generic method because available days change for each month
+                return DataProcessing.computeCumulatedTOs(
                     months,
                     getProductionMetricsValuesFromJson("availableDays"),
                     getProductionMetricsValuesFromJson("productionDays"))
+            } else {
+                return DataProcessing.computeGenericCumulatedMetrics(
+                    months,
+                    getProductionMetricsValuesFromJson(productionMetricsLabel),
+                    "TO")
             }
         }
     }
 
-    const data = calculateValuesToDisplayForProductionMetricsFromJson("TO")
+    const displayedCumulatedValues = computeCumulatedMetricsFromJson("TO")
 
 
     return <div>
@@ -74,7 +74,7 @@ const ExcellenceCenterBarChart = ({productionMetricsLabel}) => {
                 datasets: [
                     {
                         label: 'Cumul annuel à date (€)',
-                        data: data,
+                        data: displayedCumulatedValues,
                         pointBackgroundColor: 'white',
                         pointBorderColor: '#A50040',
                         pointBorderWidth: 3,

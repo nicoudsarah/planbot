@@ -10,43 +10,40 @@ const computeAverage = (values) => {
 
 export class DataProcessing extends React.Component {
 
-    static calculateValueToDisplayForProductionMetricsExceptTO(months, productionMetricsValues, productionMetricsLabel) {
-        let collectionOfProductionMetricsValues = []
+    static computeGenericCumulatedMetrics(months, productionMetricValues, productionMetricLabel) {
+        let cumulatedValues = []
         months.forEach((month, index) => {
-            let eachMonthProductionMetricValues = productionMetricsValues.slice(0, index + 1);
+            let monthlyProductionMetricValues = productionMetricValues.slice(0, index + 1);
 
-            if(productionMetricsLabel == "CA"){
-                const sumOfProductionMetricValues = computeSum(eachMonthProductionMetricValues);
-                collectionOfProductionMetricsValues.push(sumOfProductionMetricValues/1000);
-            } else if (productionMetricsLabel == "TJM") {
-                const averageOfProductionMetrics = computeAverage(eachMonthProductionMetricValues);
-                collectionOfProductionMetricsValues.push(averageOfProductionMetrics.toFixed(2))
+            if(productionMetricLabel == "CA"){
+                cumulatedValues.push(computeSum(monthlyProductionMetricValues)/1000);
+            } else if (productionMetricLabel == "TJM") {
+                cumulatedValues.push(computeAverage(monthlyProductionMetricValues).toFixed(2))
             }
             else {
-                const sumOfProductionMetricValues = computeSum(eachMonthProductionMetricValues);
-                collectionOfProductionMetricsValues.push(sumOfProductionMetricValues);
+                cumulatedValues.push(computeSum(monthlyProductionMetricValues));
             }
         })
-        return collectionOfProductionMetricsValues
+        return cumulatedValues
     }
 
-    static calculateValueToDisplayForTOProductionMetrics(months, availableDaysValues, productionDaysValues){
+    static computeCumulatedTOs(months, availableDaysValues, productionDaysValues){
         let collectedSumOfProductionDays =[]
         let collectedSumOfAvailableDays =[]
-        let collectionOfTOValues = []
+        let allTOCumulatedValues = []
+
         months.forEach((month, index) => {
-            const eachMonthProductionDaysValues = productionDaysValues.slice(0, index + 1);
-            const eachMonthAvailableDaysValues = availableDaysValues.slice(0, index + 1);
-            const sumOfProductionDays = computeSum(eachMonthProductionDaysValues)
-            const sumOfAvailableDays = computeSum(eachMonthAvailableDaysValues)
-            collectedSumOfProductionDays.push(sumOfProductionDays)
-            collectedSumOfAvailableDays.push(sumOfAvailableDays)
+            const monthlyProductionDaysValues = productionDaysValues.slice(0, index + 1);
+            collectedSumOfProductionDays.push(computeSum(monthlyProductionDaysValues))
+
+            const monthlyAvailableDaysValues = availableDaysValues.slice(0, index + 1);
+            collectedSumOfAvailableDays.push(computeSum(monthlyAvailableDaysValues))
         })
-        for (var i = 0 ; i < months.length ; i++){
-            let cumulatedTOvalues = ((collectedSumOfProductionDays[i]/collectedSumOfAvailableDays[i])*100).toFixed(2)
-            collectionOfTOValues.push(cumulatedTOvalues)
+        for (let i = 0 ; i < months.length ; i++){
+            let cumulatedTOValues = collectedSumOfProductionDays[i]/collectedSumOfAvailableDays[i]
+            allTOCumulatedValues.push((cumulatedTOValues*100).toFixed(2))
         }
-        return collectionOfTOValues
+        return allTOCumulatedValues
 
     }
 }
