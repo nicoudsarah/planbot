@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from "react";
 import {fetchFilteredProductionMetrics} from "../API";
 import "./ExcellenceCenterTable.scss";
+import {DataProcessing} from "../DataProcessing";
 
 const ExcellenceCenterTable = ({excellenceCenter, projectType, year}) => {
 
@@ -21,6 +22,21 @@ const ExcellenceCenterTable = ({excellenceCenter, projectType, year}) => {
     }, [excellenceCenter, projectType, year])
     const months = selectedYearProductionMetrics && Object.keys(selectedYearProductionMetrics)
 
+    const getProductionMetricsValuesFromJson = (productionMetricsLabel) => {
+        return months.map(month => selectedYearProductionMetrics[month][productionMetricsLabel]);
+    }
+
+    const extractProductionMetricFromJson = (productionMetricsLabel) => {
+        if (months && selectedYearProductionMetrics) {
+            if (productionMetricsLabel == "TO") {
+                const productionDaysValues = getProductionMetricsValuesFromJson("productionDays")
+                const availableDaysValues = getProductionMetricsValuesFromJson("availableDays")
+                return DataProcessing.computeTOs(availableDaysValues, productionDaysValues)
+            } else {
+                return getProductionMetricsValuesFromJson(productionMetricsLabel)
+            }
+        }
+    }
 
     const calculateAnnualDateValueForProductionMetrics = (ProductionMetric) => {
         let computedValues = []
@@ -68,12 +84,12 @@ const ExcellenceCenterTable = ({excellenceCenter, projectType, year}) => {
                     {selectedYearProductionMetrics && months && months.map((month, index) =>
                         <tr key={index} className="ExcellenceCenterTable__row">
                             <td key={index} className="ExcellenceCenterTable__row-item">{month}</td>
-                            <td className="ExcellenceCenterTable__row-item__CA">{selectedYearProductionMetrics[month].CA}</td>
-                            <td className="ExcellenceCenterTable__row-item__TJM">{selectedYearProductionMetrics[month].TJM}</td>
-                            <td className="ExcellenceCenterTable__row-item__availableDays">{selectedYearProductionMetrics[month].availableDays}</td>
-                            <td className="ExcellenceCenterTable__row-item">{selectedYearProductionMetrics[month].productionDays}</td>
-                            <td className="ExcellenceCenterTable__row-item">{selectedYearProductionMetrics[month].interProductionDays}</td>
-                            <td className="ExcellenceCenterTable__row-item">{selectedYearProductionMetrics[month].TO}</td>
+                            <td className="ExcellenceCenterTable__row-item__CA">{extractProductionMetricFromJson("CA")[index]}</td>
+                            <td className="ExcellenceCenterTable__row-item__TJM">{extractProductionMetricFromJson("TJM")[index]}</td>
+                            <td className="ExcellenceCenterTable__row-item__availableDays">{extractProductionMetricFromJson("availableDays")[index]}</td>
+                            <td className="ExcellenceCenterTable__row-item">{extractProductionMetricFromJson("productionDays")[index]}</td>
+                            <td className="ExcellenceCenterTable__row-item">{extractProductionMetricFromJson("interProductionDays")[index]}</td>
+                            <td className="ExcellenceCenterTable__row-item">{extractProductionMetricFromJson("TO")[index]}</td>
 
                             <td className="ExcellenceCenterTable__row-item__CA">{calculateAnnualDateValueForProductionMetrics(ProductionMetricsJSONKeys[0])[index]}</td>
                             <td className="ExcellenceCenterTable__row-item">{calculateAnnualDateValueForProductionMetrics(ProductionMetricsJSONKeys[1])[index]}</td>
