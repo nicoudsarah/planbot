@@ -44,8 +44,18 @@ export class DataProcessing extends React.Component {
             allTOCumulatedValues.push((cumulatedTOValues*100).toFixed(2))
         }
         return allTOCumulatedValues
-
     }
+
+    static computeTOs(availableDaysValues, productionDaysValues) {
+        let TOValues = []
+        for (let i = 0; i < productionDaysValues.length ; i++) {
+            TOValues.push(((productionDaysValues[i]/availableDaysValues[i])*100).toFixed(2))
+
+        }
+        return TOValues
+    }
+
+
 }
 
 

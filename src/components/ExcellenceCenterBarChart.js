@@ -9,7 +9,6 @@ defaults.global.tooltips.enabled = false
 
 const ExcellenceCenterBarChart = ({productionMetricsLabel}) => {
 
-
     const [monthlyProductionMetrics, changeProductionMetricsForEachMonth] = useState(null)
 
 
@@ -28,24 +27,24 @@ const ExcellenceCenterBarChart = ({productionMetricsLabel}) => {
     }
 
 
-
-    const extractProductionMetricsValues = (productionMetricsLabel) => {
-        let metricValues = []
-        if (months.length>0 && monthlyProductionMetrics) {
-            metricValues = months.map((month) => {
-                return monthlyProductionMetrics[month][productionMetricsLabel]
-            })
-        }
-        return metricValues.length>0 ? metricValues : []
-    }
-
-    let productionMetricsValues = []
-    productionMetricsValues = extractProductionMetricsValues(productionMetricsLabel)
-
-
     const getProductionMetricsValuesFromJson = (productionMetricsLabel) => {
         return months.map(month => monthlyProductionMetrics[month][productionMetricsLabel]);
     }
+
+    const extractProductionMetricFromJson = (productionMetricsLabel) => {
+        if (months && monthlyProductionMetrics) {
+            if (productionMetricsLabel == "TO") {
+                const productionDaysValues = getProductionMetricsValuesFromJson("productionDays")
+                const availableDaysValues = getProductionMetricsValuesFromJson("availableDays")
+                return DataProcessing.computeTOs(availableDaysValues, productionDaysValues)
+            } else {
+                return getProductionMetricsValuesFromJson(productionMetricsLabel)
+            }
+        }
+    }
+
+    const displayMonthlyValues = extractProductionMetricFromJson ("TO")
+
 
     const computeCumulatedMetricsFromJson = (productionMetricsLabel) => {
         if (months && monthlyProductionMetrics) {
@@ -85,7 +84,7 @@ const ExcellenceCenterBarChart = ({productionMetricsLabel}) => {
                     },
                     {
                         label: 'Valeurs mensuelles (€)',
-                        data:  productionMetricsValues,
+                        data:  displayMonthlyValues,
                         backgroundColor: '#7EA6E0',
                         borderColor: '#006EAF',
                         borderWidth: 1
