@@ -5,8 +5,7 @@ import {DataProcessing} from "../DataProcessing";
 
 const ExcellenceCenterTable = ({excellenceCenter, projectType, year}) => {
 
-    const ProductionMetricsLabels =  ["CA (k€)", "TJM", "# Jours dispo",  "# Jours prod", "# Jours interP", "TO"]
-    const ProductionMetricsJSONKeys =  ["CA", "TJM", "availableDays",  "productionDays", "interProductionDays", "TO"]
+    const ProductionMetricsLabels =  ["CA (k€)", "TJM (€)", "# Jours dispo",  "# Jours prod", "# Jours interP", "TO (%)"]
 
     const [selectedYearProductionMetrics, changeProductionMetrics] = useState(null)
 
@@ -17,30 +16,29 @@ const ExcellenceCenterTable = ({excellenceCenter, projectType, year}) => {
         }
         setProductionMetricsWithFilters()
 
-
-
     }, [excellenceCenter, projectType, year])
     const months = selectedYearProductionMetrics && Object.keys(selectedYearProductionMetrics)
 
-    const getProductionMetricsValuesFromJson = (productionMetricsLabel) => {
-        return months.map(month => selectedYearProductionMetrics[month][productionMetricsLabel]);
+
+    const getProductionMetricsValuesFromJson = (productionMetric) => {
+        return months.map(month => selectedYearProductionMetrics[month][productionMetric]);
     }
 
-    const extractProductionMetricFromJson = (productionMetricsLabel) => {
+    const extractProductionMetricFromJson = (productionMetric) => {
         if (months && selectedYearProductionMetrics) {
-            if (productionMetricsLabel == "TO") {
+            if (productionMetric == "TO") {
                 const productionDaysValues = getProductionMetricsValuesFromJson("productionDays")
                 const availableDaysValues = getProductionMetricsValuesFromJson("availableDays")
                 return DataProcessing.computeTOs(availableDaysValues, productionDaysValues)
             } else {
-                return getProductionMetricsValuesFromJson(productionMetricsLabel)
+                return getProductionMetricsValuesFromJson(productionMetric)
             }
         }
     }
 
-    const computeCumulatedMetricsFromJson = (productionMetricsLabel) => {
+    const computeCumulatedMetricsFromJson = (productionMetric) => {
         if (months && selectedYearProductionMetrics) {
-            if (productionMetricsLabel == "TO"){
+            if (productionMetric == "TO"){
                 // we can not use generic method because available days change for each month
                 return DataProcessing.computeCumulatedTOs(
                     months,
@@ -49,37 +47,19 @@ const ExcellenceCenterTable = ({excellenceCenter, projectType, year}) => {
             } else {
                 return DataProcessing.computeGenericCumulatedMetrics(
                     months,
-                    getProductionMetricsValuesFromJson(productionMetricsLabel),
-                    productionMetricsLabel)
+                    getProductionMetricsValuesFromJson(productionMetric),
+                    productionMetric)
             }
         }
     }
 
-
-    const calculateAnnualDateValueForProductionMetrics = (ProductionMetric) => {
-        let computedValues = []
+    const computeActualTotalMetrics = (ProductionMetric) => {
         if (months && selectedYearProductionMetrics) {
-            computedValues = months
-                .map(month => selectedYearProductionMetrics[month][ProductionMetric])
-                .reduce((acc, currentValue, index) => {
-                    if (index === 0) {
-                        acc.push(currentValue)
-                        return acc;
-                    }
-                    acc.push(currentValue + acc[index - 1])
-                    return acc;
-                }, [])
-        }
-        return computedValues
-    }
-
-    const calculateActualTotalValueForProductionMetric = (ProductionMetric) => {
-        if (months && selectedYearProductionMetrics) {
-            const computedValues = calculateAnnualDateValueForProductionMetrics(ProductionMetric)
-            const actualTotal = computedValues[computedValues.length - 1]
-            return actualTotal
+            const computedValues = computeCumulatedMetricsFromJson(ProductionMetric)
+            return computedValues[computedValues.length - 1]
         }
     }
+
 
     return (
         <>
@@ -118,11 +98,11 @@ const ExcellenceCenterTable = ({excellenceCenter, projectType, year}) => {
                         </tr>)}
                         <tr>
                             <td className="ExcellenceCenterTable__row-total-item">Total annuel</td>
-                            <td className="ExcellenceCenterTable__row-total-item__CA">{calculateActualTotalValueForProductionMetric(ProductionMetricsJSONKeys[0])}</td>
+                            <td className="ExcellenceCenterTable__row-total-item__CA">{computeActualTotalMetrics("CA")}</td>
                             <td></td>
-                            <td className="ExcellenceCenterTable__row-total-item">{calculateActualTotalValueForProductionMetric(ProductionMetricsJSONKeys[2])}</td>
-                            <td className="ExcellenceCenterTable__row-total-item">{calculateActualTotalValueForProductionMetric(ProductionMetricsJSONKeys[3])}</td>
-                            <td className="ExcellenceCenterTable__row-total-item">{calculateActualTotalValueForProductionMetric(ProductionMetricsJSONKeys[4])}</td>
+                            <td className="ExcellenceCenterTable__row-total-item">{computeActualTotalMetrics("availableDays")}</td>
+                            <td className="ExcellenceCenterTable__row-total-item">{computeActualTotalMetrics("productionDays")}</td>
+                            <td className="ExcellenceCenterTable__row-total-item">{computeActualTotalMetrics("interProductionDays")}</td>
                         </tr>
                 </tbody>
             </table>
