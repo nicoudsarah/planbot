@@ -30,7 +30,7 @@ describe('ExcellenceCenter', () =>{
         });
 
         ExcellenceCenterWrapperObject.update()
-        expect(ExcellenceCenterWrapperObject.find('.ExcellenceCenterTable__row-item__CA').at(0).text()).toEqual("69000")
+        expect(ExcellenceCenterWrapperObject.find('.ExcellenceCenterTable__row-item__CA').at(0).text()).toEqual("69")
     })
 
     it('should show a value of 38000 for january on CA column for Grenoble excellence center',async () => {
@@ -41,7 +41,7 @@ describe('ExcellenceCenter', () =>{
         });
 
         ExcellenceCenterWrapperObject.update()
-        expect(ExcellenceCenterWrapperObject.find('.ExcellenceCenterTable__row-item__CA').at(0).text()).toEqual("38000")
+        expect(ExcellenceCenterWrapperObject.find('.ExcellenceCenterTable__row-item__CA').at(0).text()).toEqual("38")
     })
 
     it('should show a value of 107000 for january on CA column for all excellence centers',async () => {
@@ -52,7 +52,7 @@ describe('ExcellenceCenter', () =>{
         });
 
         ExcellenceCenterWrapperObject.update()
-        expect(ExcellenceCenterWrapperObject.find('.ExcellenceCenterTable__row-item__CA').at(0).text()).toEqual("107000")
+        expect(ExcellenceCenterWrapperObject.find('.ExcellenceCenterTable__row-item__CA').at(0).text()).toEqual("107")
     })
 
     it('should show a value of 2021 for january on TJM column for year 2021',async () => {

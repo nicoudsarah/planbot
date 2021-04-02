@@ -5,7 +5,7 @@ import {DataProcessing} from "../DataProcessing";
 
 const ExcellenceCenterTable = ({excellenceCenter, projectType, year}) => {
 
-    const ProductionMetricsLabels =  ["CA", "TJM", "# Jours dispo",  "# Jours prod", "# Jours interP", "TO"]
+    const ProductionMetricsLabels =  ["CA (k€)", "TJM", "# Jours dispo",  "# Jours prod", "# Jours interP", "TO"]
     const ProductionMetricsJSONKeys =  ["CA", "TJM", "availableDays",  "productionDays", "interProductionDays", "TO"]
 
     const [selectedYearProductionMetrics, changeProductionMetrics] = useState(null)
@@ -37,6 +37,24 @@ const ExcellenceCenterTable = ({excellenceCenter, projectType, year}) => {
             }
         }
     }
+
+    const computeCumulatedMetricsFromJson = (productionMetricsLabel) => {
+        if (months && selectedYearProductionMetrics) {
+            if (productionMetricsLabel == "TO"){
+                // we can not use generic method because available days change for each month
+                return DataProcessing.computeCumulatedTOs(
+                    months,
+                    getProductionMetricsValuesFromJson("availableDays"),
+                    getProductionMetricsValuesFromJson("productionDays"))
+            } else {
+                return DataProcessing.computeGenericCumulatedMetrics(
+                    months,
+                    getProductionMetricsValuesFromJson(productionMetricsLabel),
+                    productionMetricsLabel)
+            }
+        }
+    }
+
 
     const calculateAnnualDateValueForProductionMetrics = (ProductionMetric) => {
         let computedValues = []
@@ -84,19 +102,19 @@ const ExcellenceCenterTable = ({excellenceCenter, projectType, year}) => {
                     {selectedYearProductionMetrics && months && months.map((month, index) =>
                         <tr key={index} className="ExcellenceCenterTable__row">
                             <td key={index} className="ExcellenceCenterTable__row-item">{month}</td>
-                            <td className="ExcellenceCenterTable__row-item__CA">{extractProductionMetricFromJson("CA")[index]}</td>
+                            <td className="ExcellenceCenterTable__row-item__CA">{(extractProductionMetricFromJson("CA")[index])/1000}</td>
                             <td className="ExcellenceCenterTable__row-item__TJM">{extractProductionMetricFromJson("TJM")[index]}</td>
                             <td className="ExcellenceCenterTable__row-item__availableDays">{extractProductionMetricFromJson("availableDays")[index]}</td>
                             <td className="ExcellenceCenterTable__row-item">{extractProductionMetricFromJson("productionDays")[index]}</td>
                             <td className="ExcellenceCenterTable__row-item">{extractProductionMetricFromJson("interProductionDays")[index]}</td>
                             <td className="ExcellenceCenterTable__row-item">{extractProductionMetricFromJson("TO")[index]}</td>
 
-                            <td className="ExcellenceCenterTable__row-item__CA">{calculateAnnualDateValueForProductionMetrics(ProductionMetricsJSONKeys[0])[index]}</td>
-                            <td className="ExcellenceCenterTable__row-item">{calculateAnnualDateValueForProductionMetrics(ProductionMetricsJSONKeys[1])[index]}</td>
-                            <td className="ExcellenceCenterTable__row-item">{calculateAnnualDateValueForProductionMetrics(ProductionMetricsJSONKeys[2])[index]}</td>
-                            <td className="ExcellenceCenterTable__row-item">{calculateAnnualDateValueForProductionMetrics(ProductionMetricsJSONKeys[3])[index]}</td>
-                            <td className="ExcellenceCenterTable__row-item">{calculateAnnualDateValueForProductionMetrics(ProductionMetricsJSONKeys[4])[index]}</td>
-                            <td className="ExcellenceCenterTable__row-item">{parseInt(calculateAnnualDateValueForProductionMetrics(ProductionMetricsJSONKeys[5])[index]/(index+1))}</td>
+                            <td className="ExcellenceCenterTable__row-item__CA">{computeCumulatedMetricsFromJson("CA")[index]}</td>
+                            <td className="ExcellenceCenterTable__row-item">{computeCumulatedMetricsFromJson("TJM")[index]}</td>
+                            <td className="ExcellenceCenterTable__row-item">{computeCumulatedMetricsFromJson("availableDays")[index]}</td>
+                            <td className="ExcellenceCenterTable__row-item">{computeCumulatedMetricsFromJson("productionDays")[index]}</td>
+                            <td className="ExcellenceCenterTable__row-item">{computeCumulatedMetricsFromJson("interProductionDays")[index]}</td>
+                            <td className="ExcellenceCenterTable__row-item">{computeCumulatedMetricsFromJson("TO")[index]}</td>
                         </tr>)}
                         <tr>
                             <td className="ExcellenceCenterTable__row-total-item">Total annuel</td>
