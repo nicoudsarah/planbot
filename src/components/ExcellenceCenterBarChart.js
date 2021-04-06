@@ -72,7 +72,7 @@ const ExcellenceCenterBarChart = ({productionMetricsLabel}) => {
                 labels: ['Janv', 'Fev', 'Mars', 'Avr', 'Mai', 'Juin', 'Juil', 'Août', 'Sept', 'Oct', 'Nov', 'Dec'],
                 datasets: [
                     {
-                        label: 'Cumul annuel à date (€)',
+                        label: 'Cumul annuel à date',
                         data: displayedCumulatedValues,
                         pointBackgroundColor: 'white',
                         pointBorderColor: '#A50040',
@@ -83,7 +83,7 @@ const ExcellenceCenterBarChart = ({productionMetricsLabel}) => {
                         fill: false
                     },
                     {
-                        label: 'Valeurs mensuelles (€)',
+                        label: 'Valeurs mensuelles',
                         data:  displayMonthlyValues,
                         backgroundColor: '#7EA6E0',
                         borderColor: '#006EAF',
