@@ -31,12 +31,16 @@ const ExcellenceCenterBarChart = ({productionMetricsLabel}) => {
         return months.map(month => monthlyProductionMetrics[month][productionMetricsLabel]);
     }
 
+    console.log(getProductionMetricsValuesFromJson("CA"))
+
     const extractProductionMetricFromJson = (productionMetricsLabel) => {
         if (months && monthlyProductionMetrics) {
             if (productionMetricsLabel == "TO") {
                 const productionDaysValues = getProductionMetricsValuesFromJson("productionDays")
                 const availableDaysValues = getProductionMetricsValuesFromJson("availableDays")
                 return DataProcessing.computeTOs(availableDaysValues, productionDaysValues)
+            } else if (productionMetricsLabel == "CA") {
+                return getProductionMetricsValuesFromJson(productionMetricsLabel).map(productionMetric => productionMetric/1000)
             } else {
                 return getProductionMetricsValuesFromJson(productionMetricsLabel)
             }
@@ -44,6 +48,8 @@ const ExcellenceCenterBarChart = ({productionMetricsLabel}) => {
     }
 
     const displayMonthlyValues = extractProductionMetricFromJson (productionMetricsLabel)
+    console.log(extractProductionMetricFromJson ("CA"))
+    console.log(extractProductionMetricFromJson (productionMetricsLabel))
 
 
     const computeCumulatedMetricsFromJson = (productionMetricsLabel) => {
