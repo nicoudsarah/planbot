@@ -68,6 +68,23 @@ const ExcellenceCenterBarChart = ({productionMetricsLabel}) => {
 
     const displayedCumulatedValues = computeCumulatedMetricsFromJson(productionMetricsLabel)
 
+    const specifyUnity = (productionMetricsLabel) => {
+        let unity
+        switch (productionMetricsLabel) {
+            case "CA": unity = ' (k€)'
+                break
+            case "TJM": unity = ' (€)'
+                break
+            case "TO": unity = ' (%)'
+                break
+            default:
+                unity = ''
+        }
+        return unity
+    }
+
+    const unity = specifyUnity(productionMetricsLabel)
+
 
     return <div>
         <Bar
@@ -75,7 +92,7 @@ const ExcellenceCenterBarChart = ({productionMetricsLabel}) => {
                 labels: ['Janv', 'Fev', 'Mars', 'Avr', 'Mai', 'Juin', 'Juil', 'Août', 'Sept', 'Oct', 'Nov', 'Dec'],
                 datasets: [
                     {
-                        label: 'Cumul annuel à date',
+                        label: 'Valeurs annuelles à date'+unity,
                         data: displayedCumulatedValues,
                         pointBackgroundColor: 'white',
                         pointBorderColor: '#A50040',
@@ -86,7 +103,7 @@ const ExcellenceCenterBarChart = ({productionMetricsLabel}) => {
                         fill: false
                     },
                     {
-                        label: 'Valeurs mensuelles',
+                        label: 'Valeurs mensuelles'+unity,
                         data:  displayMonthlyValues,
                         backgroundColor: '#7EA6E0',
                         borderColor: '#006EAF',
