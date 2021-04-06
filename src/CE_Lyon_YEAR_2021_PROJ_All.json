@@ -3,96 +3,84 @@
         "CA": 69000,
         "TJM": 2021,
         "availableDays": 100,
-        "productionDays": 61,
-        "interProductionDays": 15,
-        "TO":70
+        "productionDays": 21,
+        "interProductionDays": 15
     },
     "february": {
         "CA": 37000,
         "TJM": 550,
-        "availableDays": 41,
-        "productionDays": 61,
-        "interProductionDays": 17,
-        "TO":75
+        "availableDays": 20,
+        "productionDays": 11,
+        "interProductionDays": 17
     },
     "march": {
         "CA": 38000,
         "TJM": 750,
-        "availableDays": 37,
-        "productionDays": 61,
-        "interProductionDays": 19,
-        "TO":80
+        "availableDays": 21,
+        "productionDays": 11,
+        "interProductionDays": 19
     },
     "april": {
         "CA": 39000,
         "TJM": 850,
-        "availableDays": 43,
-        "productionDays": 61,
-        "interProductionDays": 21,
-        "TO":85
+        "availableDays": 23,
+        "productionDays": 21,
+        "interProductionDays": 21
     },
     "may": {
         "CA": 40000,
         "TJM": 750,
-        "availableDays": 39,
-        "productionDays": 61,
-        "interProductionDays": 21,
-        "TO":90
+        "availableDays": 29,
+        "productionDays": 21,
+        "interProductionDays": 21
     },
     "june": {
         "CA": 41000,
         "TJM": 900,
-        "availableDays": 45,
-        "productionDays": 61,
-        "interProductionDays": 25,
-        "TO":95
+        "availableDays": 25,
+        "productionDays": 21,
+        "interProductionDays": 25
     },
     "july": {
         "CA": 42000,
         "TJM": 1000,
-        "availableDays": 54,
-        "productionDays": 61,
-        "interProductionDays": 28,
-        "TO":100
+        "availableDays": 24,
+        "productionDays": 21,
+        "interProductionDays": 28
     },
     "august": {
         "CA": 43000,
         "TJM": 950,
-        "availableDays": 56,
-        "productionDays": 61,
-        "interProductionDays": 21,
-        "TO":100
+        "availableDays": 26,
+        "productionDays": 21,
+        "interProductionDays": 21
     },
     "september": {
         "CA": 44000,
         "TJM": 1100,
-        "availableDays": 56,
-        "productionDays": 61,
-        "interProductionDays": 29,
-        "TO":100
+        "availableDays": 26,
+        "productionDays": 21,
+        "interProductionDays": 29
     },
     "october": {
         "CA": 45000,
         "TJM": 1050,
-        "availableDays": 56,
-        "productionDays": 61,
-        "interProductionDays": 24,
-        "TO":100
+        "availableDays": 26,
+        "productionDays": 21,
+        "interProductionDays": 24
     },
     "november": {
         "CA": 46000,
         "TJM": 1200,
-        "availableDays": 56,
-        "productionDays": 51,
-        "interProductionDays": 16,
-        "TO":100
+        "availableDays": 26,
+        "productionDays": 21,
+        "interProductionDays": 16
     },
     "december": {
         "CA": 47000,
         "TJM": 12500,
-        "availableDays": 56,
-        "productionDays": 51,
-        "interProductionDays": 27,
-        "TO":100
+        "availableDays": 26,
+        "productionDays": 21,
+        "interProductionDays": 27
     }
 }

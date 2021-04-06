@@ -4,40 +4,35 @@
         "TJM": 2020,
         "availableDays": 75,
         "productionDays": 20,
-        "interProductionDays": 15,
-        "TO":70
+        "interProductionDays": 15
     },
     "february": {
         "CA": 20000,
         "TJM": 700,
         "availableDays": 23,
         "productionDays": 21,
-        "interProductionDays": 4,
-        "TO":75
+        "interProductionDays": 4
     },
     "march": {
         "CA": 15000,
         "TJM": 900,
         "availableDays": 24,
         "productionDays": 22,
-        "interProductionDays": 14,
-        "TO":80
+        "interProductionDays": 14
     },
     "april": {
         "CA": 10000,
         "TJM": 700,
         "availableDays": 25,
         "productionDays": 23,
-        "interProductionDays": 3,
-        "TO":85
+        "interProductionDays": 3
     },
     "may": {
         "CA": 15000,
         "TJM": 900,
         "availableDays": 26,
         "productionDays": 24,
-        "interProductionDays": 13,
-        "TO":90
+        "interProductionDays": 13
     },
     "june": {
         "CA": 20000,
@@ -52,47 +47,41 @@
         "TJM": 900,
         "availableDays": 28,
         "productionDays": 26,
-        "interProductionDays": 12,
-        "TO":100
+        "interProductionDays": 12
     },
     "august": {
         "CA": 10000,
         "TJM": 700,
         "availableDays": 29,
         "productionDays": 27,
-        "interProductionDays": 4,
-        "TO":100
+        "interProductionDays": 4
     },
     "september": {
         "CA": 15000,
         "TJM": 900,
         "availableDays": 28,
         "productionDays": 28,
-        "interProductionDays": 11,
-        "TO":100
+        "interProductionDays": 11
     },
     "october": {
         "CA": 20000,
         "TJM": 700,
         "availableDays": 27,
-        "productionDays": 29,
-        "interProductionDays": 5,
-        "TO":100
+        "productionDays": 27,
+        "interProductionDays": 5
     },
     "november": {
         "CA": 15000,
         "TJM": 900,
         "availableDays": 26,
-        "productionDays": 30,
-        "interProductionDays": 10,
-        "TO":100
+        "productionDays": 26,
+        "interProductionDays": 10
     },
     "december": {
         "CA": 10000,
         "TJM": 700,
         "availableDays": 25,
-        "productionDays": 31,
-        "interProductionDays": 6,
-        "TO":100
+        "productionDays": 25,
+        "interProductionDays": 6
     }
 }
