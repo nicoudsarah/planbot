@@ -96,15 +96,19 @@ export const fetchProjectTypes = async () => {
     });
 }
 
-
-
 export const fetchProductionMetrics = async() => {
     return new Promise ( (resolve, _) => {
         const actualYearJSONForAllProduction = Json_CE_All_YEAR_2021_PROJ_All
         resolve(actualYearJSONForAllProduction)
     })
+}
 
-    //renvoie le JSON
+export const fetchProductionMetricsLabel = async () => {
+    return new Promise((resolve, _) => {
+        const projectsType = [{key: "CA", value: "CA (k€)"}, {key: "TJM", value: "TJM (€)"}, {key: "availableDays", value:"# Jours dispo"},
+            {key: "productionDays", value: "# Jours prod"}, {key: "interProductionDays", value: "# Jours interP"}, {key: "TO", value:"TO (%)"}]
+        resolve(projectsType);
+    });
 }
 
 

@@ -43,7 +43,7 @@ const ExcellenceCenterBarChart = ({productionMetricsLabel}) => {
         }
     }
 
-    const displayMonthlyValues = extractProductionMetricFromJson ("TO")
+    const displayMonthlyValues = extractProductionMetricFromJson (productionMetricsLabel)
 
 
     const computeCumulatedMetricsFromJson = (productionMetricsLabel) => {
@@ -63,7 +63,7 @@ const ExcellenceCenterBarChart = ({productionMetricsLabel}) => {
         }
     }
 
-    const displayedCumulatedValues = computeCumulatedMetricsFromJson("TO")
+    const displayedCumulatedValues = computeCumulatedMetricsFromJson(productionMetricsLabel)
 
 
     return <div>
