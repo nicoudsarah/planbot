@@ -2,7 +2,7 @@ import React, {useEffect, useState} from "react";
 import FilterSelector from "./FilterSelector";
 import ExcellenceCenterTable from "./ExcellenceCenterTable";
 import ExcellenceCenterBarChart from "./ExcellenceCenterBarChart";
-import {fetchExcellenceCenters, fetchYears, fetchProjectTypes} from "../API";
+import {fetchExcellenceCenters, fetchYears, fetchProjectTypes, fetchProductionMetricsLabel} from "../API";
 import "./ExcellenceCenter.scss";
 
 const ExcellenceCenter = () => {
@@ -18,6 +18,10 @@ const ExcellenceCenter = () => {
 
     const [projectTypesFilters, setProjectsTypesFilters] = useState([])
     const [currentProjectTypesFilter, changeProjectTypesFilter] = useState(projectTypesFilters.length>0 ? projectTypesFilters[0].key : 'all');
+
+    const [productionMetric, setProductionMetric] = useState([]);
+    const [currentProductionMetric, changeProductionMetric] = useState(productionMetric.length>0 ? productionMetric[0].key : "CA");
+
 
     useEffect( () => {
 
@@ -50,6 +54,16 @@ const ExcellenceCenter = () => {
 
     }, [])
 
+    useEffect( () => {
+
+        const getProductionMetrics = async () => {
+            const productionMetrics = await fetchProductionMetricsLabel()
+            setProductionMetric(productionMetrics)
+        }
+        getProductionMetrics()
+
+    }, [])
+
 
     const handleExcellenceCentersFilterChange = (e) => {
         changeExcellenceCentersFilter(e.target.value);
@@ -61,6 +75,10 @@ const ExcellenceCenter = () => {
 
     const handleProjectTypesFilterChange = (e) => {
         changeProjectTypesFilter(e.target.value);
+    }
+
+    const handleProductionMetricFilterChange = (e) => {
+        changeProductionMetric(e.target.value);
     }
 
     return (
@@ -82,7 +100,12 @@ const ExcellenceCenter = () => {
             <ExcellenceCenterTable className="excellence-center__table" excellenceCenter={currentExcellenceCentersFilter} year={currentYear} projectType={currentProjectTypesFilter}/>
             <br/>
             <br/>
-            <ExcellenceCenterBarChart productionMetricsLabel={"TJM"}/>
+            <div className="excellence-center__button-item">
+                <FilterSelector label="Métrique de production" options={productionMetric} id="productionMetric" onChange={handleProductionMetricFilterChange}/>
+            </div>
+            <br/>
+            <br/>
+            <ExcellenceCenterBarChart productionMetricsLabel={currentProductionMetric}/>
         </div>
     );
 }
