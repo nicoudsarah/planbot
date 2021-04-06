@@ -85,6 +85,27 @@ const ExcellenceCenterBarChart = ({productionMetricsLabel}) => {
 
     const unity = specifyUnity(productionMetricsLabel)
 
+    const manageYMaxAxis = (productionMetricsLabel) => {
+        let yMax
+        if (months && monthlyProductionMetrics) {
+            if(productionMetricsLabel == "TO") {
+                yMax = 120
+            } else if (productionMetricsLabel == "TJM") {
+                const maximumValue = Math.max(...displayMonthlyValues)
+                //rounded up to the nearest ten to kept a beautiful y axe appearance
+                yMax = 10*Math.ceil((maximumValue + 20*maximumValue/100)/10)
+            } else {
+                const maximumValue = Math.max(...displayedCumulatedValues)
+                //rounded up to the nearest ten to kept a beautiful y axe appearance
+                yMax = 10*Math.ceil((maximumValue + 20*maximumValue/100)/10)
+            }
+        }
+
+        return yMax
+    }
+
+    const yMax = manageYMaxAxis(productionMetricsLabel)
+
 
     return <div>
         <Bar
@@ -92,7 +113,7 @@ const ExcellenceCenterBarChart = ({productionMetricsLabel}) => {
                 labels: ['Janv', 'Fev', 'Mars', 'Avr', 'Mai', 'Juin', 'Juil', 'Août', 'Sept', 'Oct', 'Nov', 'Dec'],
                 datasets: [
                     {
-                        label: 'Valeurs annuelles à date'+unity,
+                        label: 'Valeurs annuelles à date' + unity,
                         data: displayedCumulatedValues,
                         pointBackgroundColor: 'white',
                         pointBorderColor: '#A50040',
@@ -103,7 +124,7 @@ const ExcellenceCenterBarChart = ({productionMetricsLabel}) => {
                         fill: false
                     },
                     {
-                        label: 'Valeurs mensuelles'+unity,
+                        label: 'Valeurs mensuelles' + unity,
                         data:  displayMonthlyValues,
                         backgroundColor: '#7EA6E0',
                         borderColor: '#006EAF',
@@ -119,7 +140,8 @@ const ExcellenceCenterBarChart = ({productionMetricsLabel}) => {
                 scales: {
                     yAxes: [{
                         ticks: {
-                            beginAtZero: true
+                            beginAtZero: true,
+                            max: yMax
                         }
                     }]
                 },
