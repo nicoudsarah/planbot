@@ -176,5 +176,70 @@ describe('ExcellenceCenter', () =>{
         expect(ExcellenceCenterWrapperObject.find('Bar').props().data.datasets[1].data[1]).toEqual("91.30")
     })
 
+    it('should show a cumulated value of 127 for february on the graph for CA production metric',async () => {
+        let ExcellenceCenterWrapperObject
+        await act(async () => {
+            ExcellenceCenterWrapperObject = await mount(<ExcellenceCenter />);
+            ExcellenceCenterWrapperObject.find('FilterSelector').at(3).props().onChange({target:{value:"CA"}})
+        });
+
+        ExcellenceCenterWrapperObject.update()
+        expect(ExcellenceCenterWrapperObject.find('Bar').props().data.datasets[0].data[1]).toEqual(127)
+    })
+
+    it('should show a cumulated value of 1360.50 for february on the graph for TJM production metric',async () => {
+        let ExcellenceCenterWrapperObject
+        await act(async () => {
+            ExcellenceCenterWrapperObject = await mount(<ExcellenceCenter />);
+            ExcellenceCenterWrapperObject.find('FilterSelector').at(3).props().onChange({target:{value:"TJM"}})
+        });
+
+        ExcellenceCenterWrapperObject.update()
+        expect(ExcellenceCenterWrapperObject.find('Bar').props().data.datasets[0].data[1]).toEqual("1360.50")
+    })
+
+    it('should show a cumulated value of 123 for february on the graph for available days production metric',async () => {
+        let ExcellenceCenterWrapperObject
+        await act(async () => {
+            ExcellenceCenterWrapperObject = await mount(<ExcellenceCenter />);
+            ExcellenceCenterWrapperObject.find('FilterSelector').at(3).props().onChange({target:{value:"availableDays"}})
+        });
+
+        ExcellenceCenterWrapperObject.update()
+        expect(ExcellenceCenterWrapperObject.find('Bar').props().data.datasets[0].data[1]).toEqual(123)
+    })
+
+    it('should show a cumulated value of 41 for february on the graph for production days production metric',async () => {
+        let ExcellenceCenterWrapperObject
+        await act(async () => {
+            ExcellenceCenterWrapperObject = await mount(<ExcellenceCenter />);
+            ExcellenceCenterWrapperObject.find('FilterSelector').at(3).props().onChange({target:{value:"productionDays"}})
+        });
+
+        ExcellenceCenterWrapperObject.update()
+        expect(ExcellenceCenterWrapperObject.find('Bar').props().data.datasets[0].data[1]).toEqual(41)
+    })
+
+    it('should show a cumulated value of 19 for february on the graph for inter production days production metric',async () => {
+        let ExcellenceCenterWrapperObject
+        await act(async () => {
+            ExcellenceCenterWrapperObject = await mount(<ExcellenceCenter />);
+            ExcellenceCenterWrapperObject.find('FilterSelector').at(3).props().onChange({target:{value:"interProductionDays"}})
+        });
+
+        ExcellenceCenterWrapperObject.update()
+        expect(ExcellenceCenterWrapperObject.find('Bar').props().data.datasets[0].data[1]).toEqual(19)
+    })
+
+    it('should show a cumulated value of 33.33 for february on the graph for TO production metric',async () => {
+        let ExcellenceCenterWrapperObject
+        await act(async () => {
+            ExcellenceCenterWrapperObject = await mount(<ExcellenceCenter />);
+            ExcellenceCenterWrapperObject.find('FilterSelector').at(3).props().onChange({target:{value:"TO"}})
+        });
+
+        ExcellenceCenterWrapperObject.update()
+        expect(ExcellenceCenterWrapperObject.find('Bar').props().data.datasets[0].data[1]).toEqual("33.33")
+    })
 
 })
