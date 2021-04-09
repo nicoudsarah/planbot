@@ -17,7 +17,7 @@ import Json_CE_Lyon_YEAR_2020_PROJ_Dev from "./CE_Lyon_YEAR_2020_PROJ_Dev.json";
 import Json_CE_Lyon_YEAR_2020_PROJ_Ergo from "./CE_Lyon_YEAR_2020_PROJ_Ergo.json";
 import Json_CE_Lyon_YEAR_2020_PROJ_All from "./CE_Lyon_YEAR_2020_PROJ_All.json";
 
-/* Pour Ruby
+/* Pour Rails
        const fetchCEData = async () => {
            const response = await fetch(data,{
                headers : {
