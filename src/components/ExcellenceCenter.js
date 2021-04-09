@@ -106,6 +106,7 @@ const ExcellenceCenter = () => {
             <br/>
             <br/>
             <ExcellenceCenterBarChart productionMetricsLabel={currentProductionMetric}/>
+            <div className="legende">* Cliquer pour faire disparaître/apparaître le jeu de données </div>
         </div>
     );
 }
