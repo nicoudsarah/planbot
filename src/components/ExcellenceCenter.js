@@ -22,12 +22,16 @@ const ExcellenceCenter = () => {
     const [productionMetric, setProductionMetric] = useState([]);
     const [currentProductionMetric, changeProductionMetric] = useState(productionMetric.length>0 ? productionMetric[0].key : "CA");
 
+    const [spinner, setSpinner] = useState(false)
+
 
     useEffect( () => {
 
         const getYears = async () => {
             const years = await fetchYears()
+            setSpinner(true);
             setYears(years)
+            setSpinner(false)
         }
         getYears()
 
@@ -38,7 +42,9 @@ const ExcellenceCenter = () => {
 
         const getExcellenceCenters = async () => {
             const ExcellenceCenters = await fetchExcellenceCenters()
+            setSpinner(true);
             setExcellenceCentersFilters(ExcellenceCenters)
+            setSpinner(false)
         }
         getExcellenceCenters()
 
@@ -48,7 +54,9 @@ const ExcellenceCenter = () => {
 
         const getProjectTypes = async () => {
             const ProjectTypes = await fetchProjectTypes()
+            setSpinner(true);
             setProjectsTypesFilters(ProjectTypes)
+            setSpinner(false)
         }
         getProjectTypes()
 
@@ -58,7 +66,9 @@ const ExcellenceCenter = () => {
 
         const getProductionMetrics = async () => {
             const productionMetrics = await fetchProductionMetricsLabel()
+            setSpinner(true);
             setProductionMetric(productionMetrics)
+            setSpinner(false)
         }
         getProductionMetrics()
 
@@ -81,7 +91,7 @@ const ExcellenceCenter = () => {
         changeProductionMetric(e.target.value);
     }
 
-    return (
+    return spinner ? <div><div className="loader"></div> <div className="loader-text">Chargement de la BI ...</div></div> : (
         <div className="excellence-center">
             <h2 className="excellence-center__title">Business Intelligency - CE</h2>
             <div className="excellence-center__buttons">
