@@ -4,9 +4,16 @@ import {act} from "react-dom/test-utils";
 
 import ExcellenceCenter from "./ExcellenceCenter"
 import FilterSelector from "./FilterSelector";
-import {fetchYears} from "../API";
 
-describe('ExcellenceCenter', () => {
+describe('ExcellenceCenter before fetching data', () => {
+    it('should show a spinner during the loading', () => {
+        const ExcellenceCenterWrapperObject = shallow(<ExcellenceCenter />);
+        const ExcellenceCenterTitleText = ExcellenceCenterWrapperObject.find('.loader-text').text();
+        expect(ExcellenceCenterTitleText).toEqual("Chargement de la BI ...");
+    })
+})
+
+describe('ExcellenceCenter after fetching data', () => {
     let ExcellenceCenterWrapperObject
     beforeEach(async () => {
             await act(async () => {
@@ -22,14 +29,7 @@ describe('ExcellenceCenter', () => {
         expect(ExcellenceCenterTitleText).toEqual("Business Intelligency - CE");
     });
 
-    /*it('should show a spinner during the loading',async () => {
-        const spinner = true
-        const ExcellenceCenterWrapperObject = shallow(<ExcellenceCenter />);
-        ExcellenceCenterWrapperObject.setSpinner(true);
-        console.log(ExcellenceCenterWrapperObject.props())
-        //const ExcellenceCenterTitleText = ExcellenceCenterWrapperObject.find('.loader-text').text();
-        //expect(ExcellenceCenterTitleText).toEqual("Chargement de la BI ...");
-    })*/
+    /**/
 
     it('should show a value of 69 for january on CA column table for Lyon excellence center', async () => {
         await act(async () => {
