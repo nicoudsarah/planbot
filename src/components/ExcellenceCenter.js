@@ -22,14 +22,14 @@ const ExcellenceCenter = () => {
     const [productionMetric, setProductionMetric] = useState([]);
     const [currentProductionMetric, changeProductionMetric] = useState(productionMetric.length>0 ? productionMetric[0].key : "CA");
 
-    const [spinner, setSpinner] = useState(false)
+    const [spinner, setSpinner] = useState(true)
 
 
     useEffect( () => {
 
         const getYears = async () => {
-            const years = await fetchYears()
             setSpinner(true);
+            const years = await fetchYears()
             setYears(years)
             setSpinner(false)
         }
@@ -41,8 +41,8 @@ const ExcellenceCenter = () => {
     useEffect(() => {
 
         const getExcellenceCenters = async () => {
-            const ExcellenceCenters = await fetchExcellenceCenters()
             setSpinner(true);
+            const ExcellenceCenters = await fetchExcellenceCenters()
             setExcellenceCentersFilters(ExcellenceCenters)
             setSpinner(false)
         }
@@ -53,8 +53,8 @@ const ExcellenceCenter = () => {
     useEffect(() => {
 
         const getProjectTypes = async () => {
-            const ProjectTypes = await fetchProjectTypes()
             setSpinner(true);
+            const ProjectTypes = await fetchProjectTypes()
             setProjectsTypesFilters(ProjectTypes)
             setSpinner(false)
         }
@@ -65,8 +65,8 @@ const ExcellenceCenter = () => {
     useEffect( () => {
 
         const getProductionMetrics = async () => {
-            const productionMetrics = await fetchProductionMetricsLabel()
             setSpinner(true);
+            const productionMetrics = await fetchProductionMetricsLabel()
             setProductionMetric(productionMetrics)
             setSpinner(false)
         }
