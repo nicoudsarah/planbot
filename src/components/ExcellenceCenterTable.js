@@ -5,7 +5,8 @@ import {DataProcessing} from "../DataProcessing";
 
 const ExcellenceCenterTable = ({excellenceCenter, projectType, year}) => {
 
-    const ProductionMetricsLabels =  ["CA (k€)", "TJM (€)", "# Jours dispo",  "# Jours prod", "# Jours interP", "TO (%)"]
+    const productionMetricsLabels =  ["CA (k€)", "TJM (€)", "# Jours dispo",  "# Jours prod", "# Jours interP", "TO (%)"]
+    const frenchMonths = ["janvier", "février", "mars", "avril", "mai", "juin", "juillet", "août", "septembre", "octobre", "novembre", "décembre"]
 
     const [selectedYearProductionMetrics, changeProductionMetrics] = useState(null)
 
@@ -21,7 +22,7 @@ const ExcellenceCenterTable = ({excellenceCenter, projectType, year}) => {
 
 
     const getProductionMetricsValuesFromJson = (productionMetric) => {
-        return months.map(month => selectedYearProductionMetrics[month][productionMetric]);
+        return months.map(month => selectedYearProductionMetrics[month][productionMetric])
     }
 
     const extractProductionMetricFromJson = (productionMetric) => {
@@ -72,16 +73,16 @@ const ExcellenceCenterTable = ({excellenceCenter, projectType, year}) => {
                     </tr>
                     <tr>
                         <th id="month-cell">Mois</th>
-                        {ProductionMetricsLabels.map((item, index) =>
+                        {productionMetricsLabels.map((item, index) =>
                             <th key={index} id="month-cell-item">{item}</th>)}
-                        {ProductionMetricsLabels.map((item, index) =>
+                        {productionMetricsLabels.map((item, index) =>
                             <th key={index} >{item}</th>)}
                     </tr>
                 </thead>
                 <tbody>
                     {selectedYearProductionMetrics && months && months.map((month, index) =>
                         <tr key={index} className="ExcellenceCenterTable__row">
-                            <td key={index} className="ExcellenceCenterTable__row-item">{month}</td>
+                            <td key={index} className="ExcellenceCenterTable__row-item">{frenchMonths[index]}</td>
                             <td className="ExcellenceCenterTable__row-item__CA">{(extractProductionMetricFromJson("CA")[index])/1000}</td>
                             <td className="ExcellenceCenterTable__row-item__TJM">{extractProductionMetricFromJson("TJM")[index]}</td>
                             <td className="ExcellenceCenterTable__row-item__availableDays">{extractProductionMetricFromJson("availableDays")[index]}</td>

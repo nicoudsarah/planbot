@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from "react";
-import {Bar, defaults} from "react-chartjs-2"
+import {Bar, defaults} from "react-chartjs-2";
 import 'chartjs-plugin-datalabels';
 import {fetchProductionMetrics} from "../API";
 import {DataProcessing} from "../DataProcessing";
@@ -28,7 +28,7 @@ const ExcellenceCenterBarChart = ({productionMetricsLabel}) => {
 
 
     const getProductionMetricsValuesFromJson = (productionMetricsLabel) => {
-        return months.map(month => monthlyProductionMetrics[month][productionMetricsLabel]);
+        return months.map(month => monthlyProductionMetrics[month][productionMetricsLabel])
     }
 
 
