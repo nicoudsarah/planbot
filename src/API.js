@@ -1,103 +1,89 @@
-import Json_CE_All_YEAR_2021_PROJ_Dev from "./CE_All_YEAR_2021_PROJ_Dev.json";
-import Json_CE_All_YEAR_2021_PROJ_Ergo from "./CE_All_YEAR_2021_PROJ_Ergo.json";
-import Json_CE_All_YEAR_2021_PROJ_All from "./CE_All_YEAR_2021_PROJ_All.json";
-import Json_CE_All_YEAR_2020_PROJ_Dev from "./CE_All_YEAR_2020_PROJ_Dev.json";
-import Json_CE_All_YEAR_2020_PROJ_Ergo from "./CE_All_YEAR_2020_PROJ_Ergo.json";
-import Json_CE_All_YEAR_2020_PROJ_All from "./CE_All_YEAR_2020_PROJ_All.json";
-import Json_CE_Grenoble_YEAR_2021_PROJ_Dev from "./CE_Grenoble_YEAR_2021_PROJ_Dev.json";
-import Json_CE_Grenoble_YEAR_2021_PROJ_Ergo from "./CE_Grenoble_YEAR_2021_PROJ_Ergo.json";
-import Json_CE_Grenoble_YEAR_2021_PROJ_All from "./CE_Grenoble_YEAR_2021_PROJ_All.json";
-import Json_CE_Grenoble_YEAR_2020_PROJ_Dev from "./CE_Grenoble_YEAR_2020_PROJ_Dev.json";
-import Json_CE_Grenoble_YEAR_2020_PROJ_Ergo from "./CE_Grenoble_YEAR_2020_PROJ_Ergo.json";
-import Json_CE_Grenoble_YEAR_2020_PROJ_All from "./CE_Grenoble_YEAR_2020_PROJ_All.json";
-import Json_CE_Lyon_YEAR_2021_PROJ_Dev from "./CE_Lyon_YEAR_2021_PROJ_Dev.json";
-import Json_CE_Lyon_YEAR_2021_PROJ_Ergo from "./CE_Lyon_YEAR_2021_PROJ_Ergo.json";
-import Json_CE_Lyon_YEAR_2021_PROJ_All from "./CE_Lyon_YEAR_2021_PROJ_All.json";
-import Json_CE_Lyon_YEAR_2020_PROJ_Dev from "./CE_Lyon_YEAR_2020_PROJ_Dev.json";
-import Json_CE_Lyon_YEAR_2020_PROJ_Ergo from "./CE_Lyon_YEAR_2020_PROJ_Ergo.json";
-import Json_CE_Lyon_YEAR_2020_PROJ_All from "./CE_Lyon_YEAR_2020_PROJ_All.json";
+import JsonCEAllYear2021ProjDev from './CE_All_YEAR_2021_PROJ_Dev.json';
+import JsonCEAllYear2021ProjErgo from './CE_All_YEAR_2021_PROJ_Ergo.json';
+import JsonCEAllYear2021ProjAll from './CE_All_YEAR_2021_PROJ_All.json';
+import JsonCEAllYear2020ProjDev from './CE_All_YEAR_2020_PROJ_Dev.json';
+import JsonCEAllYear2020ProjErgo from './CE_All_YEAR_2020_PROJ_Ergo.json';
+import JsonCEAllYear2020ProjAll from './CE_All_YEAR_2020_PROJ_All.json';
+import JsonCEGrenobleYear2021ProjDev from './CE_Grenoble_YEAR_2021_PROJ_Dev.json';
+import JsonCEGrenobleYear2021ProjErgo from './CE_Grenoble_YEAR_2021_PROJ_Ergo.json';
+import JsonCEGrenobleYear2021ProjAll from './CE_Grenoble_YEAR_2021_PROJ_All.json';
+import JsonCEGrenobleYear2020ProjDev from './CE_Grenoble_YEAR_2020_PROJ_Dev.json';
+import JsonCEGrenobleYear2020ProjErgo from './CE_Grenoble_YEAR_2020_PROJ_Ergo.json';
+import JsonCEGrenobleYear2020ProjAll from './CE_Grenoble_YEAR_2020_PROJ_All.json';
+import JsonCELyonYear2021ProjDev from './CE_Lyon_YEAR_2021_PROJ_Dev.json';
+import JsonCELyonYear2021ProjErgo from './CE_Lyon_YEAR_2021_PROJ_Ergo.json';
+import JsonCELyonYear2021ProjAll from './CE_Lyon_YEAR_2021_PROJ_All.json';
+import JsonCELyonYear2020ProjDev from './CE_Lyon_YEAR_2020_PROJ_Dev.json';
+import JsonCELyonYear2020ProjErgo from './CE_Lyon_YEAR_2020_PROJ_Ergo.json';
+import JsonCELyonYear2020ProjAll from './CE_Lyon_YEAR_2020_PROJ_All.json';
 
-export const fetchFilteredProductionMetrics = async ({excellenceCenter, year, projectType}) => {
-    let Json = null
-    if (excellenceCenter === "all" && year === "2021" && projectType === "dev") {
-        Json = Json_CE_All_YEAR_2021_PROJ_Dev
-    } else if (excellenceCenter === "all" && year === "2021" && projectType === "ergo") {
-        Json = Json_CE_All_YEAR_2021_PROJ_Ergo
-    } else if (excellenceCenter === "all" && year === "2021" && projectType === "all") {
-        Json = Json_CE_All_YEAR_2021_PROJ_All
-    } else if (excellenceCenter === "all" && year === "2020" && projectType === "dev") {
-        Json = Json_CE_All_YEAR_2020_PROJ_Dev
-    } else if (excellenceCenter === "all" && year === "2020" && projectType === "ergo") {
-        Json = Json_CE_All_YEAR_2020_PROJ_Ergo
-    } else if (excellenceCenter === "all" && year === "2020" && projectType === "all") {
-        Json = Json_CE_All_YEAR_2020_PROJ_All
-    } else if (excellenceCenter === "grenoble" && year === "2021" && projectType === "dev") {
-        Json = Json_CE_Grenoble_YEAR_2021_PROJ_Dev
-    } else if (excellenceCenter === "grenoble" && year === "2021" && projectType === "ergo") {
-        Json = Json_CE_Grenoble_YEAR_2021_PROJ_Ergo
-    } else if (excellenceCenter === "grenoble" && year === "2021" && projectType === "all") {
-        Json = Json_CE_Grenoble_YEAR_2021_PROJ_All
-    } else if (excellenceCenter === "grenoble" && year === "2020" && projectType === "dev") {
-        Json = Json_CE_Grenoble_YEAR_2020_PROJ_Dev
-    } else if (excellenceCenter === "grenoble" && year === "2020" && projectType === "ergo") {
-        Json = Json_CE_Grenoble_YEAR_2020_PROJ_Ergo
-    } else if (excellenceCenter === "grenoble" && year === "2020" && projectType === "all") {
-        Json = Json_CE_Grenoble_YEAR_2020_PROJ_All
-    } else if (excellenceCenter === "lyon" && year === "2021" && projectType === "dev") {
-        Json = Json_CE_Lyon_YEAR_2021_PROJ_Dev
-    } else if (excellenceCenter === "lyon" && year === "2021" && projectType === "ergo") {
-        Json = Json_CE_Lyon_YEAR_2021_PROJ_Ergo
-    } else if (excellenceCenter === "lyon" && year === "2021" && projectType === "all") {
-        Json = Json_CE_Lyon_YEAR_2021_PROJ_All
-    } else if (excellenceCenter === "lyon" && year === "2020" && projectType === "dev") {
-        Json = Json_CE_Lyon_YEAR_2020_PROJ_Dev
-    } else if (excellenceCenter === "lyon" && year === "2020" && projectType === "ergo") {
-        Json = Json_CE_Lyon_YEAR_2020_PROJ_Ergo
-    } else if (excellenceCenter === "lyon" && year === "2020" && projectType === "all") {
-        Json = Json_CE_Lyon_YEAR_2020_PROJ_All
-    }
+export const fetchFilteredProductionMetrics = async ({ excellenceCenter, year, projectType }) => {
+  let Json = null;
+  if (excellenceCenter === 'all' && year === '2021' && projectType === 'dev') {
+    Json = JsonCEAllYear2021ProjDev;
+  } else if (excellenceCenter === 'all' && year === '2021' && projectType === 'ergo') {
+    Json = JsonCEAllYear2021ProjErgo;
+  } else if (excellenceCenter === 'all' && year === '2021' && projectType === 'all') {
+    Json = JsonCEAllYear2021ProjAll;
+  } else if (excellenceCenter === 'all' && year === '2020' && projectType === 'dev') {
+    Json = JsonCEAllYear2020ProjDev;
+  } else if (excellenceCenter === 'all' && year === '2020' && projectType === 'ergo') {
+    Json = JsonCEAllYear2020ProjErgo;
+  } else if (excellenceCenter === 'all' && year === '2020' && projectType === 'all') {
+    Json = JsonCEAllYear2020ProjAll;
+  } else if (excellenceCenter === 'grenoble' && year === '2021' && projectType === 'dev') {
+    Json = JsonCEGrenobleYear2021ProjDev;
+  } else if (excellenceCenter === 'grenoble' && year === '2021' && projectType === 'ergo') {
+    Json = JsonCEGrenobleYear2021ProjErgo;
+  } else if (excellenceCenter === 'grenoble' && year === '2021' && projectType === 'all') {
+    Json = JsonCEGrenobleYear2021ProjAll;
+  } else if (excellenceCenter === 'grenoble' && year === '2020' && projectType === 'dev') {
+    Json = JsonCEGrenobleYear2020ProjDev;
+  } else if (excellenceCenter === 'grenoble' && year === '2020' && projectType === 'ergo') {
+    Json = JsonCEGrenobleYear2020ProjErgo;
+  } else if (excellenceCenter === 'grenoble' && year === '2020' && projectType === 'all') {
+    Json = JsonCEGrenobleYear2020ProjAll;
+  } else if (excellenceCenter === 'lyon' && year === '2021' && projectType === 'dev') {
+    Json = JsonCELyonYear2021ProjDev;
+  } else if (excellenceCenter === 'lyon' && year === '2021' && projectType === 'ergo') {
+    Json = JsonCELyonYear2021ProjErgo;
+  } else if (excellenceCenter === 'lyon' && year === '2021' && projectType === 'all') {
+    Json = JsonCELyonYear2021ProjAll;
+  } else if (excellenceCenter === 'lyon' && year === '2020' && projectType === 'dev') {
+    Json = JsonCELyonYear2020ProjDev;
+  } else if (excellenceCenter === 'lyon' && year === '2020' && projectType === 'ergo') {
+    Json = JsonCELyonYear2020ProjErgo;
+  } else if (excellenceCenter === 'lyon' && year === '2020' && projectType === 'all') {
+    Json = JsonCELyonYear2020ProjAll;
+  }
 
-    return new Promise((resolve, _) => {
-        resolve(Json)
-    });
+  return new Promise((resolve) => {
+    resolve(Json);
+  });
+};
 
-}
+export const fetchYears = async () => new Promise((resolve) => {
+  const years = [{ key: '2021', value: '2021' }, { key: '2020', value: '2020' }];
+  resolve(years);
+});
 
-export const fetchYears = async () => {
-    return new Promise((resolve, _) => {
-        const years = [{key: "2021", value:"2021"}, {key: "2020", value: "2020"}]
-        resolve(years)
-    });
-}
+export const fetchExcellenceCenters = async () => new Promise((resolve) => {
+  const ce = [{ key: 'all', value: 'Tous' }, { key: 'lyon', value: 'Lyon' }, { key: 'grenoble', value: 'Grenoble' }];
+  resolve(ce);
+});
 
-export const fetchExcellenceCenters = async () => {
-    return new Promise((resolve, _) => {
-        const ce = [{key: "all", value: "Tous"}, {key: "lyon", value: "Lyon"}, {key: "grenoble", value:"Grenoble"}]
-        resolve(ce)
-    });
-}
+export const fetchProjectTypes = async () => new Promise((resolve) => {
+  const projectsType = [{ key: 'all', value: 'Tous' }, { key: 'dev', value: 'Dev' }, { key: 'ergo', value: 'Ergo' }];
+  resolve(projectsType);
+});
 
-export const fetchProjectTypes = async () => {
-    return new Promise((resolve, _) => {
-        const projectsType = [{key: "all", value: "Tous"}, {key: "dev", value: "Dev"}, {key: "ergo", value:"Ergo"}]
-        resolve(projectsType)
-    });
-}
+export const fetchProductionMetrics = async () => new Promise((resolve) => {
+  const actualYearJSONForAllProduction = JsonCEAllYear2021ProjAll;
+  resolve(actualYearJSONForAllProduction);
+});
 
-export const fetchProductionMetrics = async() => {
-    return new Promise ( (resolve, _) => {
-        const actualYearJSONForAllProduction = Json_CE_All_YEAR_2021_PROJ_All
-        resolve(actualYearJSONForAllProduction)
-    })
-}
-
-export const fetchProductionMetricsLabel = async () => {
-    return new Promise((resolve, _) => {
-        const projectsType = [{key: "CA", value: "CA (k€)"}, {key: "TJM", value: "TJM (€)"}, {key: "availableDays", value:"# Jours dispo"},
-            {key: "productionDays", value: "# Jours prod"}, {key: "interProductionDays", value: "# Jours interP"}, {key: "TO", value:"TO (%)"}]
-        resolve(projectsType)
-    });
-}
-
-
-
+export const fetchProductionMetricsLabel = async () => new Promise((resolve) => {
+  const projectsType = [{ key: 'CA', value: 'CA (k€)' }, { key: 'TJM', value: 'TJM (€)' }, { key: 'availableDays', value: '# Jours dispo' },
+    { key: 'productionDays', value: '# Jours prod' }, { key: 'interProductionDays', value: '# Jours interP' }, { key: 'TO', value: 'TO (%)' }];
+  resolve(projectsType);
+});
