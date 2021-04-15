@@ -20,7 +20,6 @@
     ],
     "rules": {
         "import/no-extraneous-dependencies": ["error", {"devDependencies": true}],
-        "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
-        "no-shadow": "off"
+        "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }]
     }
 }

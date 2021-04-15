@@ -1,15 +1,11 @@
-p{
-  display: flex;
-  margin: auto;
+.filter-selector {
+    display: flex;
+    align-items: center;
+
+    &__select{
+      margin-left: 1em;
+    }
 }
 
-select{
-  margin-top: auto;
-  margin-bottom: auto;
-}
-
-.excellence-center-choice{
-  margin-right: 10%;
-}
 
 

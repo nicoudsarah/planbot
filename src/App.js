@@ -4,7 +4,7 @@ import './App.scss';
 
 const App = () => (
   <div className="App">
-    <h1>Business Intelligency</h1>
+    <h1 className="title">Business Intelligency</h1>
     <ExcellenceCenter />
   </div>
 );

@@ -6,6 +6,7 @@ import {
   fetchExcellenceCenters, fetchYears, fetchProjectTypes, fetchProductionMetricsLabel,
 } from '../API';
 import './ExcellenceCenter.scss';
+import { PROJECT_TYPE_ALL, PRODUCTION_CA, EXCELLENCE_CENTER_ALL } from '../keys';
 
 const ExcellenceCenter = () => {
   const todayDate = new Date();
@@ -15,33 +16,45 @@ const ExcellenceCenter = () => {
   const [currentYear, changeYear] = useState(years.length > 0 ? years[0].key : todayYear);
 
   const [excellenceCentersFilters, setExcellenceCentersFilters] = useState([]);
-  const [currentExcellenceCentersFilter, changeExcellenceCentersFilter] = useState(excellenceCentersFilters.length > 0 ? excellenceCentersFilters[0].key : 'all');
+  const [currentExcellenceCentersFilter, changeExcellenceCentersFilter] = useState(
+    excellenceCentersFilters.length > 0 ? excellenceCentersFilters[0].key : EXCELLENCE_CENTER_ALL,
+  );
 
   const [projectTypesFilters, setProjectsTypesFilters] = useState([]);
-  const [currentProjectTypesFilter, changeProjectTypesFilter] = useState(projectTypesFilters.length > 0 ? projectTypesFilters[0].key : 'all');
+  const [currentProjectTypesFilter, changeProjectTypesFilter] = useState(
+    projectTypesFilters.length > 0 ? projectTypesFilters[0].key : PROJECT_TYPE_ALL,
+  );
 
   const [productionMetric, setProductionMetric] = useState([]);
-  const [currentProductionMetric, changeProductionMetric] = useState(productionMetric.length > 0 ? productionMetric[0].key : 'CA');
+  const [currentProductionMetric, changeProductionMetric] = useState(
+    productionMetric.length > 0 ? productionMetric[0].key : PRODUCTION_CA,
+  );
 
-  const [spinner, setSpinner] = useState(true);
+  const [isLoading, setIsLoading] = useState(true);
+  const [hasError, setHasError] = useState(false);
 
   useEffect(() => {
     const fetchFilterSelectorComponentData = async () => {
-      setSpinner(true);
+      setIsLoading(true);
+      setHasError(false);
 
-      const [fetchedYears, fetchedExcellenceCenter,
-        fetchedProjectTypes, fetchedProductionMetricLabel] = await Promise.all(
-        [fetchYears(),
-          fetchExcellenceCenters(),
-          fetchProjectTypes(),
-          fetchProductionMetricsLabel()],
-      );
-      setYears(fetchedYears);
-      setExcellenceCentersFilters(fetchedExcellenceCenter);
-      setProjectsTypesFilters(fetchedProjectTypes);
-      setProductionMetric(fetchedProductionMetricLabel);
-
-      setSpinner(false);
+      try {
+        const [fetchedYears, fetchedExcellenceCenter,
+          fetchedProjectTypes, fetchedProductionMetricLabel] = await Promise.all(
+          [fetchYears(),
+            fetchExcellenceCenters(),
+            fetchProjectTypes(),
+            fetchProductionMetricsLabel()],
+        );
+        setYears(fetchedYears);
+        setExcellenceCentersFilters(fetchedExcellenceCenter);
+        setProjectsTypesFilters(fetchedProjectTypes);
+        setProductionMetric(fetchedProductionMetricLabel);
+      } catch (e) {
+        setHasError(true);
+      } finally {
+        setIsLoading(false);
+      }
     };
     fetchFilterSelectorComponentData();
   }, []);
@@ -62,27 +75,38 @@ const ExcellenceCenter = () => {
     changeProductionMetric(e.target.value);
   };
 
-  return spinner ? (
+  const renderSpinner = () => (
     <div>
-      <div className="loader" />
-      <div className="loader-text">Chargement de la BI ...</div>
+      <div className="spinner" />
+      <div className="spinner-text">Chargement de la BI ...</div>
     </div>
-  ) : (
+  );
+
+  const renderLoadingError = () => (
+    <section>
+      <h1>Le serveur Planbot a rencontré une erreur.</h1>
+      <h2>Veuillez réactualiser la page.</h2>
+    </section>
+  );
+
+  if (isLoading) {
+    return renderSpinner();
+  }
+  if (hasError) {
+    return renderLoadingError();
+  }
+  return (
     <div className="excellence-center">
       <h2 className="excellence-center__title">Business Intelligency - CE</h2>
-      <div className="excellence-center__buttons">
-        <div className="excellence-center__button-item">
+      <section>
+        <div className="excellence-center__table__selectors">
           <FilterSelector
             label="Choix du centre d'excellence"
             options={excellenceCentersFilters}
             id="excellence-center-choice"
             onChange={handleExcellenceCentersFilterChange}
           />
-        </div>
-        <div className="excellence-center__button-item">
           <FilterSelector label="Année" options={years} id="year" onChange={handleYearChange} />
-        </div>
-        <div className="excellence-center__button-item">
           <FilterSelector
             label="Type de projet"
             options={projectTypesFilters}
@@ -90,29 +114,28 @@ const ExcellenceCenter = () => {
             onChange={handleProjectTypesFilterChange}
           />
         </div>
-      </div>
-      <br />
-      <br />
-      <ExcellenceCenterTable
-        className="excellence-center__table"
-        excellenceCenter={currentExcellenceCentersFilter}
-        year={currentYear}
-        projectType={currentProjectTypesFilter}
-      />
-      <br />
-      <br />
-      <div className="excellence-center__button-item">
-        <FilterSelector
-          label="Métrique de production globale sur l'année en cours"
-          options={productionMetric}
-          id="productionMetric"
-          onChange={handleProductionMetricFilterChange}
+
+        <ExcellenceCenterTable
+          className="excellence-center__table"
+          excellenceCenter={currentExcellenceCentersFilter}
+          year={currentYear}
+          projectType={currentProjectTypesFilter}
         />
-      </div>
-      <br />
-      <br />
-      <ExcellenceCenterBarChart productionMetricsLabel={currentProductionMetric} />
-      <div className="legend">* Cliquer pour faire disparaître/apparaître le jeu de données</div>
+      </section>
+
+      <section>
+        <div className="excellence-center__bar-chart__selector">
+          <FilterSelector
+            label="Métrique de production globale sur l'année en cours"
+            options={productionMetric}
+            id="productionMetric"
+            onChange={handleProductionMetricFilterChange}
+          />
+        </div>
+
+        <ExcellenceCenterBarChart productionMetricsLabel={currentProductionMetric} />
+        <div className="legend">Cliquer pour faire disparaître/apparaître le jeu de données</div>
+      </section>
     </div>
   );
 };

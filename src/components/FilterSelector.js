@@ -8,16 +8,19 @@ const FilterSelector = (props) => {
   const { id } = props;
   return (
     <>
-      {label && (
-      <p className={id}>{label}</p>
-      )}
-      {options && (
-      <select id={id} onChange={(e) => props.onChange(e)}>
-        {options.map(
-          (item) => <option key={item.key} value={item.key}>{item.value}</option>,
+      <div className="filter-selector">
+        {label && (
+        <p>{label}</p>
         )}
-      </select>
-      )}
+        {options && (
+        <select className="filter-selector__select" id={id} onChange={(e) => props.onChange(e)}>
+          {options.map(
+            (item) => <option key={item.key} value={item.key}>{item.value}</option>,
+          )}
+        </select>
+        )}
+      </div>
+
     </>
   );
 };

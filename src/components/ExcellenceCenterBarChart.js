@@ -22,29 +22,29 @@ const ExcellenceCenterBarChart = ({ productionMetricsLabel }) => {
     months = Object.keys(monthlyProductionMetrics);
   }
 
-  const getProductionMetricsValuesFromJson = (productionMetricsLabel) => months
-    .map((month) => monthlyProductionMetrics[month][productionMetricsLabel]);
+  const getProductionMetricsValuesFromJson = (label) => months
+    .map((month) => monthlyProductionMetrics[month][label]);
 
-  const extractProductionMetricFromJson = (productionMetricsLabel) => {
+  const extractProductionMetricFromJson = (label) => {
     if (months && monthlyProductionMetrics) {
-      if (productionMetricsLabel === 'TO') {
+      if (label === 'TO') {
         const productionDaysValues = getProductionMetricsValuesFromJson('productionDays');
         const availableDaysValues = getProductionMetricsValuesFromJson('availableDays');
         return DataProcessing.computeTOs(availableDaysValues, productionDaysValues);
-      } if (productionMetricsLabel === 'CA') {
-        return getProductionMetricsValuesFromJson(productionMetricsLabel)
+      } if (label === 'CA') {
+        return getProductionMetricsValuesFromJson(label)
           .map((productionMetric) => productionMetric / 1000);
       }
-      return getProductionMetricsValuesFromJson(productionMetricsLabel);
+      return getProductionMetricsValuesFromJson(label);
     }
     return '';
   };
 
   const displayMonthlyValues = extractProductionMetricFromJson(productionMetricsLabel);
 
-  const computeCumulatedMetricsFromJson = (productionMetricsLabel) => {
+  const computeCumulatedMetricsFromJson = (label) => {
     if (months && monthlyProductionMetrics) {
-      if (productionMetricsLabel === 'TO') {
+      if (label === 'TO') {
         // we can not use generic method because available days change for each month
         return DataProcessing.computeCumulatedTOs(
           months,
@@ -54,8 +54,8 @@ const ExcellenceCenterBarChart = ({ productionMetricsLabel }) => {
       }
       return DataProcessing.computeGenericCumulatedMetrics(
         months,
-        getProductionMetricsValuesFromJson(productionMetricsLabel),
-        productionMetricsLabel,
+        getProductionMetricsValuesFromJson(label),
+        label,
       );
     }
     return '';
@@ -63,9 +63,9 @@ const ExcellenceCenterBarChart = ({ productionMetricsLabel }) => {
 
   const displayedCumulatedValues = computeCumulatedMetricsFromJson(productionMetricsLabel);
 
-  const specifyUnity = (productionMetricsLabel) => {
+  const specifyUnity = (label) => {
     let unity;
-    switch (productionMetricsLabel) {
+    switch (label) {
       case 'CA': unity = '(k€)';
         break;
       case 'TJM': unity = '(€)';
@@ -80,12 +80,12 @@ const ExcellenceCenterBarChart = ({ productionMetricsLabel }) => {
 
   const unity = specifyUnity(productionMetricsLabel);
 
-  const manageYMaxAxis = (productionMetricsLabel) => {
+  const manageYMaxAxis = (label) => {
     let yMax;
     if (months && monthlyProductionMetrics) {
-      if (productionMetricsLabel === 'TO') {
+      if (label === 'TO') {
         yMax = 120;
-      } else if (productionMetricsLabel === 'TJM') {
+      } else if (label === 'TJM') {
         const maximumValue = Math.max(...displayMonthlyValues);
         // rounded up to the nearest ten to kept a beautiful y axe appearance
         yMax = 10 * Math.ceil((maximumValue + (20 * maximumValue) / 100) / 10);
