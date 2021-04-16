@@ -1,4 +1,7 @@
 import React from 'react';
+import {
+  PRODUCTION_CA, PRODUCTION_TJM,
+} from './keys';
 
 const computeSum = (values) => values.reduce((a, b) => a + b, 0);
 
@@ -10,9 +13,9 @@ export default class DataProcessing extends React.Component {
     months.forEach((month, index) => {
       const monthlyProductionMetricValues = productionMetricValues.slice(0, index + 1);
 
-      if (productionMetricLabel === 'CA') {
+      if (productionMetricLabel === PRODUCTION_CA) {
         cumulatedValues.push(computeSum(monthlyProductionMetricValues) / 1000);
-      } else if (productionMetricLabel === 'TJM') {
+      } else if (productionMetricLabel === PRODUCTION_TJM) {
         cumulatedValues.push(computeAverage(monthlyProductionMetricValues).toFixed(2));
       } else {
         cumulatedValues.push(computeSum(monthlyProductionMetricValues));

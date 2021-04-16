@@ -1,3 +1,12 @@
-export const PROJECT_TYPE_ALL = 'all';
-export const PRODUCTION_CA = 'CA';
 export const EXCELLENCE_CENTER_ALL = 'all';
+export const EXCELLENCE_CENTER_LYON = 'lyon';
+export const EXCELLENCE_CENTER_GRENOBLE = 'grenoble';
+export const PROJECT_TYPE_ALL = 'all';
+export const PROJECT_TYPE_DEV = 'dev';
+export const PROJECT_TYPE_ERGO = 'ergo';
+export const PRODUCTION_CA = 'CA';
+export const PRODUCTION_TJM = 'TJM';
+export const PRODUCTION_AVAILABLEDAYS = 'availableDays';
+export const PRODUCTION_PRODUCTIONDAYS = 'productionDays';
+export const PRODUCTION_INTERPRODUCTIONDAYS = 'interProductionDays';
+export const PRODUCTION_TO = 'TO';

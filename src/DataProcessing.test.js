@@ -1,11 +1,14 @@
 // import * as React from 'react';
 import DataProcessing from './DataProcessing';
+import {
+  PRODUCTION_CA, PRODUCTION_TJM, PRODUCTION_AVAILABLEDAYS,
+} from './keys';
 
 describe('Dataprocessing', () => {
   it('should compute a table of added values for availableDays cumulated production metric', () => {
     const months = ['january', 'february', 'march'];
     const productionMetricsValues = [100, 200, 300];
-    const productionMetricsLabel = 'availableDays';
+    const productionMetricsLabel = PRODUCTION_AVAILABLEDAYS;
     const valueToDisplay = DataProcessing.computeGenericCumulatedMetrics(
       months, productionMetricsValues, productionMetricsLabel,
     );
@@ -15,7 +18,7 @@ describe('Dataprocessing', () => {
   it('should compute a table of added values convert in k€ for CA cumulated production metric', () => {
     const months = ['january', 'february', 'march'];
     const productionMetricsValues = [100000, 200000, 300000];
-    const productionMetricsLabel = 'CA';
+    const productionMetricsLabel = PRODUCTION_CA;
     const valueToDisplay = DataProcessing.computeGenericCumulatedMetrics(
       months, productionMetricsValues, productionMetricsLabel,
     );
@@ -25,7 +28,7 @@ describe('Dataprocessing', () => {
   it('should compute a table of average values for TJM cumulated production metric ', () => {
     const months = ['january', 'february', 'march'];
     const productionMetricsValues = [100, 200, 300];
-    const productionMetricsLabel = 'TJM';
+    const productionMetricsLabel = PRODUCTION_TJM;
     const valueToDisplay = DataProcessing.computeGenericCumulatedMetrics(
       months, productionMetricsValues, productionMetricsLabel,
     );

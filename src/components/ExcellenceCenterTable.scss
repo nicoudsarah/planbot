@@ -1,15 +1,20 @@
+$color-light-yellow: #FFF2CC;
+$color-light-blue: #CCE5FF;
+$color-light-pink: #FFCCCC;
+$color-hard-pink: #CC0066;
+
 table {
   border-collapse: collapse;
 }
 
 thead {
-  background-color: #FFF2CC;
+  background-color: $color-light-yellow;
   text-align: center;
   height: 60px;
 }
 
 tbody tr:nth-child(even) {
-  background-color: #CCE5FF;
+  background-color: $color-light-blue;
 }
 
 tbody tr {
@@ -28,11 +33,11 @@ td {
 }
 
 .ExcellenceCenterTable__row-total-item {
-  background-color: #FFCCCC;
+  background-color: $color-light-pink;
   height: 30px;
   &__CA{
-    background-color: #FFCCCC;
-    border-left: solid #CC0066 1px;
+    background-color: $color-light-pink;
+    border-left: solid $color-hard-pink 1px;
   }
 }
 

@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { fetchFilteredProductionMetrics } from '../API';
 import './ExcellenceCenterTable.scss';
 import DataProcessing from '../DataProcessing';
+import { PRODUCTION_TO } from '../keys';
 
 const ExcellenceCenterTable = ({ excellenceCenter, projectType, year }) => {
   const productionMetricsLabels = ['CA (k€)', 'TJM (€)', '# Jours dispo', '# Jours prod', '# Jours interP', 'TO (%)'];
@@ -10,12 +11,20 @@ const ExcellenceCenterTable = ({ excellenceCenter, projectType, year }) => {
 
   const [selectedYearProductionMetrics, changeProductionMetrics] = useState(null);
 
+  const [hasError, setHasError] = useState(false);
+
   useEffect(() => {
     const setProductionMetricsWithFilters = async () => {
-      changeProductionMetrics((
-        await fetchFilteredProductionMetrics({ excellenceCenter, year, projectType })
-      ));
+      setHasError(false);
+      try {
+        changeProductionMetrics((
+          await fetchFilteredProductionMetrics({ excellenceCenter, year, projectType })
+        ));
+      } catch (e) {
+        setHasError(true);
+      }
     };
+
     setProductionMetricsWithFilters();
   }, [excellenceCenter, projectType, year]);
   const months = selectedYearProductionMetrics && Object.keys(selectedYearProductionMetrics);
@@ -26,7 +35,7 @@ const ExcellenceCenterTable = ({ excellenceCenter, projectType, year }) => {
 
   const extractProductionMetricFromJson = (productionMetric) => {
     if (months && selectedYearProductionMetrics) {
-      if (productionMetric === 'TO') {
+      if (productionMetric === PRODUCTION_TO) {
         const productionDaysValues = getProductionMetricsValuesFromJson('productionDays');
         const availableDaysValues = getProductionMetricsValuesFromJson('availableDays');
         return DataProcessing.computeTOs(availableDaysValues, productionDaysValues);
@@ -38,7 +47,7 @@ const ExcellenceCenterTable = ({ excellenceCenter, projectType, year }) => {
 
   const computeCumulatedMetricsFromJson = (productionMetric) => {
     if (months && selectedYearProductionMetrics) {
-      if (productionMetric === 'TO') {
+      if (productionMetric === PRODUCTION_TO) {
         // we can not use generic method because available days change for each month
         return DataProcessing.computeCumulatedTOs(
           months,
@@ -52,7 +61,7 @@ const ExcellenceCenterTable = ({ excellenceCenter, projectType, year }) => {
         productionMetric,
       );
     }
-    return '';
+    return null;
   };
 
   const computeActualTotalMetrics = (ProductionMetric) => {
@@ -60,9 +69,19 @@ const ExcellenceCenterTable = ({ excellenceCenter, projectType, year }) => {
       const computedValues = computeCumulatedMetricsFromJson(ProductionMetric);
       return computedValues[computedValues.length - 1];
     }
-    return '';
+    return null;
   };
 
+  const renderLoadingError = () => (
+    <section>
+      <h1>Le serveur Planbot a rencontré une erreur.</h1>
+      <h2>Veuillez réactualiser la page.</h2>
+    </section>
+  );
+
+  if (hasError) {
+    return renderLoadingError();
+  }
   return (
     <>
       <table>

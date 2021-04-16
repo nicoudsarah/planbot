@@ -4,15 +4,25 @@ import 'chartjs-plugin-datalabels';
 import PropTypes from 'prop-types';
 import { fetchProductionMetrics } from '../API';
 import DataProcessing from '../DataProcessing';
+import {
+  PRODUCTION_CA, PRODUCTION_TJM, PRODUCTION_AVAILABLEDAYS, PRODUCTION_PRODUCTIONDAYS, PRODUCTION_TO,
+} from '../keys';
 
 defaults.global.tooltips.enabled = false;
 
 const ExcellenceCenterBarChart = ({ productionMetricsLabel }) => {
   const [monthlyProductionMetrics, changeProductionMetricsForEachMonth] = useState(null);
 
+  const [hasError, setHasError] = useState(false);
+
   useEffect(() => {
     const setProductionMetricsWithFilters = async () => {
-      changeProductionMetricsForEachMonth(await fetchProductionMetrics());
+      setHasError(false);
+      try {
+        changeProductionMetricsForEachMonth(await fetchProductionMetrics());
+      } catch (e) {
+        setHasError(true);
+      }
     };
 
     setProductionMetricsWithFilters();
@@ -27,11 +37,11 @@ const ExcellenceCenterBarChart = ({ productionMetricsLabel }) => {
 
   const extractProductionMetricFromJson = (label) => {
     if (months && monthlyProductionMetrics) {
-      if (label === 'TO') {
-        const productionDaysValues = getProductionMetricsValuesFromJson('productionDays');
-        const availableDaysValues = getProductionMetricsValuesFromJson('availableDays');
+      if (label === PRODUCTION_TO) {
+        const productionDaysValues = getProductionMetricsValuesFromJson(PRODUCTION_PRODUCTIONDAYS);
+        const availableDaysValues = getProductionMetricsValuesFromJson(PRODUCTION_AVAILABLEDAYS);
         return DataProcessing.computeTOs(availableDaysValues, productionDaysValues);
-      } if (label === 'CA') {
+      } if (label === PRODUCTION_CA) {
         return getProductionMetricsValuesFromJson(label)
           .map((productionMetric) => productionMetric / 1000);
       }
@@ -44,12 +54,12 @@ const ExcellenceCenterBarChart = ({ productionMetricsLabel }) => {
 
   const computeCumulatedMetricsFromJson = (label) => {
     if (months && monthlyProductionMetrics) {
-      if (label === 'TO') {
+      if (label === PRODUCTION_TO) {
         // we can not use generic method because available days change for each month
         return DataProcessing.computeCumulatedTOs(
           months,
-          getProductionMetricsValuesFromJson('availableDays'),
-          getProductionMetricsValuesFromJson('productionDays'),
+          getProductionMetricsValuesFromJson(PRODUCTION_AVAILABLEDAYS),
+          getProductionMetricsValuesFromJson(PRODUCTION_PRODUCTIONDAYS),
         );
       }
       return DataProcessing.computeGenericCumulatedMetrics(
@@ -66,11 +76,11 @@ const ExcellenceCenterBarChart = ({ productionMetricsLabel }) => {
   const specifyUnity = (label) => {
     let unity;
     switch (label) {
-      case 'CA': unity = '(k€)';
+      case PRODUCTION_CA: unity = '(k€)';
         break;
-      case 'TJM': unity = '(€)';
+      case PRODUCTION_TJM: unity = '(€)';
         break;
-      case 'TO': unity = '(%)';
+      case PRODUCTION_TO: unity = '(%)';
         break;
       default:
         unity = '';
@@ -83,9 +93,9 @@ const ExcellenceCenterBarChart = ({ productionMetricsLabel }) => {
   const manageYMaxAxis = (label) => {
     let yMax;
     if (months && monthlyProductionMetrics) {
-      if (label === 'TO') {
+      if (label === PRODUCTION_TO) {
         yMax = 120;
-      } else if (label === 'TJM') {
+      } else if (label === PRODUCTION_TJM) {
         const maximumValue = Math.max(...displayMonthlyValues);
         // rounded up to the nearest ten to kept a beautiful y axe appearance
         yMax = 10 * Math.ceil((maximumValue + (20 * maximumValue) / 100) / 10);
@@ -101,6 +111,16 @@ const ExcellenceCenterBarChart = ({ productionMetricsLabel }) => {
 
   const yMax = manageYMaxAxis(productionMetricsLabel);
 
+  const renderLoadingError = () => (
+    <section>
+      <h1>Le serveur Planbot a rencontré une erreur.</h1>
+      <h2>Veuillez réactualiser la page.</h2>
+    </section>
+  );
+
+  if (hasError) {
+    return renderLoadingError();
+  }
   return (
     <div>
       <Bar

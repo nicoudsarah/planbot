@@ -78,7 +78,7 @@ const ExcellenceCenter = () => {
   const renderSpinner = () => (
     <div>
       <div className="spinner" />
-      <div className="spinner-text">Chargement de la BI ...</div>
+      <div className="spinner-text" data-test="spinner">Chargement de la BI ...</div>
     </div>
   );
 
