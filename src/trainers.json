@@ -1,0 +1,333 @@
+{
+    "training1": {
+        "id": 1,
+        "name": "Git partie 1",
+        "birthYear": 2016,
+        "duration": 1,
+        "external" : false,
+        "trainers": {
+            "2021":[
+                {
+                    "userId": 3,
+                    "day": 1
+                },
+                {
+                    "userId": 13,
+                    "day": 1
+                }
+            ],
+            "2020":[
+                {
+                    "userId": 1,
+                    "day": 2
+                },
+                {
+                    "userId": 3,
+                    "day": 1
+                },
+                {
+                    "userId": 13,
+                    "day": 1
+                }
+            ],
+
+            "2019":[
+                {
+                    "userId": 1,
+                    "day": 1
+                },
+                {
+                    "userId": 3,
+                    "day": 1
+                }
+            ],
+            "2018":[
+                {
+                    "userId": 2,
+                    "day": 1
+                },
+                {
+                    "userId": 3,
+                    "day": 1
+                },
+                {
+                    "userId": 1,
+                    "day": 2
+                }
+            ],
+            "2017":[
+                {
+                    "userId": 2,
+                    "day": 2
+                },
+                {
+                    "userId": 3,
+                    "day": 1
+                },
+                {
+                    "userId": 1,
+                    "day": 1
+                }
+            ],
+            "2016":{
+            }
+        }
+    },
+    "training2": {
+        "id": 2,
+        "name": "Git partie 2",
+        "birthYear": 2017,
+        "duration": 1,
+        "external" : false,
+        "trainers": {
+            "2021":[
+                {
+                    "userId": 12,
+                    "day": 1
+                },
+                {
+                    "userId": 13,
+                    "day": 1
+                }
+            ],
+            "2020":[
+                {
+                    "userId": 2,
+                    "day": 1
+                },
+                {
+                    "userId": 1,
+                    "day": 1
+                }
+            ],
+            "2019":[
+                {
+                    "userId": 2,
+                    "day": 2
+                },
+                {
+                    "userId": 1,
+                    "day": 2
+                }
+            ],
+            "2018":[
+                {
+                    "userId": 2,
+                    "day": 1
+                },
+                {
+                    "userId": 1,
+                    "day": 1
+                }
+            ],
+            "2017":[
+                {
+                    "userId": 2,
+                    "day": 1
+                },
+                {
+                    "userId": 1,
+                    "day": 1
+                }
+            ],
+            "2016":{
+            }
+        }
+    },
+    "training3": {
+        "id": 3,
+        "name": "Initiation TDD",
+        "birthYear": 2020,
+        "duration": 1,
+        "external" : false,
+        "trainers": {
+            "2021":[
+                {
+                    "userId": 4,
+                    "day": 3
+                },
+                {
+                    "userId": 2,
+                    "day": 2
+                },
+                {
+                    "userId": 1,
+                    "day": 1
+                }
+            ],
+            "2020":{
+            },
+            "2019":{
+            },
+            "2018":{
+            },
+            "2017":{
+            },
+            "2016":{
+            }
+        }
+    },
+    "training4": {
+        "id": 4,
+        "name": "Ergo-conception",
+        "birthYear": 2021,
+        "duration": 1,
+        "external" : false,
+        "trainers": {
+            "2021":[
+                {
+                    "userId": 7,
+                    "day": 1
+                },
+                {
+                    "userId": 8,
+                    "day": 1
+                },
+                {
+                    "userId": 9,
+                    "day": 2
+                }
+            ],
+            "2020":{
+            },
+            "2019":{
+            },
+            "2018":{
+            },
+            "2017":{
+            },
+            "2016":{
+            }
+        }
+    },
+    "training5": {
+        "id": 5,
+        "name": "Introduction aux tests",
+        "birthYear": 2018,
+        "duration": 2,
+        "external" : false,
+        "trainers": {
+            "2021":[
+                {
+                    "userId": 1,
+                    "day": 2
+                },
+                {
+                    "userId": 2,
+                    "day": 3
+                },
+                {
+                    "userId": 14,
+                    "day": 3
+                }
+            ],
+            "2020":{
+            },
+            "2019":{
+            },
+            "2018":{
+            },
+            "2017":{
+            },
+            "2016":{
+            }
+        }
+    },
+    "training6": {
+        "id": 6,
+        "name": "Atelier sécurité",
+        "birthYear": 2020,
+        "duration": 2.5,
+        "external" : true
+    },
+    "training7": {
+        "id": 7,
+        "name": "12 Factors App",
+        "birthYear": 2021,
+        "duration": 3,
+        "external" : true
+    },
+    "training8": {
+        "id": 8,
+        "name": "Méthodologie",
+        "birthYear": 2019,
+        "duration": 0.5,
+        "external" : false,
+        "trainers": {
+            "2021":[
+                {
+                    "userId": 4,
+                    "day": 1
+                }
+            ],
+            "2020": [
+                {
+                    "userId": 4,
+                    "day": 1
+                }
+            ],
+            "2019":{
+            },
+            "2018":{
+            },
+            "2017":{
+            },
+            "2016":{
+            }
+        }
+    },
+    "training9": {
+        "id": 9,
+        "name": "Ergo-recueil du besoin",
+        "birthYear": 2020,
+        "duration": 1,
+        "external" : false,
+        "trainers": {
+            "2021":[
+                {
+                    "userId": 7,
+                    "day": 1
+                },
+                {
+                    "userId": 9,
+                    "day": 2
+                },
+                {
+                    "userId": 8,
+                    "day": 1
+                }
+            ],
+            "2020":{
+            },
+            "2019":{
+            },
+            "2018":{
+            },
+            "2017":{
+            },
+            "2016":{
+            }
+        }
+    },
+    "training10": {
+        "id": 10,
+        "name": "Ergonomie du code",
+        "birthYear": 2021,
+        "duration": 1,
+        "external" : false,
+        "trainers": {
+            "2021":{
+            },
+            "2020":{
+            },
+            "2019":{
+            },
+            "2018":{
+            },
+            "2017":{
+            },
+            "2016":{
+            }
+        }
+    }
+}
