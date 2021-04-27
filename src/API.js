@@ -22,6 +22,7 @@ import {
   PRODUCTION_CA, PRODUCTION_TJM, PRODUCTION_AVAILABLEDAYS,
   PRODUCTION_PRODUCTIONDAYS, PRODUCTION_INTERPRODUCTIONDAYS, PRODUCTION_TO,
 } from './keys';
+import JsonFormationsList from './formations_list.json';
 
 export const fetchFilteredProductionMetrics = async ({ excellenceCenter, year, projectType }) => {
   let Json = null;
@@ -97,4 +98,8 @@ export const fetchProductionMetricsLabel = async () => new Promise((resolve) => 
     { key: PRODUCTION_AVAILABLEDAYS, value: '# Jours dispo' }, { key: PRODUCTION_PRODUCTIONDAYS, value: '# Jours prod' },
     { key: PRODUCTION_INTERPRODUCTIONDAYS, value: '# Jours interP' }, { key: PRODUCTION_TO, value: 'TO (%)' }];
   resolve(projectsType);
+});
+
+export const fetchFormations = async () => new Promise((resolve) => {
+  resolve(JsonFormationsList.formations);
 });
