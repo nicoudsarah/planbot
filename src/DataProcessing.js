@@ -44,13 +44,26 @@ export default class DataProcessing extends React.Component {
   }
 
   static computeTOs(availableDaysValues, productionDaysValues) {
-    // const TOValues = [];
     return availableDaysValues.map(
       (day, index) => ((productionDaysValues[index] / day) * 100).toFixed(2),
     );
-    /* or (let i = 0; i < productionDaysValues.length; i += 1) {
-      TOValues.push(((productionDaysValues[i] / availableDaysValues[i]) * 100).toFixed(2));
-    } */
-    // return TOValues;
   }
+
+  static collectInternalFormationsDetails(formationsDetails) {
+    const internalFormationsDetails = [];
+    for (let i = 0; i < formationsDetails.length; i += 1) {
+      if (formationsDetails[i].external === false) {
+        internalFormationsDetails.push(formationsDetails[i]);
+      }
+    }
+    return internalFormationsDetails;
+  }
+
+  /* static collectDesignInternalFormationDetails(JSONDesignDetails) {
+    const designInternalFormationDetails = [];
+    for (let i = 0; i < JSONDesignDetails.length; i += 1) {
+      if()
+    }
+    return JSONDesignDetails
+  } */
 }

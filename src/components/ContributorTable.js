@@ -1,31 +1,30 @@
 import React, { useEffect, useState } from 'react';
 import './ContributorTable.scss';
-import { fetchFormations } from '../API';
+import DataProcessing from '../DataProcessing';
+import { fetchFormationsReports } from '../API';
 
 const ContributorTable = () => {
-  const [formations, changeFormation] = useState([]);
   const [hasError, setHasError] = useState(false);
+  const [formationsReports, changeFormationReports] = useState([]);
 
   useEffect(() => {
-    const setFormations = async () => {
+    const setFormationsReports = async () => {
       setHasError(false);
       try {
-        const formationsElement = await fetchFormations();
-        changeFormation(formationsElement);
+        const formationsReportsDetails = await fetchFormationsReports();
+        changeFormationReports(formationsReportsDetails);
       } catch (e) {
         setHasError(true);
       }
     };
-    setFormations();
+    setFormationsReports();
   }, []);
-  
-  console.log('********');
-  if (formations.length !== 0) {
-    // console.log(formations[0].name);
-    formations.map((formation) => console.log(formation.name));
-  }
-  console.log('********');
 
+  let internalFormationDetails = [];
+  if (formationsReports.length !== 0) {
+    internalFormationDetails = DataProcessing
+      .collectInternalFormationsDetails(formationsReports);
+  }
 
   const renderLoadingError = () => (
     <section>
@@ -68,11 +67,13 @@ const ContributorTable = () => {
           </tr>
         </thead>
         <tbody>
-          {formations.length !== 0 && formations.map((formation) => (
-            <tr>
-              <td key={formation.id} className="ExcellenceCenterTable__row-item">{formation.name}</td>
-            </tr>
-          ))}
+          {internalFormationDetails.length !== 0 && internalFormationDetails.map(
+            (internalFormation) => (
+              <tr>
+                <td key={internalFormation.id} className="ExcellenceCenterTable__row-item">{internalFormation.name}</td>
+              </tr>
+            ),
+          )}
           <tr>
             <td>Git partie 1</td>
             <td className="contributor-table__contributors-name">

@@ -53,4 +53,20 @@ describe('Dataprocessing', () => {
     );
     expect(valueToDisplay).toEqual(['25.00', '50.00', '75.00']);
   });
+
+  it('should return only the internal formation names', () => {
+    const JSONFormations = [
+      { id: 1, name: 'formation1', external: false },
+      { id: 2, name: 'formation2', external: true },
+      { id: 3, name: 'formation3', external: false },
+    ];
+    const actualInternalFormationsSelected = (
+      DataProcessing.collectInternalFormationsDetails(JSONFormations)
+    );
+    const expectedInternalFormationSelected = [
+      { id: 1, name: 'formation1', external: false },
+      { id: 3, name: 'formation3', external: false },
+    ];
+    expect(actualInternalFormationsSelected).toEqual(expectedInternalFormationSelected);
+  });
 });
