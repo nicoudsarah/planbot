@@ -7,6 +7,16 @@ const computeSum = (values) => values.reduce((a, b) => a + b, 0);
 
 const computeAverage = (values) => computeSum(values) / values.length;
 
+const collectInternalReportOfActors = (nbOfTimeReports, internalFormationTimeReports) => {
+  const userIdOfFormationActors = new Set();
+  for (let j = 0; j < nbOfTimeReports; j += 1) {
+    if (internalFormationTimeReports[j].contribution !== 'disciple') {
+      userIdOfFormationActors.add(internalFormationTimeReports[j].userId);
+    }
+  }
+  return userIdOfFormationActors;
+};
+
 export default class DataProcessing extends React.Component {
   static computeGenericCumulatedMetrics(months, productionMetricValues, productionMetricLabel) {
     const cumulatedValues = [];
@@ -59,11 +69,19 @@ export default class DataProcessing extends React.Component {
     return internalFormationsDetails;
   }
 
-  /* static collectDesignInternalFormationDetails(JSONDesignDetails) {
-    const designInternalFormationDetails = [];
-    for (let i = 0; i < JSONDesignDetails.length; i += 1) {
-      if()
+  static collectUserIdOfActors(InternalFormationsDetails) {
+    const userIdOfAllActors = [];
+    for (let i = 0; i < InternalFormationsDetails.length; i += 1) {
+      let userIdOfFormationActors = new Set();
+      const internalFormationTimeReports = InternalFormationsDetails[i].timeReports;
+      const nbOfTimeReports = internalFormationTimeReports.length;
+
+      userIdOfFormationActors = collectInternalReportOfActors(
+        nbOfTimeReports, internalFormationTimeReports,
+      );
+
+      userIdOfAllActors.push(userIdOfFormationActors);
     }
-    return JSONDesignDetails
-  } */
+    return userIdOfAllActors;
+  }
 }

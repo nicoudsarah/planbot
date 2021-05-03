@@ -69,4 +69,17 @@ describe('Dataprocessing', () => {
     ];
     expect(actualInternalFormationsSelected).toEqual(expectedInternalFormationSelected);
   });
+
+  it('should return userId of the formations actors (authors and instructors)', () => {
+    const JSONFormations = [
+      { id: 1, timeReports: [{ userId: 1, contribution: 'author' }, { userId: 2, contribution: 'instructor' }] },
+      { id: 2, timeReports: [{ userId: 3, contribution: 'disciple' }, { userId: 4, contribution: 'instructor' }] },
+      { id: 3, timeReports: [{ userId: 5, contribution: 'author' }, { userId: 6, contribution: 'disciple' }] },
+    ];
+    const actualUserIdOfContributors = (
+      DataProcessing.collectUserIdOfActors(JSONFormations)
+    );
+    const expectedUserIdOfContributors = [new Set([1, 2]), new Set([4]), new Set([5])];
+    expect(actualUserIdOfContributors).toEqual(expectedUserIdOfContributors);
+  });
 });

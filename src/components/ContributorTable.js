@@ -21,9 +21,13 @@ const ContributorTable = () => {
   }, []);
 
   let internalFormationDetails = [];
+  let userIdOfActors = [];
   if (formationsReports.length !== 0) {
     internalFormationDetails = DataProcessing
       .collectInternalFormationsDetails(formationsReports);
+
+    userIdOfActors = DataProcessing
+      .collectUserIdOfActors(internalFormationDetails);
   }
 
   const renderLoadingError = () => (
@@ -68,12 +72,14 @@ const ContributorTable = () => {
         </thead>
         <tbody>
           {internalFormationDetails.length !== 0 && internalFormationDetails.map(
-            (internalFormation) => (
-              <tr>
+            (internalFormation, index) => (
+              <tr key={internalFormation.id}>
                 <td key={internalFormation.id} className="ExcellenceCenterTable__row-item">{internalFormation.name}</td>
+                <td className="ExcellenceCenterTable__row-item">{[...userIdOfActors[index]].join(' ') }</td>
               </tr>
             ),
           )}
+
           <tr>
             <td>Git partie 1</td>
             <td className="contributor-table__contributors-name">
