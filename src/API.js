@@ -23,6 +23,7 @@ import {
   PRODUCTION_PRODUCTIONDAYS, PRODUCTION_INTERPRODUCTIONDAYS, PRODUCTION_TO,
 } from './keys';
 import JsonFormationReports from './Formations_Reports.json';
+import JsonUsers from './user_list.json';
 
 export const fetchFilteredProductionMetrics = async ({ excellenceCenter, year, projectType }) => {
   let Json = null;
@@ -102,4 +103,8 @@ export const fetchProductionMetricsLabel = async () => new Promise((resolve) => 
 
 export const fetchFormationsReports = async () => new Promise((resolve) => {
   resolve(JsonFormationReports.formations);
+});
+
+export const fetchUsers = async () => new Promise((resolve) => {
+  resolve(JsonUsers.users);
 });

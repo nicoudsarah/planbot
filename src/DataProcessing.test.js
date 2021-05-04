@@ -77,9 +77,19 @@ describe('Dataprocessing', () => {
       { id: 3, timeReports: [{ userId: 5, contribution: 'author' }, { userId: 6, contribution: 'disciple' }] },
     ];
     const actualUserIdOfContributors = (
-      DataProcessing.collectUserIdOfActors(JSONFormations)
+      DataProcessing.collectActorsUserIds(JSONFormations)
     );
     const expectedUserIdOfContributors = [new Set([1, 2]), new Set([4]), new Set([5])];
     expect(actualUserIdOfContributors).toEqual(expectedUserIdOfContributors);
+  });
+
+  it('should convert userId to the name of the user', () => {
+    const setOfUsersId = [new Set([1, 2]), new Set([2, 3]), new Set([1, 3])];
+    const usersJson = [{ id: 1, name: 'Pierre' }, { id: 2, name: 'Paul' }, { id: 3, name: 'Jacques' }];
+    const actualUserNameConversion = (
+      DataProcessing.createUserNamesTable(setOfUsersId, usersJson)
+    );
+    const expectedUserNameConverion = [['Pierre', 'Paul'], ['Paul', 'Jacques'], ['Pierre', 'Jacques']];
+    expect(actualUserNameConversion).toEqual(expectedUserNameConverion);
   });
 });

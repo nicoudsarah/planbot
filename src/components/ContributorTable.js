@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import './ContributorTable.scss';
 import DataProcessing from '../DataProcessing';
-import { fetchFormationsReports } from '../API';
+import { fetchFormationsReports, fetchUsers } from '../API';
 
 const ContributorTable = () => {
   const [hasError, setHasError] = useState(false);
   const [formationsReports, changeFormationReports] = useState([]);
+  const [users, changeUsers] = useState([]);
 
   useEffect(() => {
     const setFormationsReports = async () => {
@@ -20,14 +21,30 @@ const ContributorTable = () => {
     setFormationsReports();
   }, []);
 
+  useEffect(() => {
+    const setUsers = async () => {
+      setHasError(false);
+      try {
+        const usersDetails = await fetchUsers();
+        changeUsers(usersDetails);
+      } catch (e) {
+        setHasError(true);
+      }
+    };
+    setUsers();
+  }, []);
+
   let internalFormationDetails = [];
   let userIdOfActors = [];
+  let userNamesOfActors = [];
   if (formationsReports.length !== 0) {
     internalFormationDetails = DataProcessing
       .collectInternalFormationsDetails(formationsReports);
 
     userIdOfActors = DataProcessing
-      .collectUserIdOfActors(internalFormationDetails);
+      .collectActorsUserIds(internalFormationDetails);
+
+    userNamesOfActors = DataProcessing.createUserNamesTable(userIdOfActors, users);
   }
 
   const renderLoadingError = () => (
@@ -75,7 +92,7 @@ const ContributorTable = () => {
             (internalFormation, index) => (
               <tr key={internalFormation.id}>
                 <td key={internalFormation.id} className="ExcellenceCenterTable__row-item">{internalFormation.name}</td>
-                <td className="ExcellenceCenterTable__row-item">{[...userIdOfActors[index]].join(' ') }</td>
+                <td className="ExcellenceCenterTable__row-item">{userNamesOfActors[index].join(' - ') }</td>
               </tr>
             ),
           )}

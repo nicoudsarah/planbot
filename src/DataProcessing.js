@@ -17,6 +17,26 @@ const collectInternalReportOfActors = (nbOfTimeReports, internalFormationTimeRep
   return userIdOfFormationActors;
 };
 
+const convertSetsToArrays = (Sets) => {
+  const arrays = [];
+  for (let i = 0; i < Sets.length; i += 1) {
+    arrays.push([...Sets[i]]);
+  }
+  return arrays;
+};
+
+const getUserNamesFromIds = (usersId, usersJson) => {
+  const usersConvertedNames = [];
+  for (let i = 0; i < usersId.length; i += 1) {
+    for (let j = 0; j < usersJson.length; j += 1) {
+      if (usersJson[j].id === usersId[i]) {
+        usersConvertedNames.push(usersJson[j].name);
+      }
+    }
+  }
+  return usersConvertedNames;
+};
+
 export default class DataProcessing extends React.Component {
   static computeGenericCumulatedMetrics(months, productionMetricValues, productionMetricLabel) {
     const cumulatedValues = [];
@@ -69,7 +89,7 @@ export default class DataProcessing extends React.Component {
     return internalFormationsDetails;
   }
 
-  static collectUserIdOfActors(InternalFormationsDetails) {
+  static collectActorsUserIds(InternalFormationsDetails) {
     const userIdOfAllActors = [];
     for (let i = 0; i < InternalFormationsDetails.length; i += 1) {
       let userIdOfFormationActors = new Set();
@@ -83,5 +103,18 @@ export default class DataProcessing extends React.Component {
       userIdOfAllActors.push(userIdOfFormationActors);
     }
     return userIdOfAllActors;
+  }
+
+  static createUserNamesTable(userIdsSets, usersJson) {
+    const userIdsArrays = convertSetsToArrays(userIdsSets);
+
+    const userNamesTable = [];
+    for (let i = 0; i < userIdsArrays.length; i += 1) {
+      const userNames = getUserNamesFromIds(
+        userIdsArrays[i], usersJson,
+      );
+      userNamesTable.push(userNames);
+    }
+    return userNamesTable;
   }
 }
