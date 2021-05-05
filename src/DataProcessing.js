@@ -26,18 +26,33 @@ const convertSetsToArrays = (Sets) => {
 };
 
 const collectActualYearIds = (userIds, timeReports, actualYear) => {
-  const ActorsIdsOfTheYear = new Set();
+  const actorsIdsOfTheYear = new Set();
   for (let j = 0; j < userIds.length; j += 1) {
     for (let i = 0; i < timeReports.length; i += 1) {
       if (timeReports[i].userId === userIds[j]) {
         const date = new Date(timeReports[j].date);
         if (date.getFullYear() === actualYear) {
-          ActorsIdsOfTheYear.add(timeReports[i].userId);
+          actorsIdsOfTheYear.add(timeReports[i].userId);
         }
       }
     }
   }
-  return ActorsIdsOfTheYear;
+  return actorsIdsOfTheYear;
+};
+
+const collectOtherIds = (userIds, timeReports, actualYear) => {
+  const otherActorIds = new Set();
+  for (let j = 0; j < userIds.length; j += 1) {
+    for (let i = 0; i < timeReports.length; i += 1) {
+      if (timeReports[i].userId === userIds[j]) {
+        const date = new Date(timeReports[j].date);
+        if (date.getFullYear() !== actualYear) {
+          otherActorIds.add(timeReports[i].userId);
+        }
+      }
+    }
+  }
+  return otherActorIds;
 };
 
 const getUserNamesFromIds = (usersId, usersJson) => {
@@ -132,6 +147,22 @@ export default class DataProcessing extends React.Component {
         userIdsForeachFormation, timeReportsForEachFormation, actualYear,
       );
       actualYearActorsIds.push([...actualYearActorIdsOfEachFormation]);
+    }
+    return actualYearActorsIds;
+  }
+
+  static collectOtherActorsIds(userIdsSets, internalFormationsDetails, actualYear) {
+    const userIdsArrays = convertSetsToArrays(userIdsSets);
+
+    const actualYearActorsIds = [];
+    for (let k = 0; k < userIdsArrays.length; k += 1) {
+      const userIdsForeachFormation = userIdsArrays[k];
+      const timeReportsForEachFormation = internalFormationsDetails[k].timeReports;
+
+      const actorIdsOfEachFormation = collectOtherIds(
+        userIdsForeachFormation, timeReportsForEachFormation, actualYear,
+      );
+      actualYearActorsIds.push([...actorIdsOfEachFormation]);
     }
     return actualYearActorsIds;
   }
