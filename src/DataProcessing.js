@@ -167,13 +167,11 @@ export default class DataProcessing extends React.Component {
     return actualYearActorsIds;
   }
 
-  static createUserNamesTable(userIdsSets, usersJson) {
-    const userIdsArrays = convertSetsToArrays(userIdsSets);
-
+  static createUserNamesTable(userIds, usersJson) {
     const userNamesTable = [];
-    for (let i = 0; i < userIdsArrays.length; i += 1) {
+    for (let i = 0; i < userIds.length; i += 1) {
       const userNames = getUserNamesFromIds(
-        userIdsArrays[i], usersJson,
+        userIds[i], usersJson,
       );
       userNamesTable.push(userNames);
     }

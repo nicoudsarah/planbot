@@ -83,16 +83,6 @@ describe('Dataprocessing', () => {
     expect(actualUserIdOfContributors).toEqual(expectedUserIdOfContributors);
   });
 
-  it('should convert userId to the name of the user', () => {
-    const setOfUsersId = [new Set([1, 2]), new Set([2, 3]), new Set([1, 3])];
-    const usersJson = [{ id: 1, name: 'Pierre' }, { id: 2, name: 'Paul' }, { id: 3, name: 'Jacques' }];
-    const actualUserNameConversion = (
-      DataProcessing.createUserNamesTable(setOfUsersId, usersJson)
-    );
-    const expectedUserNameConversion = [['Pierre', 'Paul'], ['Paul', 'Jacques'], ['Pierre', 'Jacques']];
-    expect(actualUserNameConversion).toEqual(expectedUserNameConversion);
-  });
-
   it('should collect only user id of actual year actors', () => {
     const actorsUserIds = [new Set([1, 2]), new Set([2, 3]), new Set([2, 1]), new Set([1, 3])];
     const JsonFormationReports = [
@@ -123,5 +113,15 @@ describe('Dataprocessing', () => {
     );
     const expectedActorsIds = [[2], [2], [2, 1], []];
     expect(actualActorsIds).toEqual(expectedActorsIds);
+  });
+
+  it('should convert userId to the name of the user', () => {
+    const setOfUsersId = [[1, 2], [2, 3], [1, 3]];
+    const usersJson = [{ id: 1, name: 'Pierre' }, { id: 2, name: 'Paul' }, { id: 3, name: 'Jacques' }];
+    const actualUserNameConversion = (
+      DataProcessing.createUserNamesTable(setOfUsersId, usersJson)
+    );
+    const expectedUserNameConversion = [['Pierre', 'Paul'], ['Paul', 'Jacques'], ['Pierre', 'Jacques']];
+    expect(actualUserNameConversion).toEqual(expectedUserNameConversion);
   });
 });
