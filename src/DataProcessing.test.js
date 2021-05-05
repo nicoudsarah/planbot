@@ -89,7 +89,23 @@ describe('Dataprocessing', () => {
     const actualUserNameConversion = (
       DataProcessing.createUserNamesTable(setOfUsersId, usersJson)
     );
-    const expectedUserNameConverion = [['Pierre', 'Paul'], ['Paul', 'Jacques'], ['Pierre', 'Jacques']];
-    expect(actualUserNameConversion).toEqual(expectedUserNameConverion);
+    const expectedUserNameConversion = [['Pierre', 'Paul'], ['Paul', 'Jacques'], ['Pierre', 'Jacques']];
+    expect(actualUserNameConversion).toEqual(expectedUserNameConversion);
+  });
+
+  it('should collect only user id of actual year actors', () => {
+    const actorsUserIds = [new Set([1, 2]), new Set([2, 3]), new Set([2, 1]), new Set([1, 3])];
+    const JsonFormationReports = [
+      { id: 1, timeReports: [{ userId: 1, date: '02/01/2021' }, { userId: 2, date: '02/01/2016' }] },
+      { id: 2, timeReports: [{ userId: 2, date: '02/01/2016' }, { userId: 3, date: '02/01/2021' }] },
+      { id: 3, timeReports: [{ userId: 2, date: '02/01/2016' }, { userId: 1, date: '02/01/2016' }] },
+      { id: 4, timeReports: [{ userId: 1, date: '02/01/2021' }, { userId: 3, date: '02/01/2021' }] },
+    ];
+    const actualYear = 2021;
+    const actualActorsIdOf2021 = (
+      DataProcessing.collectActualYearActorsIds(actorsUserIds, JsonFormationReports, actualYear)
+    );
+    const expectedActorsIdOf2021 = [[1], [3], [], [1, 3]];
+    expect(actualActorsIdOf2021).toEqual(expectedActorsIdOf2021);
   });
 });

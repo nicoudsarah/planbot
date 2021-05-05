@@ -25,6 +25,21 @@ const convertSetsToArrays = (Sets) => {
   return arrays;
 };
 
+const collectActualYearIds = (userIds, timeReports, actualYear) => {
+  const ActorsIdsOfTheYear = new Set();
+  for (let j = 0; j < userIds.length; j += 1) {
+    for (let i = 0; i < timeReports.length; i += 1) {
+      if (timeReports[i].userId === userIds[j]) {
+        const date = new Date(timeReports[j].date);
+        if (date.getFullYear() === actualYear) {
+          ActorsIdsOfTheYear.add(timeReports[i].userId);
+        }
+      }
+    }
+  }
+  return ActorsIdsOfTheYear;
+};
+
 const getUserNamesFromIds = (usersId, usersJson) => {
   const usersConvertedNames = [];
   for (let i = 0; i < usersId.length; i += 1) {
@@ -89,11 +104,11 @@ export default class DataProcessing extends React.Component {
     return internalFormationsDetails;
   }
 
-  static collectActorsUserIds(InternalFormationsDetails) {
+  static collectActorsUserIds(internalFormationsDetails) {
     const userIdOfAllActors = [];
-    for (let i = 0; i < InternalFormationsDetails.length; i += 1) {
+    for (let i = 0; i < internalFormationsDetails.length; i += 1) {
       let userIdOfFormationActors = new Set();
-      const internalFormationTimeReports = InternalFormationsDetails[i].timeReports;
+      const internalFormationTimeReports = internalFormationsDetails[i].timeReports;
       const nbOfTimeReports = internalFormationTimeReports.length;
 
       userIdOfFormationActors = collectInternalReportOfActors(
@@ -103,6 +118,22 @@ export default class DataProcessing extends React.Component {
       userIdOfAllActors.push(userIdOfFormationActors);
     }
     return userIdOfAllActors;
+  }
+
+  static collectActualYearActorsIds(userIdsSets, internalFormationsDetails, actualYear) {
+    const userIdsArrays = convertSetsToArrays(userIdsSets);
+
+    const actualYearActorsIds = [];
+    for (let k = 0; k < userIdsArrays.length; k += 1) {
+      const userIdsForeachFormation = userIdsArrays[k];
+      const timeReportsForEachFormation = internalFormationsDetails[k].timeReports;
+
+      const actualYearActorIdsOfEachFormation = collectActualYearIds(
+        userIdsForeachFormation, timeReportsForEachFormation, actualYear,
+      );
+      actualYearActorsIds.push([...actualYearActorIdsOfEachFormation]);
+    }
+    return actualYearActorsIds;
   }
 
   static createUserNamesTable(userIdsSets, usersJson) {

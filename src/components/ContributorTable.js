@@ -43,6 +43,11 @@ const ContributorTable = () => {
 
     userIdOfActors = DataProcessing
       .collectActorsUserIds(internalFormationDetails);
+    console.log(userIdOfActors);
+
+    const ActorsIds = DataProcessing
+      .collectActualYearActorsIds(userIdOfActors, internalFormationDetails, 2021);
+    console.log(ActorsIds);
 
     userNamesOfActors = DataProcessing.createUserNamesTable(userIdOfActors, users);
   }
