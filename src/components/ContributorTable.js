@@ -36,24 +36,21 @@ const ContributorTable = () => {
 
   let internalFormationDetails = [];
   let userIdOfActors = [];
-  let userNamesOfActors = [];
+  let actorsActualYearIds = [];
+  let otherActorsIds = [];
+
   if (formationsReports.length !== 0) {
     internalFormationDetails = DataProcessing
       .collectInternalFormationsDetails(formationsReports);
 
     userIdOfActors = DataProcessing
       .collectActorsUserIds(internalFormationDetails);
-    console.log(userIdOfActors);
 
-    const actorsActualYearIds = DataProcessing
+    actorsActualYearIds = DataProcessing
       .collectActualYearActorsIds(userIdOfActors, internalFormationDetails, 2021);
-    console.log(actorsActualYearIds);
 
-    const otherActorsIds = DataProcessing
+    otherActorsIds = DataProcessing
       .collectOtherActorsIds(userIdOfActors, internalFormationDetails, 2021);
-    console.log(otherActorsIds);
-
-    userNamesOfActors = DataProcessing.createUserNamesTable(userIdOfActors, users);
   }
 
   const renderLoadingError = () => (
@@ -77,7 +74,11 @@ const ContributorTable = () => {
           </tr>
           <tr>
             <th>Formations</th>
-            <th className="contributor-table__contributor-section">Contributeurs (de l&apos;année)</th>
+            <th className="contributor-table__contributor-section">
+              Contributeurs (
+              <span className="actual-year-actors">de l&apos;année</span>
+              )
+            </th>
             <th colSpan="2" className="contributor-table__time-section">Année courante</th>
             <th colSpan="2" className="contributor-table__time-section">2020</th>
             <th colSpan="2" className="contributor-table__time-section">2019</th>
@@ -101,7 +102,16 @@ const ContributorTable = () => {
             (internalFormation, index) => (
               <tr key={internalFormation.id}>
                 <td key={internalFormation.id} className="ExcellenceCenterTable__row-item">{internalFormation.name}</td>
-                <td className="ExcellenceCenterTable__row-item">{userNamesOfActors[index].join(' - ') }</td>
+                <td className="ExcellenceCenterTable__row-item">
+                  <span className="other-years-actors">{DataProcessing.createUserNamesTable(otherActorsIds, users)[index].join(' - ') }</span>
+                  {(DataProcessing
+                    .createUserNamesTable(otherActorsIds, users)[index].length === 0
+                      || DataProcessing
+                        .createUserNamesTable(actorsActualYearIds, users)[index].length === 0)
+                    ? <span> </span>
+                    : <span> - </span>}
+                  <span className="actual-year-actors">{DataProcessing.createUserNamesTable(actorsActualYearIds, users)[index].join(' - ') }</span>
+                </td>
               </tr>
             ),
           )}
